@@ -5,9 +5,10 @@
 package com.pi.tests;
 
 import com.pi.entities.Profil;
+import com.pi.entities.Publication;
 import com.pi.services.ServiceProfil;
-import com.pi.entities.Historique;
-import com.pi.services.ServiceHistorique;
+import com.pi.services.ServicePublication;
+
 
 /**
  *
@@ -16,10 +17,13 @@ import com.pi.services.ServiceHistorique;
 public class MainProg {
      public static void main(String[] args) {
         ServiceProfil sp = new ServiceProfil();
-        //sp.ajouter(new Profil(54398225, "daly.ghofrane@gmail.com","bizerte","Personne dynamique,motivée","français/anglais/arabe","java,web","licence en BI","telecom",false));
-        //sp.modifier(new Profil(4,25398225, "daly.ghofrane@gmail.com","tunis","Personne dynamique,motivée","français/anglais/arabe","java,web","licence en BI","telecom",true));
-        ServiceHistorique sp1 = new ServiceHistorique();
-        sp1.ajouter(new Historique(14,5,6,true));
+       // System.out.println(sp.getProfilById(12));
+        //sp.ajouter(new Profil("21398220", "daly.ghofrane@gmail.com","tunis","Personne dynamique,motivée","français/anglais/arabe","java,web","licence en BI","telecom","oui"));
+      //sp.modifier(new Profil(25,"14", "daly.ghofrane@gmail.com","bizerte","Personne dynamique,motivée","français/anglais/arabe","java,web","licence en BI","telecom","oui"));
+      //sp.supprimer(new Profil(19));
+     // System.out.println(sp.afficher());
+      ServicePublication sp1 = new ServicePublication();
+      sp1.ajouter(new Publication("gygh","bhbhh",5,6)); 
 }
 
 }

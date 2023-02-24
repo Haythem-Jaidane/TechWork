@@ -12,142 +12,142 @@ import java.util.Objects;
  */
 public class Profil {
     
-    private int id;
-    private int tel;
-    private String email;
-    private String localisation;
-    private String description;
-    private String langues;
-    private String competences;
-    private String formation;
-    private String experiencesProfessionnelles;
-    private boolean diplome;
+    private int id_Profil;
+    private String Numéro_téléphone;
+    private String E_mail;
+    private String Localisation;
+    private String Description;
+    private String Langues;
+    private String Competences;
+    private String Formation;
+    private String Experiences_professionnelles;
+    private String Diplome;
 
-    public Profil(int id) {
-        this.id = id;
+    public Profil(int id_Profil) {
+        this.id_Profil = id_Profil;
     }
 
-    public Profil(int tel, String email, String localisation, String description, String langues, String competences, String formation, String experiencesProfessionnelles, boolean diplome) {
-        this.tel = tel;
-        this.email = email;
-        this.localisation = localisation;
-        this.description = description;
-        this.langues = langues;
-        this.competences = competences;
-        this.formation = formation;
-        this.experiencesProfessionnelles = experiencesProfessionnelles;
-        this.diplome = diplome;
+    public Profil(String Numéro_téléphone, String E_mail, String Localisation, String Description, String Langues, String Competences, String Formation, String Experiences_professionnelles, String Diplome) {
+        this.Numéro_téléphone = Numéro_téléphone;
+        this.E_mail = E_mail;
+        this.Localisation = Localisation;
+        this.Description = Description;
+        this.Langues = Langues;
+        this.Competences = Competences;
+        this.Formation = Formation;
+        this.Experiences_professionnelles = Experiences_professionnelles;
+        this.Diplome = Diplome;
     }
 
 
-    public Profil(int id, int tel, String email, String localisation, String description,
-            String langues, String competences, String formation, String experiencesProfessionnelles, boolean diplome  ) {
-        this.id = id;
-        this.tel = tel;
-        this.email = email;
-        this.localisation = localisation;
-        this.description = description;
-        this.langues = langues;
-        this.competences = competences;
-        this.formation = formation;
-        this.experiencesProfessionnelles = experiencesProfessionnelles;
-        this.diplome=diplome;
+    public Profil(int id_Profil, String Numéro_téléphone, String E_mail, String Localisation, String Description,
+            String Langues, String Competences, String Formation, String Experiences_professionnelles, String Diplome  ) {
+        this.id_Profil = id_Profil;
+        this.Numéro_téléphone = Numéro_téléphone;
+        this.E_mail = E_mail;
+        this.Localisation = Localisation;
+        this.Description = Description;
+        this.Langues = Langues;
+        this.Competences = Competences;
+        this.Formation = Formation;
+        this.Experiences_professionnelles = Experiences_professionnelles;
+        this.Diplome=Diplome;
                 
     }
 
-    public int getId() {
-        return id;
+    public int getId_Profil() {
+        return id_Profil;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_Profil(int id_Profil) {
+        this.id_Profil = id_Profil;
     }
 
-    public int getTel() {
-        return tel;
+    public String getNuméro_téléphone() {
+        return Numéro_téléphone;
     }
 
-    public void setTel(int tel) {
-        this.tel = tel;
+    public void setNuméro_téléphone(String Numéro_téléphone) {
+        this.Numéro_téléphone = Numéro_téléphone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getE_mail() {
+        return E_mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setE_mail(String E_mail) {
+        this.E_mail = E_mail;
     }
 
     public String getLocalisation() {
-        return localisation;
+        return Localisation;
     }
 
-    public void setLocalisation(String localisation) {
-        this.localisation = localisation;
+    public void setLocalisation(String Localisation) {
+        this.Localisation = Localisation;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
     public String getLangues() {
-        return langues;
+        return Langues;
     }
 
-    public void setLangues(String langues) {
-        this.langues = langues;
+    public void setLangues(String Langues) {
+        this.Langues = Langues;
     }
 
     public String getCompetences() {
-        return competences;
+        return Competences;
     }
 
-    public void setCompetences(String competences) {
-        this.competences = competences;
+    public void setCompetences(String Competences) {
+        this.Competences = Competences;
     }
 
     public String getFormation() {
-        return formation;
+        return Formation;
     }
 
-    public void setFormation(String formation) {
-        this.formation = formation;
+    public void setFormation(String Formation) {
+        this.Formation = Formation;
     }
 
-    public String getExperiencesProfessionnelles() {
-        return experiencesProfessionnelles;
+    public String getExperiences_professionnelles() {
+        return Experiences_professionnelles;
     }
 
-    public void setExperiencesProfessionnelles(String experiencesProfessionnelles) {
-        this.experiencesProfessionnelles = experiencesProfessionnelles;
+    public void setExperiences_professionnelles(String Experiences_professionnelles) {
+        this.Experiences_professionnelles = Experiences_professionnelles;
     }
 
-    public boolean getDiplome() {
-        return diplome;
+    public String getDiplome() {
+        return Diplome;
     }
 
-    public void setDiplome(boolean diplome) {
-        this.diplome = diplome;
+    public void setDiplome(String Diplome) {
+        this.Diplome = Diplome;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + this.id;
-        hash = 17 * hash + this.tel;
-        hash = 17 * hash + Objects.hashCode(this.email);
-        hash = 17 * hash + Objects.hashCode(this.localisation);
-        hash = 17 * hash + Objects.hashCode(this.description);
-        hash = 17 * hash + Objects.hashCode(this.langues);
-        hash = 17 * hash + Objects.hashCode(this.competences);
-        hash = 17 * hash + Objects.hashCode(this.formation);
-        hash = 17 * hash + Objects.hashCode(this.experiencesProfessionnelles);
-        hash = 17 * hash + (this.diplome ? 1 : 0);
+        hash = 53 * hash + this.id_Profil;
+        hash = 53 * hash + Objects.hashCode(this.Numéro_téléphone);
+        hash = 53 * hash + Objects.hashCode(this.E_mail);
+        hash = 53 * hash + Objects.hashCode(this.Localisation);
+        hash = 53 * hash + Objects.hashCode(this.Description);
+        hash = 53 * hash + Objects.hashCode(this.Langues);
+        hash = 53 * hash + Objects.hashCode(this.Competences);
+        hash = 53 * hash + Objects.hashCode(this.Formation);
+        hash = 53 * hash + Objects.hashCode(this.Experiences_professionnelles);
+        hash = 53 * hash + Objects.hashCode(this.Diplome);
         return hash;
     }
 
@@ -163,41 +163,42 @@ public class Profil {
             return false;
         }
         final Profil other = (Profil) obj;
-        if (this.id != other.id) {
+        if (this.id_Profil != other.id_Profil) {
             return false;
         }
-        if (this.tel != other.tel) {
+        if (!Objects.equals(this.Numéro_téléphone, other.Numéro_téléphone)) {
             return false;
         }
-        if (this.diplome != other.diplome) {
+        if (!Objects.equals(this.E_mail, other.E_mail)) {
             return false;
         }
-        if (!Objects.equals(this.email, other.email)) {
+        if (!Objects.equals(this.Localisation, other.Localisation)) {
             return false;
         }
-        if (!Objects.equals(this.localisation, other.localisation)) {
+        if (!Objects.equals(this.Description, other.Description)) {
             return false;
         }
-        if (!Objects.equals(this.description, other.description)) {
+        if (!Objects.equals(this.Langues, other.Langues)) {
             return false;
         }
-        if (!Objects.equals(this.langues, other.langues)) {
+        if (!Objects.equals(this.Competences, other.Competences)) {
             return false;
         }
-        if (!Objects.equals(this.competences, other.competences)) {
+        if (!Objects.equals(this.Formation, other.Formation)) {
             return false;
         }
-        if (!Objects.equals(this.formation, other.formation)) {
+        if (!Objects.equals(this.Experiences_professionnelles, other.Experiences_professionnelles)) {
             return false;
         }
-        return Objects.equals(this.experiencesProfessionnelles, other.experiencesProfessionnelles);
+        return Objects.equals(this.Diplome, other.Diplome);
     }
+
+   
 
    
     @Override
     public String toString() {
-        return "Profil{" + "id=" + id + ", tel=" + tel + ", email=" + email + ", localisation=" + localisation + ", description=" + description + ", langues=" + langues + ", competences=" + competences + ", formation=" + formation + ", experiencesProfessionnelles=" + experiencesProfessionnelles + ", diplome=" + diplome + '}';
+        return "Profil{" + "id_Profil=" + id_Profil + ",Numéro_téléphone =" + Numéro_téléphone + ", E_mail=" + E_mail + ", Localisation=" + Localisation + ", Description=" + Description + ", Langues=" + Langues + ", Competences=" + Competences + ", Formation=" + Formation + ", Experiences_professionnelles=" + Experiences_professionnelles + ", Diplome=" + Diplome + '}';
     }
 
 }
-
