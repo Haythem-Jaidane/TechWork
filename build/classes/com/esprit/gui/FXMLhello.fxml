@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.FXMLhelloController">
+   <children>
+      <ImageView fx:id="tfar" fitHeight="456.0" fitWidth="751.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@AR.PNG" />
+         </image>
+      </ImageView>
+      <Text layoutX="117.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerer vos projets" textAlignment="CENTER">
+         <font>
+            <Font name="SWItal" size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="tfAjout" layoutX="29.0" layoutY="316.0" mnemonicParsing="false" onAction="#ajout" prefHeight="23.0" prefWidth="161.0" text="Ajouter projet">
+         <font>
+            <Font name="Lucida Fax Regular" size="12.0" />
+         </font></Button>
+      <Button fx:id="tfmodif" layoutX="29.0" layoutY="350.0" mnemonicParsing="false" onAction="#modif" prefHeight="23.0" prefWidth="161.0" text="Modifier projet">
+         <font>
+            <Font name="Lucida Fax Regular" size="12.0" />
+         </font></Button>
+      <Button fx:id="tfcher" layoutX="465.0" layoutY="84.0" mnemonicParsing="false" onAction="#dep" prefHeight="24.0" prefWidth="118.0" text="Chercher projet">
+         <font>
+            <Font name="Lucida Fax Demibold" size="12.0" />
+         </font></Button>
+      <TableView fx:id="tab1" layoutX="12.0" layoutY="122.0" prefHeight="127.0" prefWidth="576.0">
+        <columns>
+          <TableColumn fx:id="colid" prefWidth="54.0" text="CODE" />
+          <TableColumn fx:id="colnom" prefWidth="92.0" text="TITRE" />
+            <TableColumn fx:id="coldesc" prefWidth="309.0" text="DESCRIPTION" />
+            <TableColumn fx:id="coldom" prefWidth="120.0" text="DOMAINE" />
+        </columns>
+      </TableView>
+      <Button layoutX="532.0" layoutY="361.0" mnemonicParsing="false" text="Help">
+         <font>
+            <Font name="SWItal" size="12.0" />
+         </font></Button>
+      <Button fx:id="tfsup" layoutX="29.0" layoutY="278.0" mnemonicParsing="false" onAction="#supp" prefHeight="23.0" prefWidth="161.0" text="Supprimer projet ">
+         <font>
+            <Font name="Lucida Fax Regular" size="12.0" />
+         </font></Button>
+      <ImageView fx:id="tfaj" fitHeight="23.0" fitWidth="28.0" layoutX="204.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ajout.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="tfm" fitHeight="23.0" fitWidth="28.0" layoutX="202.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@modif.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="tfs" fitHeight="21.0" fitWidth="22.0" layoutX="205.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@sup.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="tfc" fitHeight="24.0" fitWidth="28.0" layoutX="426.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cher.PNG" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

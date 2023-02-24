@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.AjouterprojetController">
+   <children>
+      <Button layoutX="273.0" layoutY="322.0" mnemonicParsing="false" onAction="#Ajouterprojet" text="Ajouter" />
+      <Label layoutX="135.0" layoutY="265.0" text="domaine" />
+      <Label layoutX="128.0" layoutY="217.0" text="Description" />
+      <Label layoutX="128.0" layoutY="158.0" text="Nom Projet" textFill="#ad2b2b" />
+      <TextField fx:id="tfNom" layoutX="226.0" layoutY="154.0" />
+      <TextField fx:id="tfdesc" layoutX="226.0" layoutY="213.0" />
+      <TextField fx:id="tfdom" layoutX="226.0" layoutY="261.0" />
+      <Text fill="#aac72e" fontSmoothingType="LCD" layoutX="111.0" layoutY="47.0" stroke="#170101" strokeType="OUTSIDE" strokeWidth="0.0" text="bienvenue dans notre plateforme TECH WORK" underline="true" wrappingWidth="474.92578125">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="tfimg" fitHeight="78.0" fitWidth="90.0" layoutX="19.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Downloads/328351970_480986907576057_4454646445480678590_n.jpg" />
+         </image>
+         <effect>
+            <BoxBlur iterations="0" width="0.0" />
+         </effect>
+      </ImageView>
+   </children>
+</AnchorPane>

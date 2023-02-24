@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.TypeconsController">
+   <children>
+      <TableView fx:id="tabcat" layoutX="250.0" layoutY="120.0" onMouseClicked="#Select" prefHeight="201.0" prefWidth="348.0">
+        <columns>
+          <TableColumn fx:id="colref" prefWidth="40.0" text="REF" />
+          <TableColumn fx:id="colnom" prefWidth="88.0" text="CATEGORIE" />
+            <TableColumn fx:id="coldesc" prefWidth="130.0" text="DESCRIPTION" />
+            <TableColumn fx:id="colid" prefWidth="88.0" text="CODE_PROJET" />
+        </columns>
+      </TableView>
+      <TextField fx:id="tfnom" layoutX="64.0" layoutY="188.0" />
+      <TextField fx:id="tfdesc" layoutX="64.0" layoutY="240.0" />
+      <TextField fx:id="tfid" layoutX="64.0" layoutY="288.0" />
+      <TextField fx:id="tfref" layoutX="300.0" layoutY="69.0" />
+      <Label layoutX="18.0" layoutY="192.0" text="CAT" />
+      <Label layoutX="11.0" layoutY="244.0" text="DESC" />
+      <Label layoutX="13.0" layoutY="292.0" text="CODE" />
+      <Label layoutX="266.0" layoutY="73.0" text="REF" />
+      <ImageView fitHeight="85.0" fitWidth="123.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Downloads/325851915_1370508860367931_6078429854764661616_n.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="tfdep" layoutX="334.0" layoutY="348.0" mnemonicParsing="false" onAction="#depajout" text="AJOUTER UNE CATEGORIE A UN PROJET" />
+      <Button layoutX="467.0" layoutY="69.0" mnemonicParsing="false" onAction="#Delete" text="SUPPRIMER" />
+      <Button layoutX="104.0" layoutY="348.0" mnemonicParsing="false" onAction="#modifer" text="MODIFIER" />
+      <Text fill="#151717" layoutX="14.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pour modifier um projet il suffit de selectionne le projet a modifié et par suite remplir ce formulaire en inserant vos nouveaux information" wrappingWidth="229.958984375">
+         <font>
+            <Font name="Nirmala UI" size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

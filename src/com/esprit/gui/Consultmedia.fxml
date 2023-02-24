@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ConsultmediaController">
+   <children>
+      <TableView fx:id="tabmedia" layoutX="257.0" layoutY="76.0" onMouseClicked="#select" prefHeight="200.0" prefWidth="476.0">
+        <columns>
+          <TableColumn fx:id="colnom" prefWidth="38.0" text="nom" />
+          <TableColumn fx:id="colurl" prefWidth="156.0" text="url" />
+            <TableColumn fx:id="coltype" prefWidth="89.0" text="type" />
+            <TableColumn fx:id="colid" prefWidth="101.0" text="code projet" />
+            <TableColumn fx:id="colref" prefWidth="89.0" text="ref media" />
+        </columns>
+      </TableView>
+      <Button fx:id="tfmodif" layoutX="117.0" layoutY="264.0" mnemonicParsing="false" onAction="#modifier" text="modifier" />
+      <Button layoutX="634.0" layoutY="31.0" mnemonicParsing="false" onAction="#delete" text="supprimer" />
+      <Button fx:id="tfajout" layoutX="495.0" layoutY="322.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter un fichier media" />
+      <Label layoutX="18.0" layoutY="119.0" text="nom" />
+      <Label layoutX="18.0" layoutY="155.0" text="url" />
+      <Label layoutX="18.0" layoutY="192.0" text="type" />
+      <Label layoutX="2.0" layoutY="232.0" text="code projet" />
+      <TextField fx:id="tfnom" layoutX="73.0" layoutY="115.0" />
+      <TextField fx:id="tfurl" layoutX="73.0" layoutY="151.0" />
+      <TextField fx:id="tftype" layoutX="73.0" layoutY="188.0" />
+      <TextField fx:id="tfid" layoutX="73.0" layoutY="228.0" />
+      <Label layoutX="367.0" layoutY="35.0" text="Reference Media" />
+      <TextField fx:id="tfref" layoutX="471.0" layoutY="31.0" />
+   </children>
+</AnchorPane>

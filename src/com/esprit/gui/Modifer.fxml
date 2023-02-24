@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ModiferController">
+   <children>
+      <TableView fx:id="tableprojet" layoutX="236.0" layoutY="100.0" onMouseClicked="#getSelected" prefHeight="200.0" prefWidth="362.0">
+        <columns>
+          <TableColumn fx:id="colid" prefWidth="65.0" text="CODE" />
+          <TableColumn fx:id="colnom" prefWidth="62.0" text="NOM" />
+            <TableColumn fx:id="coldesc" minWidth="0.0" prefWidth="126.0" text="DESCRIPTION" />
+            <TableColumn fx:id="coldom" prefWidth="132.0" text="DOMAINE" />
+        </columns>
+      </TableView>
+      <Label layoutX="35.0" layoutY="163.0" text="titre" />
+      <Label layoutX="16.0" layoutY="208.0" text="description" />
+      <Label layoutX="22.0" layoutY="252.0" text="domaine" />
+      <TextField fx:id="tfnom" layoutX="78.0" layoutY="159.0" />
+      <TextField fx:id="tfdesc" layoutX="78.0" layoutY="204.0" />
+      <TextField fx:id="tfdom" layoutX="78.0" layoutY="248.0" />
+      <Button fx:id="tfmodif" layoutX="100.0" layoutY="327.0" mnemonicParsing="false" onAction="#modifierproj" text="Modifier" />
+      <Label layoutX="32.0" layoutY="118.0" text="code" />
+      <TextField fx:id="tfid" layoutX="78.0" layoutY="114.0" />
+      <TextField fx:id="tf" layoutX="391.0" layoutY="36.0" promptText="Search" />
+      <Text layoutX="242.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="chercher par domaine" />
+   </children>
+</AnchorPane>
