@@ -6,6 +6,10 @@ package com.esprit.gui;
 
 import com.esprit.entities.Projet;
 import com.esprit.utils.DataSource;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -25,7 +29,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import com.lowagie.text.Document;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
 
+
+
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javafx.collections.FXCollections;
 /**
  * FXML Controller class
  *
@@ -76,8 +91,15 @@ public class FXMLhelloController implements Initializable {
     private ImageView tfc;
     @FXML
     private ImageView tfar;
+    @FXML
+    private Button tfret;
+    @FXML
+    private ImageView tfimg;
+    @FXML
+    private Button tfdip;
           public void displayImage(){
         tfc.setImage(image);
+        tfimg.setImage(image);
         tfaj.setImage(image);
         tfm.setImage(image);
         tfs.setImage(image);
@@ -117,10 +139,10 @@ public class FXMLhelloController implements Initializable {
 
     @FXML
     private void supp(ActionEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Supprimer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Modifer.fxml"));
         Parent root = loader.load();
        tfsup.getScene().setRoot(root);
-        SupprimerController dpc = loader.getController();
+        ModiferController dpc = loader.getController();
     }
 
   /*  @FXML
@@ -149,4 +171,96 @@ public class FXMLhelloController implements Initializable {
        tfcher.getScene().setRoot(root);
        TypeconsController dpc = loader.getController();
     }*/
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("cc.fxml"));
+        Parent root = loader.load();
+       tfret.getScene().setRoot(root);
+        CcController dpc = loader.getController();
+    }
+
+    @FXML
+    private void generatePdf(ActionEvent event) throws SQLException{
+
+       
+        // Créer un nouveau document PDF
+        Document document = new Document();
+        try {
+            // Créer un objet PdfWriter pour écrire le document dans un fichier
+            PdfWriter.getInstance(document, new FileOutputStream("LISTE.pdf"));
+
+            // Ouvrir le document
+            document.open();
+            Paragraph paragraph = new Paragraph("VOICI LA LISTE DE VOS PROJETS!");
+            Paragraph par = new Paragraph("                                   ");
+            
+         // Créer un tableau avec 3 colonnes
+            PdfPTable table = new PdfPTable(3);
+            
+            // Ajouter des en-têtes de colonne
+            table.addCell(new PdfPCell(new Paragraph("TITRE")));
+            table.addCell(new PdfPCell(new Paragraph("DESCRIPTION")));
+            table.addCell(new PdfPCell(new Paragraph("DOMAINE")));
+             Connection cnx = DataSource.getInstance().getCnx();
+        ObservableList<Projet> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = cnx.prepareStatement("select * from projet");
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){   
+            // Ajouter des cellules
+            table.addCell(new PdfPCell(new Paragraph(rs.getString("nom"))));
+            // valueCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    //table.addCell(valueCell);
+            table.addCell(new PdfPCell(new Paragraph(rs.getString("description"))));
+            table.addCell(new PdfPCell(new Paragraph(rs.getString("domaine"))));}}
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+            // Ajouter le tableau au document
+            document.add(par);
+            document.add(paragraph);
+            document.add(par);
+            document.add(table);
+           // document.add(paragraph);
+            // Fermer le document
+            document.close();
+            System.out.println("Le document a été créé avec succès !");}
+         catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    
+        }
+    
+    
+    
+    
+    public void  compter (){
+        try (Connection cnx = DataSource.getInstance().getCnx()) {
+            String sql = "SELECT COUNT(*) FROM projet WHERE domaine = 'informatique'";
+            Statement statement = cnx.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                System.out.println("Nombre de projets dans le domaine informatique : " + count);
+            } else {
+                System.out.println("Aucun projet trouvé dans le domaine informatique.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+        }}
+
+    @FXML
+    private void dip(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("test.fxml"));
+        Parent root = loader.load();
+        tfdip.getScene().setRoot(root);
+        
+        TestController dpc = loader.getController();
+    }    
 }

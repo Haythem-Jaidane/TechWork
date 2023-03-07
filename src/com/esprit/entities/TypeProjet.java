@@ -34,6 +34,11 @@ public class TypeProjet {
         this.id = id;
     }
 
+    public TypeProjet() {
+    }
+
+   
+
     public int getIdtypeprojet() {
         return idtypeprojet;
     }

@@ -22,25 +22,20 @@ import javafx.scene.image.ImageView;
  *
  * @author asus
  */
-public class DetailsfichmediaController implements Initializable {
+public class DetailtypeController implements Initializable {
 
     @FXML
-    private Label Lbnommedia;
+    private Label lbtype;
     @FXML
-    private Label Lburl;
+    private Label lbdesc;
     @FXML
-    private Label Lbtype;
-    @FXML
-    private Button tfretour;
+    private Button tfret;
     @FXML
     private ImageView tfimg;
-   Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
+Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
     public void displayImage(){
        
         tfimg.setImage(image);}
-    
-   
-
     /**
      * Initializes the controller class.
      */
@@ -48,28 +43,19 @@ public class DetailsfichmediaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-     public void setLbnommedia(String nommedia) {
-        this.Lbnommedia.setText(nommedia);
+    public void setlbtype(String nomtype) {
+        this.lbtype.setText(nomtype);
     }
-    public void setLburl(String urlmedia) {
-        this.Lburl.setText(urlmedia);
+    public void setlbdesc(String descriptiontype) {
+        this.lbdesc.setText(descriptiontype);
     }
-    public void setLbtype(String typemedia) {
-        this.Lbtype.setText(typemedia);
-    }
-   /* public void setLbid(int id) {
-        this.Lbid.setText(id);
-                
-         }*/
 
     @FXML
-    private void retour(ActionEvent event)  throws IOException{
-        //code net3ada min interface l interface 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Consultmedia.fxml"));
+    private void retour(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Typecons.fxml"));
         Parent root = loader.load();
-       tfretour.getScene().setRoot(root);
-        ConsultmediaController dpc = loader.getController();
+       tfret.getScene().setRoot(root);
+      TypeconsController dpc = loader.getController();
     }
 
-  
 }

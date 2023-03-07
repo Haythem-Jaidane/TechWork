@@ -36,7 +36,6 @@ public class CcController implements Initializable {
     private ImageView tf2;
     @FXML
     private ImageView tf3;
-    @FXML
     private ImageView tf4;
     @FXML
     private Button tfcons;

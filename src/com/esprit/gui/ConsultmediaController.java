@@ -21,11 +21,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 
@@ -59,7 +62,7 @@ public class ConsultmediaController implements Initializable {
 ObservableList<FichMedia> listt;
     //ObservableList<Projet> dataList;
     
-   
+   //CONTROLE DE SAISI + METIER +JOINTIURE
     
     int index = -1;
     
@@ -72,6 +75,16 @@ ObservableList<FichMedia> listt;
     private TextField tfref;
     @FXML
     private Button tfmodif;
+    @FXML
+    private Button tfret;
+    @FXML
+    private ImageView tfimg;
+    
+    Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
+    public void displayImage(){
+       
+        tfimg.setImage(image);}
+    
     /**
      * Initializes the controller class.
      */
@@ -93,9 +106,19 @@ ObservableList<FichMedia> listt;
     private void modifier(ActionEvent event) throws IOException{
         ServiceFichMedia sp3 = new ServiceFichMedia();
         index = tabmedia.getSelectionModel().getSelectedIndex();
-        
+          if (tfref.getText().isEmpty() ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("SELECTIONER FICHIER POUR LE MODIFIER ");
+            alert.showAndWait();
+       } else {
         sp3.modifier(new FichMedia(Integer.parseInt(tfref.getText()),tfnom.getText(), tfurl.getText(), tftype.getText(), Integer.parseInt(tfid.getText()))) ;
-        JOptionPane.showMessageDialog(null, "Projet edite !");
+        JOptionPane.showMessageDialog(null, "FICHIER MEDIA MODIFIE !");
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("Consultmedia.fxml"));
+        Parent root = loader.load();
+       tfajout.getScene().setRoot(root);
+      ConsultmediaController dpc = loader.getController();
+          }
     }
 
     @FXML
@@ -125,10 +148,29 @@ ObservableList<FichMedia> listt;
     }
 
     @FXML
-    private void delete(ActionEvent event) {
+    private void delete(ActionEvent event) throws IOException {
           ServiceFichMedia sp3 = new ServiceFichMedia();
+            if (tfref.getText().isEmpty() ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("SELECTIONNER UN FICHIER ! ");
+            alert.showAndWait();
+       } else {
         sp3.supprimer(new FichMedia(Integer.parseInt(tfref.getText())));
-        JOptionPane.showMessageDialog(null, "fichier  supprime !");
+        JOptionPane.showMessageDialog(null, "fichier  supprime !");}
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Consultmedia.fxml"));
+        Parent root = loader.load();
+       tfajout.getScene().setRoot(root);
+      ConsultmediaController dpc = loader.getController();
     }
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cc.fxml"));
+        Parent root = loader.load();
+       tfret.getScene().setRoot(root);
+      CcController dpc = loader.getController();
+    }
+    
     
 }

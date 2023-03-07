@@ -5,7 +5,9 @@
 package com.esprit.gui;
 
 import com.esprit.entities.Projet;
+import com.esprit.entities.TypeProjet;
 import com.esprit.services.ServiceProjet;
+import com.esprit.services.ServiceTypeProjet;
 import com.esprit.utils.DataSource;
 import java.io.IOException;
 import java.net.URL;
@@ -21,11 +23,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 
@@ -65,6 +70,21 @@ ObservableList<Projet> listp;
     private Button tfmodif;
     @FXML
     private TextField tf;
+    @FXML
+    private Button tfsup;
+    @FXML
+    private Button tfret;
+    @FXML
+    private ImageView tfimg;
+    @FXML
+    private ImageView tfcher;
+    
+    Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
+    public void displayImage(){
+       
+        tfimg.setImage(image);
+        tfcher.setImage(image);}
+    
     /**
      * Initializes the controller class.
      */
@@ -88,13 +108,20 @@ ObservableList<Projet> listp;
     @FXML
     private void modifierproj(ActionEvent event) throws IOException {
                ServiceProjet sp2 = new ServiceProjet();
+            if (tfid.getText().isEmpty() || tfnom.getText().isEmpty() || tfdesc.getText().isEmpty() || tfdom.getText().isEmpty() ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("SELECTIONNER UN PROJET ET REMPLIR TOUS LES CHAMPS ! ");
+            alert.showAndWait();
+             //sp1.ajouter(new Projet(tfNom.getText(), tfdesc.getText(), tfdom.getText()));
+        } else {
         sp2.modifier(new Projet(Integer.parseInt(tfid.getText()),tfnom.getText(), tfdesc.getText(), tfdom.getText()));
-        JOptionPane.showMessageDialog(null, "Projet edite !");
+        JOptionPane.showMessageDialog(null, "PROJET MODIFIE !");
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLhello.fxml"));
         Parent root = loader.load();
        tfmodif.getScene().setRoot(root);
-        FXMLhelloController dpc = loader.getController();
+        FXMLhelloController dpc = loader.getController();}
     }
 
     @FXML
@@ -146,6 +173,35 @@ ObservableList<Projet> listp;
   SortedList<Projet> sortedData = new SortedList<>(filteredData);  
   sortedData.comparatorProperty().bind(tableprojet.comparatorProperty());  
   tableprojet.setItems(sortedData);      
+    }
+
+        @FXML
+    private void Delete(ActionEvent event)throws IOException{
+        
+           
+      ServiceProjet sp3 = new ServiceProjet();
+      TypeProjet sp7 = new TypeProjet();
+       if (tfid.getText().isEmpty() ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("SELECTIONNER UN PROJET ! ");
+            alert.showAndWait();
+       } else {
+        sp3.supprimer(new Projet(Integer.parseInt(tfid.getText())));
+        JOptionPane.showMessageDialog(null, "PROJET SUPPRIME !");         
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLhello.fxml"));
+        Parent root = loader.load();
+       tfsup.getScene().setRoot(root);
+        FXMLhelloController dpc = loader.getController();}
+            
+        }
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLhello.fxml"));
+        Parent root = loader.load();
+       tfret.getScene().setRoot(root);
+        FXMLhelloController dpc = loader.getController();
     }
     
     

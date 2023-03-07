@@ -111,11 +111,16 @@ public class Projet {
     }
 
 
+   /* @Override
+    public String toString() {
+        return "Projet{" + "id=" + id + ", nom=" + nom + ", description=" + description + ", domaine=" + domaine + '}';
+    }
+*/
+
     @Override
     public String toString() {
         return "Projet{" + "id=" + id + ", nom=" + nom + ", description=" + description + ", domaine=" + domaine + '}';
     }
-
   
 
     

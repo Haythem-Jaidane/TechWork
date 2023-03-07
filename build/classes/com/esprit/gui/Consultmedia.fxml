@@ -5,31 +5,65 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ConsultmediaController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D2B4DE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.ConsultmediaController">
    <children>
-      <TableView fx:id="tabmedia" layoutX="257.0" layoutY="76.0" onMouseClicked="#select" prefHeight="200.0" prefWidth="476.0">
+      <TableView fx:id="tabmedia" layoutX="319.0" layoutY="102.0" onMouseClicked="#select" prefHeight="212.0" prefWidth="261.0">
         <columns>
-          <TableColumn fx:id="colnom" prefWidth="38.0" text="nom" />
-          <TableColumn fx:id="colurl" prefWidth="156.0" text="url" />
-            <TableColumn fx:id="coltype" prefWidth="89.0" text="type" />
-            <TableColumn fx:id="colid" prefWidth="101.0" text="code projet" />
-            <TableColumn fx:id="colref" prefWidth="89.0" text="ref media" />
+          <TableColumn fx:id="colnom" prefWidth="74.0" text="nom" />
+          <TableColumn fx:id="colurl" minWidth="0.0" prefWidth="76.0" text="url" />
+            <TableColumn fx:id="coltype" prefWidth="74.0" text="type" />
+            <TableColumn fx:id="colid" minWidth="0.0" prefWidth="233.0" text="code projet" visible="false" />
+            <TableColumn fx:id="colref" prefWidth="16.0" text="ref media" visible="false" />
         </columns>
       </TableView>
-      <Button fx:id="tfmodif" layoutX="117.0" layoutY="264.0" mnemonicParsing="false" onAction="#modifier" text="modifier" />
-      <Button layoutX="634.0" layoutY="31.0" mnemonicParsing="false" onAction="#delete" text="supprimer" />
-      <Button fx:id="tfajout" layoutX="495.0" layoutY="322.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter un fichier media" />
-      <Label layoutX="18.0" layoutY="119.0" text="nom" />
-      <Label layoutX="18.0" layoutY="155.0" text="url" />
-      <Label layoutX="18.0" layoutY="192.0" text="type" />
-      <Label layoutX="2.0" layoutY="232.0" text="code projet" />
-      <TextField fx:id="tfnom" layoutX="73.0" layoutY="115.0" />
-      <TextField fx:id="tfurl" layoutX="73.0" layoutY="151.0" />
-      <TextField fx:id="tftype" layoutX="73.0" layoutY="188.0" />
-      <TextField fx:id="tfid" layoutX="73.0" layoutY="228.0" />
-      <Label layoutX="367.0" layoutY="35.0" text="Reference Media" />
-      <TextField fx:id="tfref" layoutX="471.0" layoutY="31.0" />
+      <Button fx:id="tfmodif" blendMode="SCREEN" layoutX="48.0" layoutY="303.0" mnemonicParsing="false" onAction="#modifier" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: white;" text="Modifier">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Button>
+      <Button blendMode="SCREEN" layoutX="182.0" layoutY="303.0" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: white;" text="Supprimer">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Button>
+      <Button fx:id="tfajout" blendMode="SCREEN" layoutX="336.0" layoutY="336.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="30.0" prefWidth="227.0" style="-fx-background-color: white;" text="Ajouter un fichier media">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Button>
+      <Label layoutX="4.0" layoutY="127.0" prefHeight="22.0" prefWidth="95.0" text="Nom Media" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font></Label>
+      <Label layoutX="6.0" layoutY="177.0" prefHeight="31.0" prefWidth="58.0" text="url" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="25.0" />
+         </font></Label>
+      <Label layoutX="4.0" layoutY="238.0" text="Type Media" textFill="WHITE">
+         <font>
+            <Font name="Baskerville Old Face" size="21.0" />
+         </font></Label>
+      <TextField fx:id="tfnom" layoutX="110.0" layoutY="117.0" prefHeight="41.0" prefWidth="164.0" style="-fx-background-color: transperent; -fx-border-color: white;" />
+      <TextField fx:id="tfurl" layoutX="110.0" layoutY="172.0" prefHeight="41.0" prefWidth="164.0" style="-fx-background-color: transperent; -fx-border-color: white;" />
+      <TextField fx:id="tftype" layoutX="110.0" layoutY="230.0" prefHeight="41.0" prefWidth="164.0" style="-fx-background-color: transperent; -fx-border-color: white;" />
+      <TextField fx:id="tfid" layoutX="117.0" layoutY="78.0" style="-fx-background-color: transperent; -fx-border-color: white;" visible="false" />
+      <TextField fx:id="tfref" layoutX="107.0" layoutY="348.0" prefHeight="22.0" prefWidth="151.0" style="-fx-background-color: transperent; -fx-border-color: white;" visible="false" />
+      <Button fx:id="tfret" blendMode="EXCLUSION" layoutX="11.0" layoutY="361.0" mnemonicParsing="false" onAction="#retour" prefHeight="22.0" prefWidth="95.0" style="-fx-background-color: black;" text="RETOUR" textFill="#fffefe">
+         <font>
+            <Font name="SWItal" size="14.0" />
+         </font></Button>
+      <Text fill="#110000" layoutX="37.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gérer vos Fichiers Medias" wrappingWidth="290.99999809265137">
+         <font>
+            <Font name="Rage Italic" size="31.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="tfimg" fitHeight="98.0" fitWidth="103.0" layoutX="492.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo%20WorkTech.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -7,53 +7,51 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.CcController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.CcController">
    <children>
-      <ImageView fx:id="tfimg" fitHeight="281.0" fitWidth="324.0" layoutX="300.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@hee.jpg" />
-         </image>
-      </ImageView>
-      <Text layoutX="160.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Portfolio" wrappingWidth="280.0439453125">
+      <Button fx:id="tfcons" blendMode="SRC_ATOP" layoutX="10.0" layoutY="141.0" mnemonicParsing="false" onAction="#ger" prefHeight="41.0" prefWidth="290.0" style="-fx-background-color: white; -fx-border-color: #D2B4DE;" text="Gerer vos projets" textFill="#926396">
          <font>
-            <Font name="Aldhabi" size="58.0" />
-         </font>
-      </Text>
-      <ImageView fx:id="tf4" fitHeight="238.0" fitWidth="297.0" layoutX="23.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cadre.PNG" />
-         </image>
-      </ImageView>
-      <Button fx:id="tfcons" layoutX="92.0" layoutY="167.0" mnemonicParsing="false" onAction="#ger" prefHeight="25.0" prefWidth="178.0" text="Gerer vos projets">
-         <font>
-            <Font name="Lucida Fax Regular" size="12.0" />
+            <Font name="Lucida Fax Demibold Italic" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="tfcher" layoutX="92.0" layoutY="266.0" mnemonicParsing="false" onAction="#deeep" prefHeight="25.0" prefWidth="178.0" text="Gerer vos catégories ">
+      <Button fx:id="tfcher" layoutX="10.0" layoutY="284.0" mnemonicParsing="false" onAction="#deeep" prefHeight="41.0" prefWidth="290.0" style="-fx-background-color: white; -fx-border-color: #D2B4DE;" text="Gerer vos catégories " textFill="#926396">
          <font>
-            <Font name="Lucida Fax Regular" size="12.0" />
+            <Font name="Lucida Fax Demibold Italic" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="tfcon" layoutX="92.0" layoutY="215.0" mnemonicParsing="false" onAction="#consulter" prefHeight="25.0" prefWidth="178.0" text="Gérer vos fichiers medias">
+      <Button fx:id="tfcon" layoutX="10.0" layoutY="211.0" mnemonicParsing="false" onAction="#consulter" prefHeight="41.0" prefWidth="290.0" style="-fx-background-color: white; -fx-border-color: #D2B4DE;" text="Gérer vos fichiers medias" textAlignment="JUSTIFY" textFill="#926396">
          <font>
-            <Font name="Lucida Fax Regular" size="12.0" />
+            <Font name="Lucida Fax Demibold Italic" size="16.0" />
          </font>
       </Button>
-      <ImageView fx:id="tf1" fitHeight="25.0" fitWidth="28.0" layoutX="55.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tf1" fitHeight="25.0" fitWidth="28.0" layoutX="20.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Capture.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="tf2" fitHeight="25.0" fitWidth="35.0" layoutX="57.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tf2" fitHeight="25.0" fitWidth="35.0" layoutX="14.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Capture1.PNG" />
          </image>
       </ImageView>
-      <ImageView fx:id="tf3" fitHeight="25.0" fitWidth="26.0" layoutX="56.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tf3" fitHeight="25.0" fitWidth="26.0" layoutX="14.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Capture3.PNG" />
          </image>
       </ImageView>
-      <Button layoutX="521.0" layoutY="361.0" mnemonicParsing="false" text="Aide" />
+      <AnchorPane layoutX="305.0" prefHeight="400.0" prefWidth="315.0" style="-fx-background-color: #D2B4DE;">
+         <children>
+            <ImageView fx:id="tfimg" fitHeight="269.0" fitWidth="245.0" layoutX="34.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo%20WorkTech.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Text layoutX="15.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Portfolio" wrappingWidth="280.0439453125">
+         <font>
+            <Font name="Rage Italic" size="45.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

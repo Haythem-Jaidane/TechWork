@@ -21,11 +21,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javax.swing.JOptionPane;
 
@@ -67,7 +70,14 @@ ObservableList<TypeProjet> listc;
     Statement st = null;
     @FXML
     private Button tfdep;
-    
+    @FXML
+    private Button tfret;
+    @FXML
+    private ImageView tfimg;
+    Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
+    public void displayImage(){
+       
+        tfimg.setImage(image);}
     /**
      * Initializes the controller class.
      */
@@ -110,20 +120,50 @@ ObservableList<TypeProjet> listc;
     }
 
     @FXML
-    private void Delete(ActionEvent event) {
+    private void Delete(ActionEvent event) throws IOException {
         
          ServiceTypeProjet sp4 = new ServiceTypeProjet();
+           if (tfref.getText().isEmpty() ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("SELECTIONNER UN TYPE A SUPPRIMER !");
+            alert.showAndWait();
+       } else {
+               
         sp4.supprimer(new TypeProjet(Integer.parseInt(tfref.getText())));
         JOptionPane.showMessageDialog(null, "cat  supprime !");
-    }
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("Typecons.fxml"));
+        Parent root = loader.load();
+        tfdep.getScene().setRoot(root);
+     
+        TypeconsController dpc = loader.getController();
+    }}
 
     @FXML
-    private void modifer(ActionEvent event) {
+    private void modifer(ActionEvent event) throws IOException {
         ServiceTypeProjet sp4 = new ServiceTypeProjet();
         index = tabcat.getSelectionModel().getSelectedIndex();
-        
+          if (tfref.getText().isEmpty() || tfnom.getText().isEmpty() || tfdesc.getText().isEmpty() || tfid.getText().isEmpty() ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("SELECTIONNER UN PROJET ET REMPLIR TOUS LES CHAMPS ! ");
+            alert.showAndWait();
+        } else {
         sp4.modifier(new TypeProjet(Integer.parseInt(tfref.getText()),tfnom.getText(), tfdesc.getText(), Integer.parseInt(tfid.getText()))) ;
         JOptionPane.showMessageDialog(null, "categorie edite !");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Typecons.fxml"));
+        Parent root = loader.load();
+        tfdep.getScene().setRoot(root);
+     
+        TypeconsController dpc = loader.getController();
+    }}
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cc.fxml"));
+        Parent root = loader.load();
+       tfret.getScene().setRoot(root);
+      CcController dpc = loader.getController();
     }
     
 }
