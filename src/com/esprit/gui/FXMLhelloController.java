@@ -202,7 +202,7 @@ public class FXMLhelloController implements Initializable {
             table.addCell(new PdfPCell(new Paragraph("TITRE")));
             table.addCell(new PdfPCell(new Paragraph("DESCRIPTION")));
             table.addCell(new PdfPCell(new Paragraph("DOMAINE")));
-             Connection cnx = DataSource.getInstance().getCnx();
+            Connection cnx = DataSource.getInstance().getCnx();
         ObservableList<Projet> list = FXCollections.observableArrayList();
         try {
             PreparedStatement ps = cnx.prepareStatement("select * from projet");
@@ -235,25 +235,6 @@ public class FXMLhelloController implements Initializable {
     
         }
     
-    
-    
-    
-    public void  compter (){
-        try (Connection cnx = DataSource.getInstance().getCnx()) {
-            String sql = "SELECT COUNT(*) FROM projet WHERE domaine = 'informatique'";
-            Statement statement = cnx.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            if (resultSet.next()) {
-                int count = resultSet.getInt(1);
-                System.out.println("Nombre de projets dans le domaine informatique : " + count);
-            } else {
-                System.out.println("Aucun projet trouvé dans le domaine informatique.");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
-        }}
 
     @FXML
     private void dip(ActionEvent event) throws IOException {

@@ -9,27 +9,24 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.gui.TestController">
    <children>
-      <PieChart fx:id="pc" labelLineLength="30.0" layoutX="14.0" layoutY="14.0" legendSide="LEFT" prefHeight="322.0" prefWidth="290.0" title="Statistique Projet par domaine" />
+      <PieChart fx:id="pc" labelLineLength="30.0" layoutX="7.0" layoutY="14.0" legendSide="TOP" prefHeight="322.0" prefWidth="330.0" title="Les Projet par domaine" />
       <Button layoutX="70.0" layoutY="347.0" mnemonicParsing="false" onAction="#telchart" prefHeight="28.0" prefWidth="177.0" style="-fx-background-color: #D2B4DE;" text="Voir Statistique" textFill="WHITE">
          <font>
             <Font name="SWItal" size="16.0" />
          </font></Button>
-      <AnchorPane layoutX="310.0" prefHeight="401.0" prefWidth="290.0" style="-fx-background-color: #D2B4DE;">
+      <AnchorPane layoutX="346.0" prefHeight="401.0" prefWidth="279.0" style="-fx-background-color: #D2B4DE;">
          <children>
-            <ImageView fx:id="tfimg" fitHeight="276.0" fitWidth="318.0" layoutX="13.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="tfimg" fitHeight="185.0" fitWidth="198.0" layoutX="42.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo%20WorkTech.png" />
                </image>
             </ImageView>
-            <AnchorPane layoutX="182.0" layoutY="342.0" prefHeight="35.0" prefWidth="78.0" style="-fx-background-color: white;">
-               <children>
-                  <Button fx:id="tfdep" blendMode="EXCLUSION" layoutX="4.0" layoutY="5.0" mnemonicParsing="false" onAction="#tfdep" style="-fx-background-color: black;" text="Retour" textFill="WHITE">
-                     <font>
-                        <Font name="SWItal" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
+            <AnchorPane layoutX="206.0" layoutY="351.0" prefHeight="20.0" prefWidth="59.0" style="-fx-background-color: white;" />
+            <Button fx:id="tfdep" blendMode="EXCLUSION" layoutX="199.0" layoutY="347.0" mnemonicParsing="false" onAction="#tfdep" style="-fx-background-color: black;" text="Retour" textFill="WHITE">
+               <font>
+                  <Font name="SWItal" size="13.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

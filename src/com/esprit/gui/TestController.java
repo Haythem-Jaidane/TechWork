@@ -57,6 +57,8 @@ Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
       int count;
       int n;
       int a;
+      int m ;
+      int h;
          Connection cnx = DataSource.getInstance().getCnx();
             String sql = "SELECT COUNT(*) FROM projet WHERE domaine = 'informatique'";
             Statement statement = cnx.createStatement();
@@ -83,6 +85,31 @@ Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
                // System.out.println("Aucun projet trouvé dans le domaine informatique.");
                n =0;
             }
+            String sq4 = "SELECT COUNT(*) FROM projet WHERE domaine = 'dev web'";
+            Statement ST4 = cnx.createStatement();
+            ResultSet RS4 = ST4.executeQuery(sq4);
+
+            
+          if (RS4.next()) {
+                m = RS4.getInt(1);
+                
+            } else {
+               // System.out.println("Aucun projet trouvé dans le domaine informatique.");
+               m =0;
+            }
+          
+          String sq5 = "SELECT COUNT(*) FROM projet WHERE domaine = 'mobile'";
+            Statement ST5 = cnx.createStatement();
+            ResultSet RS5 = ST5.executeQuery(sq5);
+
+            
+          if (RS5.next()) {
+                h = RS5.getInt(1);
+                
+            } else {
+               // System.out.println("Aucun projet trouvé dans le domaine informatique.");
+               h =0;
+            }
           
            String sq3 = "SELECT COUNT(*) FROM projet WHERE domaine NOT IN ('informatique', 'iot')";
             Statement ST3 = cnx.createStatement();
@@ -100,8 +127,9 @@ Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
         ObservableList<Data>list= FXCollections.observableArrayList(
                    new PieChart.Data("informatique", count),
                    new PieChart.Data("iot", n),
-                   new PieChart.Data("Autres Domaines", a)
-                         
+                   new PieChart.Data("dev web", m),
+                   new PieChart.Data("Mobile", h),
+                   new PieChart.Data("Autres Domaines", a)               
         );
         pc.setData(list);
     }

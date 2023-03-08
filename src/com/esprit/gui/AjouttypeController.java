@@ -74,14 +74,13 @@ private static final String ACCOUNT_SID = "AC0f74c61c9ed9455ce572deb3e1266124";
     private ImageView tfimg;
      Image image = new Image(getClass().getResourceAsStream("logo WorkTech.PNG"));
     public void displayImage(){
-       
         tfimg.setImage(image);}
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-             colid.setCellValueFactory(new PropertyValueFactory<Projet,Integer>("id"));
+        colid.setCellValueFactory(new PropertyValueFactory<Projet,Integer>("id"));
         colnom.setCellValueFactory(new PropertyValueFactory<Projet,String>("nom"));
         coldesc.setCellValueFactory(new PropertyValueFactory<Projet,String>("description"));
         coldom.setCellValueFactory(new PropertyValueFactory<Projet,String>("domaine"));

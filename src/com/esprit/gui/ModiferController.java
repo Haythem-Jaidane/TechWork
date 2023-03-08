@@ -178,9 +178,10 @@ ObservableList<Projet> listp;
         @FXML
     private void Delete(ActionEvent event)throws IOException{
         
-           
+         
       ServiceProjet sp3 = new ServiceProjet();
       TypeProjet sp7 = new TypeProjet();
+      
        if (tfid.getText().isEmpty() ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -192,8 +193,7 @@ ObservableList<Projet> listp;
        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLhello.fxml"));
         Parent root = loader.load();
        tfsup.getScene().setRoot(root);
-        FXMLhelloController dpc = loader.getController();}
-            
+        FXMLhelloController dpc = loader.getController();}  
         }
 
     @FXML
