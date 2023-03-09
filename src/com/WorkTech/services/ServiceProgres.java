@@ -100,7 +100,7 @@ public class ServiceProgres implements IService<Progres> {
         String req = "SELECT * FROM progres where id_utilisateur=? and id_cours=?";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
-            st.setString(1, U.getId_utilisateur());
+            st.setInt(1, U.getId());
             st.setString(2, C.getId());
             ResultSet result = st.executeQuery();
             while(result.next()) {
@@ -137,11 +137,11 @@ public class ServiceProgres implements IService<Progres> {
     }
     
     
-    public boolean checkProgresUtlisateurParCours(Cours C,UtilisateurH U){
+    public boolean checkProgresUtlisateurParCours(Cours C,Utilisateur U){
         String req = "SELECT * FROM progres where id_utilisateur=? and id_cours=?";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
-            st.setString(1, U.getId_utilisateur());
+            st.setInt(1, U.getId());
             st.setString(2, C.getId());
             ResultSet result = st.executeQuery();
             while(result.next()) {

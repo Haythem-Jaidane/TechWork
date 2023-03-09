@@ -86,7 +86,7 @@ public class InterfaceCoursController implements Initializable {
     
 
         
-        Login = new Utilisateur("gtt");
+        Login = new Utilisateur(1);
         
         List<Cours> lCour = spCours.afficher();
         
@@ -119,7 +119,7 @@ public class InterfaceCoursController implements Initializable {
             if(!spProgres.checkProgresUtlisateurParCours(C,Login)){
                 But = new Button("Commancer");
                 welcomeCours w = new welcomeCours();
-                w.setId_utilisateur(Login.getId_utilisateur());
+                //w.setId_utilisateur(Login.getId());
                 w.setC(C);
                 w.setCn(this);
                 But.setOnAction(w);

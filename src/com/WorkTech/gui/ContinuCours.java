@@ -20,7 +20,7 @@ import javafx.scene.Parent;
 public class ContinuCours implements EventHandler<ActionEvent>{
     
     private Cours C;
-    private String id_utilisateur;
+    private int id_utilisateur;
     
     InterfaceCoursController Cn;
 
@@ -28,7 +28,7 @@ public class ContinuCours implements EventHandler<ActionEvent>{
         this.C = C;
     }
 
-    public void setId_utilisateur(String id_utilisateur) {
+    public void setId_utilisateur(int id_utilisateur) {
         this.id_utilisateur = id_utilisateur;
     }
 

@@ -7,6 +7,7 @@ package com.WorkTech.services;
 import com.WorkTech.entities.Cours;
 import com.WorkTech.entities.Contenu;
 import com.WorkTech.entities.Utilisateur;
+import com.WorkTech.entities.UtilisateurH;
 import com.WorkTech.utils.DataSource;
 
 import java.sql.Connection;

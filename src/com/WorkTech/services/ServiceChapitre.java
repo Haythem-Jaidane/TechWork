@@ -4,8 +4,8 @@
  */
 package com.WorkTech.services;
 
-import com.esprit.entities.Chapitre;
-import com.esprit.utils.DataSource;
+import com.WorkTech.entities.Chapitre;
+import com.WorkTech.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
