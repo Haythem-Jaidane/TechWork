@@ -20,10 +20,14 @@ is divided into following sections:
 
         -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 <project xmlns:if="ant:if" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" xmlns:unless="ant:unless" basedir=".." default="default" name="WorkshopPIDEV3A205-impl">
 =======
 <project xmlns:if="ant:if" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" xmlns:unless="ant:unless" basedir=".." default="default" name="TechWork-impl">
 >>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
+=======
+<project xmlns:if="ant:if" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" xmlns:unless="ant:unless" basedir=".." default="default" name="PI-impl">
+>>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
     <fail message="Please build using Ant 1.8.0 or higher.">
         <condition>
             <not>
@@ -624,10 +628,14 @@ is divided into following sections:
                 </union>
                 <taskdef classname="org.testng.TestNGAntTask" classpath="${run.test.classpath}" name="testng"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="WorkshopPIDEV3A205" testname="TestNG tests" workingDir="${work.dir}">
 =======
                 <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="TechWork" testname="TestNG tests" workingDir="${work.dir}">
 >>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
+=======
+                <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="PI" testname="TestNG tests" workingDir="${work.dir}">
+>>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
                     <xmlfileset dir="${build.test.classes.dir}" includes="@{testincludes}"/>
                     <propertyset>
                         <propertyref prefix="test-sys-prop."/>
@@ -725,10 +733,14 @@ is divided into following sections:
                     <isset property="test.method"/>
                 </condition>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <condition else="-suitename WorkshopPIDEV3A205 -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
 =======
                 <condition else="-suitename TechWork -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
 >>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
+=======
+                <condition else="-suitename PI -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
+>>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
                     <matches pattern=".*\.xml" string="@{testClass}"/>
                 </condition>
                 <delete dir="${build.test.results.dir}" quiet="true"/>
@@ -1070,10 +1082,14 @@ is divided into following sections:
     </target>
     <target if="already.built.jar.${basedir}" name="-warn-already-built-jar">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <echo level="warn" message="Cycle detected: WorkshopPIDEV3A205 was already built"/>
 =======
         <echo level="warn" message="Cycle detected: TechWork was already built"/>
 >>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
+=======
+        <echo level="warn" message="Cycle detected: PI was already built"/>
+>>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
     </target>
     <target depends="init,-deps-jar-init" name="deps-jar" unless="no.deps">
         <mkdir dir="${build.dir}"/>
@@ -1745,10 +1761,14 @@ is divided into following sections:
     </target>
     <target if="already.built.clean.${basedir}" name="-warn-already-built-clean">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <echo level="warn" message="Cycle detected: WorkshopPIDEV3A205 was already built"/>
 =======
         <echo level="warn" message="Cycle detected: TechWork was already built"/>
 >>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
+=======
+        <echo level="warn" message="Cycle detected: PI was already built"/>
+>>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
     </target>
     <target depends="init,-deps-clean-init" name="deps-clean" unless="no.deps">
         <mkdir dir="${build.dir}"/>

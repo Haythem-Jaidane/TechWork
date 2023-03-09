@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gererProfil.gui.AjoutProfilController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="884.0" prefWidth="989.0">
+         <children>
+            <HBox prefHeight="80.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profil Details" wrappingWidth="308.6708984375">
+                     <font>
+                        <Font name="Bodoni MT" size="49.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="fxId" prefHeight="54.0" prefWidth="608.0" visible="false" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="56.0" prefWidth="756.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label prefHeight="21.0" prefWidth="265.0" text="Nom" />
+                  <TextField fx:id="fxNom" prefHeight="53.0" prefWidth="876.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="90.0" prefHeight="53.0" prefWidth="896.0" style="-fx-alignment: black;">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="218.0" text="Prénom" />
+                  <TextField fx:id="fxPrenom" prefHeight="55.0" prefWidth="826.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="136.0" prefHeight="46.0" prefWidth="707.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="195.0" text="Numéro_téléphone" />
+                  <TextField fx:id="fxNum" prefHeight="46.0" prefWidth="689.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="182.0" prefHeight="46.0" prefWidth="707.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="227.0" text="E_mail" />
+                  <TextField fx:id="fxEmail" prefHeight="50.0" prefWidth="830.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="228.0" prefHeight="46.0" prefWidth="707.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="195.0" text="Localisation" />
+                  <TextField fx:id="fxLocalisation" prefHeight="46.0" prefWidth="781.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="274.0" prefHeight="46.0" prefWidth="707.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="195.0" text="Description" />
+                  <TextField fx:id="fxDes" prefHeight="52.0" prefWidth="784.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="320.0" prefHeight="46.0" prefWidth="707.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="193.0" text="Langues" />
+                  <TextField fx:id="fxLangues" prefHeight="52.0" prefWidth="786.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="366.0" prefHeight="46.0" prefWidth="707.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="194.0" text="Competences" />
+                  <TextField fx:id="fxComp" prefHeight="46.0" prefWidth="787.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="412.0" prefHeight="59.0" prefWidth="985.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="258.0" text="Formation" />
+                  <TextField fx:id="fxFormation" prefHeight="39.0" prefWidth="859.0" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="366.0" prefHeight="82.0" prefWidth="985.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="194.0" text="Experiences_professionnelles" />
+                  <TextField fx:id="fxExp" prefHeight="46.0" prefWidth="781.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="82.0" prefWidth="985.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="194.0" text="latitude de la localisation" />
+                  <TextField fx:id="latitude" prefHeight="46.0" prefWidth="781.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="650.0" prefHeight="82.0" prefWidth="985.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="194.0" text="longitude de la localisation" />
+                  <TextField fx:id="longitude" prefHeight="46.0" prefWidth="781.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="610.0" prefHeight="101.0" prefWidth="989.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="194.0" text="Diplome" />
+                  <RadioButton fx:id="gr1" mnemonicParsing="false" text="Oui">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="group1" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="gr2" mnemonicParsing="false" text="Non" toggleGroup="$group1" />
+               </children>
+            </HBox>
+            <HBox prefHeight="88.0" prefWidth="989.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#Save" prefHeight="68.0" prefWidth="132.0" text="Save">
+                     <HBox.margin>
+                        <Insets left="450.0" top="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#Clean" prefHeight="70.0" prefWidth="136.0" text="Clean">
+                     <HBox.margin>
+                        <Insets left="4.0" top="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

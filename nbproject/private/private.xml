@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
 <<<<<<< HEAD
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/LoginController.java</file>
@@ -24,5 +25,8 @@
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceCoursController.java</file>
 >>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
         </group>
+=======
+        <group/>
+>>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
     </open-files>
 </project-private>
