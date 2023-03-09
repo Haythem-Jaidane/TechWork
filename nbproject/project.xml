@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
             <name>WorkshopPIDEV3A205</name>
+=======
+            <name>TechWork</name>
+>>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

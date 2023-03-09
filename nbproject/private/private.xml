@@ -3,11 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/LoginController.java</file>
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/tests/MainGUI.java</file>
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/tests/MainProg.java</file>
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/AfficherUtilisateurController.java</file>
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/MailSender.java</file>
+=======
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterContenuController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceAPIDropbox.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceWelcomeCoursController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceLireCoursController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterCourController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/tests/MainProg.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/utils/ConnectToDropbox.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterCoursController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterContenuController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterChapitreController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterChapitreController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceCoursController.java</file>
+>>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
         </group>
     </open-files>
 </project-private>
