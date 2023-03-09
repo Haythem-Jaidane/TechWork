@@ -9,6 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <project name="WorkshopPIDEV3A205" default="default" basedir=".">
     <description>Builds, tests, and runs the project WorkshopPIDEV3A205.</description>
 =======
@@ -19,6 +20,10 @@
 <project name="PI" default="default" basedir=".">
     <description>Builds, tests, and runs the project PI.</description>
 >>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
+=======
+<project name="Projetttt" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Projetttt.</description>
+>>>>>>> 732665bc19f2b86f712833095717719ace93924c
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -70,6 +75,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <target name="run" depends="WorkshopPIDEV3A205-impl.jar">
 =======
         <target name="run" depends="TechWork-impl.jar">
@@ -77,6 +83,9 @@
 =======
         <target name="run" depends="PI-impl.jar">
 >>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
+=======
+        <target name="run" depends="Projetttt-impl.jar">
+>>>>>>> 732665bc19f2b86f712833095717719ace93924c
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>
