@@ -107,10 +107,10 @@ public class ServiceCours implements IService<Cours> {
                 System.out.println("utilsateur avec ID recuperees !");
                 return new Utilisateur(result.getString("id_utilisateur"), result.getString("nom"));
             }
-            return new UtilisateurH();
+            return new Utilisateur();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            return new UtilisateurH();
+            return new Utilisateur();
         }
         
     }

@@ -55,6 +55,10 @@ public class Utilisateur {
         this.role = role;
     }
 
+    public Utilisateur() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getRole() {
         return role;
     }

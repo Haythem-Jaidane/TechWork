@@ -128,7 +128,7 @@ public class InterfaceCoursController implements Initializable {
             else{
                 But = new Button("Poursuivre");
                 ContinuCours conti = new ContinuCours();
-                conti.setId_utilisateur(Login.getId_utilisateur());
+                conti.setId_utilisateur(Login.getId());
                 conti.setC(C);
                 conti.setCn(this);
                 But.setOnAction(conti);

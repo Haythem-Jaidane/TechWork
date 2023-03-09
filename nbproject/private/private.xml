@@ -2,38 +2,42 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-<<<<<<< HEAD
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/LoginController.java</file>
-            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/tests/MainGUI.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/UtilisateurH.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceConsulterContenuController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/AfficahageMainInterface.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/services/ServiceChapitre.java</file>
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/tests/MainProg.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/Chapitre.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/AjouterUtilisateurController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/Contenu.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceAjouterCoursController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceAjouterChapitreController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/services/ServiceContenu.java</file>
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/AfficherUtilisateurController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/AffichageConsulter.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceLireCoursController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/DetailUtilisateurController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/AffichageConsulterChapitre.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/services/ServiceCours.java</file>
             <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/MailSender.java</file>
-=======
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterContenuController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceAPIDropbox.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceWelcomeCoursController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceLireCoursController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterCourController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/tests/MainProg.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/utils/ConnectToDropbox.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterCoursController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterContenuController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterChapitreController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterChapitreController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceCoursController.java</file>
->>>>>>> b8c3819bfc58cfa927140f944682981d6d108fa1
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/services/ServiceAPIDropbox.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/welcomeCours.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/LoginController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/services/IService.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceAjouterContenuController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/Cours.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/utils/ConnectToDropbox.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/tests/MainGUI.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/services/ServiceProgres.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/ContinuCours.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/Utilisateur.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceCoursController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/Progres.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceWelcomeCoursController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceConsulterChapitreController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/gui/InterfaceConsulterCourController.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Integration%20PI/TechWork/src/com/WorkTech/entities/AffichageConsulterContenu.java</file>
         </group>
-=======
-        <group/>
->>>>>>> dfcdbb6150ac1dcc01cdb7c7c528b7b84af9ec3a
-=======
-        <group>
-            <file>file:/C:/Users/asus/Desktop/projet%20pidev/Projetttt/src/com/esprit/gui/AjouttypeController.java</file>
-            <file>file:/C:/Users/asus/Desktop/projet%20pidev/Projetttt/src/com/esprit/gui/TypeconsController.java</file>
-        </group>
->>>>>>> 732665bc19f2b86f712833095717719ace93924c
     </open-files>
 </project-private>
