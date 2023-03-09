@@ -7,8 +7,13 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
+<<<<<<< HEAD
 <project name="TechWork" default="default" basedir=".">
     <description>Builds, tests, and runs the project TechWork.</description>
+=======
+<project name="mainGestionOffre_INES" default="default" basedir=".">
+    <description>Builds, tests, and runs the project mainGestionOffre_INES.</description>
+>>>>>>> 5b58d9cec55fbaf6afe3cd2a0703b106b957eacb
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -58,7 +63,11 @@
 
     An example of overriding the target for project execution could look like this:
 
+<<<<<<< HEAD
         <target name="run" depends="TechWork-impl.jar">
+=======
+        <target name="run" depends="mainGestionOffre_INES-impl.jar">
+>>>>>>> 5b58d9cec55fbaf6afe3cd2a0703b106b957eacb
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>
@@ -71,4 +80,7 @@
 
     -->
 </project>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5b58d9cec55fbaf6afe3cd2a0703b106b957eacb
