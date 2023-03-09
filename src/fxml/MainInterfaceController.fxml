@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root prefHeight="293.0" prefWidth="408.0" style="-fx-background-color: #0C2D40;" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="start" mnemonicParsing="false" text="Activer">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="pause" mnemonicParsing="false" text="Pause">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="resume" mnemonicParsing="false" text="ReActiver">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="lbData" text="Label" textFill="#1bf74b" visible="false" />
+            <TextField fx:id="tfText" prefHeight="31.0" prefWidth="0.0" visible="false" />
+            <Button mnemonicParsing="false" onAction="#sendData" text="Send" />
+         </children>
+      </HBox>
+   </center>
+   <top>
+      <Label fx:id="statusLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-font-size: 17; -fx-text-fill: white;" text="Micro : [ En Pause ]" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <TextArea fx:id="infoArea" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Dites quelque chose.." BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </TextArea>
+   </bottom>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</fx:root>
