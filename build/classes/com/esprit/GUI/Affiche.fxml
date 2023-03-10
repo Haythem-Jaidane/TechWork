@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="953.0" prefWidth="1808.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.AfficheController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <AnchorPane id="AnchorPane" layoutX="14.0" layoutY="27.0" prefHeight="926.0" prefWidth="1779.0">
+                     <children>
+                        <TableView fx:id="ProfilesTable" layoutX="9.0" layoutY="347.0" minHeight="100.0" minWidth="10.0" prefHeight="432.0" prefWidth="1774.0">
+                           <columns>
+                              <TableColumn fx:id="fxId" prefWidth="99.0" text="id_Profil" visible="false" />
+                              <TableColumn fx:id="fxNom" prefWidth="121.0" text="Nom" />
+                              <TableColumn fx:id="fxPrenom" prefWidth="136.0" text="prénom" />
+                              <TableColumn fx:id="fxNum" prefWidth="167.0" text="Numéro_téléphone" />
+                              <TableColumn fx:id="fxEmail" prefWidth="157.0" text="E_mail" />
+                              <TableColumn fx:id="fxLocalisation" prefWidth="115.0" text="Localisation" />
+                              <TableColumn fx:id="fxDes" prefWidth="119.0" text="Description" />
+                              <TableColumn fx:id="fxLangues" prefWidth="102.0" text="Langues" />
+                              <TableColumn fx:id="fxComp" prefWidth="106.0" text="Competences" />
+                              <TableColumn fx:id="fxFormation" prefWidth="105.0" text="Formation" />
+                              <TableColumn fx:id="fxExp" prefWidth="225.0" text="Experiences_professionnelles" />
+                              <TableColumn fx:id="fxLatitude" prefWidth="140.0" text="latitude" />
+                              <TableColumn fx:id="fxLongitude" prefWidth="140.0" text="longitude" />
+                              <TableColumn fx:id="fxDiplome" prefWidth="140.0" text="Diplome" />
+                           </columns>
+                        </TableView>
+                        <Pane layoutX="521.0" layoutY="141.0" prefHeight="4.0" prefWidth="1364.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Text layoutX="36.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil Details" wrappingWidth="481.6708984375">
+                           <font>
+                              <Font name="Bodoni MT" size="59.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="33.0" fitWidth="28.0" layoutX="1437.0" layoutY="14.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Documents/NetBeansProjects/PI/src/com/pi1/gui/xicoon.png" />
+                           </image>
+                        </ImageView>
+                        <HBox layoutX="77.0" layoutY="174.0" prefHeight="96.0" prefWidth="368.0">
+                           <children>
+                              <ImageView fitHeight="99.0" fitWidth="86.0" onMouseClicked="#getAddView" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@ressources/addprofpng.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="87.0" fitWidth="106.0" onMouseClicked="#refreshTable" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@ressources/refresh.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="modif" fitHeight="81.0" fitWidth="103.0" onMouseClicked="#modifProf" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@ressources/update.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="delete" fitHeight="81.0" fitWidth="103.0" onMouseClicked="#deleteprof" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@ressources/delete.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="80.0" fitWidth="117.0" layoutX="1668.0" layoutY="23.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@ressources/xicoon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
