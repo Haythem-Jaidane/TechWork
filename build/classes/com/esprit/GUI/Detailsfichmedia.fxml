@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.DetailsfichmediaController">
+   <children>
+      <Label layoutX="32.0" layoutY="97.0" text="Nom Fichier Media : " textFill="#926396">
+         <font>
+            <Font name="Baskerville Old Face" size="24.0" />
+         </font></Label>
+      <Label layoutX="32.0" layoutY="187.0" text="URL Media : " textFill="#926396">
+         <font>
+            <Font name="Baskerville Old Face" size="24.0" />
+         </font></Label>
+      <Label layoutX="28.0" layoutY="273.0" text="Type Fichier : " textFill="#926396">
+         <font>
+            <Font name="Baskerville Old Face" size="24.0" />
+         </font></Label>
+      <Label fx:id="Lbnommedia" layoutX="69.0" layoutY="135.0" prefHeight="17.0" prefWidth="79.0" text="Label">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="Lburl" layoutX="67.0" layoutY="224.0" prefHeight="17.0" prefWidth="79.0" text="Label">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="Lbtype" layoutX="67.0" layoutY="308.0" prefHeight="17.0" prefWidth="79.0" text="Label">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <AnchorPane layoutX="291.0" prefHeight="401.0" prefWidth="309.0" style="-fx-background-color: #D2B4DE;">
+         <children>
+            <ImageView fx:id="tfimg" fitHeight="315.0" fitWidth="301.0" layoutX="9.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo%20WorkTech.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Button fx:id="tfretour" blendMode="EXCLUSION" layoutX="23.0" layoutY="357.0" mnemonicParsing="false" onAction="#retour" style="-fx-background-color: black;" text="Retour" textFill="#fffefe">
+         <font>
+            <Font name="SWItal" size="16.0" />
+         </font>
+      </Button>
+      <Text layoutX="8.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detail Fichier Media">
+         <font>
+            <Font name="Rage Italic" size="36.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

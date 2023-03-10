@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.CandidatReadOffresController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="1276.0" prefWidth="1624.0" style="-fx-background-color: BBD2D8;">
+         <children>
+             
+             
+            <TableView fx:id="offresTable" layoutX="137.0" layoutY="432.0" prefHeight="222.0" prefWidth="1432.0">
+              <columns>
+                  <TableColumn fx:id="statusCol" prefWidth="100.0" text="Status" />
+                  <TableColumn fx:id="offreCol" prefWidth="75.0" text="Title" visible="false" />
+                <TableColumn fx:id="titreCol" prefWidth="100.0" text="Titre" />
+                  <TableColumn fx:id="postCol" prefWidth="100.0" text="Post" />
+                  <TableColumn fx:id="salaireCol" prefWidth="100.0" text="Salaire" />
+                  <TableColumn fx:id="contratCol" minWidth="0.0" prefWidth="100.0" text="Type Contrat" />
+                  <TableColumn fx:id="dureeCol" prefWidth="100.0" text="Duree" />
+                  <TableColumn fx:id="lieuCol" minWidth="0.0" prefWidth="100.0" text="Lieu" />
+                  <TableColumn fx:id="domaineCol" prefWidth="100.0" text="Domaine" />
+                <TableColumn fx:id="descCol" prefWidth="280.0" text="Description" />
+                  <TableColumn fx:id="nomRecruteurCol" prefWidth="100.0" text="Recruteur" />
+                  <TableColumn fx:id="emailRecruteurCol" prefWidth="100.0" text="Contact" />
+                  <TableColumn fx:id="buttonsCol" maxWidth="500.0" prefWidth="100.0" style="-fx-alignment: center;" />
+                  <TableColumn fx:id="idCol" prefWidth="100.0" text="Id" visible="false" />
+              
+              </columns>
+            </TableView>
+            <Text fill="#0c2d40" layoutX="645.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Offres De Travail">
+               <font>
+                  <Font name="Bauhaus 93" size="45.0" />
+               </font>
+            </Text>
+            <Pane layoutX="113.0" layoutY="95.0" prefHeight="17.0" prefWidth="1398.0" style="-fx-background-color: #0C2D40;" />
+            <ImageView fitHeight="117.0" fitWidth="79.0" layoutX="774.0" layoutY="131.0">
+               <image>
+                  <Image url="@img/logodark.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="48.0" layoutX="1375.0" layoutY="24.0" onMouseClicked="#btnClose" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Documents/NetBeansProjects/GestionOffreV20_interfaces_2/src/GUI/img/x.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="tfSearch" layoutX="722.0" layoutY="359.0" prefHeight="31.0" prefWidth="253.0" promptText="Recherchez un offre disponible !" />
+            <Text fill="#0c2d40" layoutX="774.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Offres De Travail Disponibles !">
+               <font>
+                  <Font name="Bauhaus 93" size="45.0" />
+               </font>
+            </Text>
+            <Text fx:id="nbDispo" fill="#0c2d40" layoutX="692.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
+               <font>
+                  <Font name="Bauhaus 93" size="45.0" />
+               </font>
+            </Text>
+            <TableView fx:id="offresTable1" layoutX="137.0" layoutY="811.0" prefHeight="303.0" prefWidth="1432.0">
+               <columns>
+                  <TableColumn fx:id="statusCol1" prefWidth="100.0" text="Status" />
+                  <TableColumn fx:id="titreCol1" prefWidth="100.0" text="Titre" />
+                  <TableColumn fx:id="postCol1" prefWidth="100.0" text="Post" />
+                  <TableColumn fx:id="salaireCol1" prefWidth="100.0" text="Salaire" />
+                  <TableColumn fx:id="contratCol1" minWidth="0.0" prefWidth="100.0" text="Type Contrat" />
+                  <TableColumn fx:id="dureeCol1" prefWidth="100.0" text="Duree" />
+                  <TableColumn fx:id="lieuCol1" minWidth="0.0" prefWidth="100.0" text="Lieu" />
+                  <TableColumn fx:id="domaineCol1" prefWidth="100.0" text="Domaine" />
+                  <TableColumn fx:id="descCol1" prefWidth="280.0" text="Description" />
+                  <TableColumn fx:id="nomRecruteurCol1" prefWidth="100.0" text="Recruteur" />
+                  <TableColumn fx:id="emailRecruteurCol1" prefWidth="100.0" text="Contact" />
+                  <TableColumn fx:id="buttonsCol1" maxWidth="500.0" prefWidth="100.0" style="-fx-alignment: center;" />
+                  <TableColumn fx:id="idCol1" prefWidth="100.0" text="Id" visible="false" />
+               </columns>
+            </TableView>
+            <Text fill="#0c2d40" layoutX="774.0" layoutY="720.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personnes ont deja été recrutés !">
+               <font>
+                  <Font name="Bauhaus 93" size="45.0" />
+               </font>
+            </Text>
+            <Text fx:id="nbNonDisp" fill="#0c2d40" layoutX="692.0" layoutY="719.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
+               <font>
+                  <Font name="Bauhaus 93" size="45.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tfSearch1" layoutX="710.0" layoutY="730.0" prefHeight="31.0" prefWidth="323.0" promptText="Recherchez un offre qui n'est plus disponible" />
+            <Button layoutX="591.0" layoutY="181.0" mnemonicParsing="false" onMouseClicked="#btnViewCandidatures" text="Candidatures" />
+            <Button layoutX="931.0" layoutY="181.0" mnemonicParsing="false" onMouseClicked="#btnViewOffre" text="Refresh" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
