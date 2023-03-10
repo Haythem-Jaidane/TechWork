@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterContenuController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceAPIDropbox.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceWelcomeCoursController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceLireCoursController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterCourController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/tests/MainProg.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/utils/ConnectToDropbox.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterCoursController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterContenuController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterChapitreController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterChapitreController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceCoursController.java</file>
+        </group>
+    </open-files>
+</project-private>
