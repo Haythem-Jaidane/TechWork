@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.CandidatReadCandidaturesController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane id="AnchorPane" prefHeight="1269.0" prefWidth="1798.0" style="-fx-background-color: BBD2D8;">
+               <children>
+                  <TableView fx:id="candidaturesTable" layoutX="97.0" layoutY="379.0" prefHeight="222.0" prefWidth="1212.0">
+                    <columns>
+                        <TableColumn fx:id="statusCol" minWidth="0.0" prefWidth="100.0" text="Status" />
+                        <TableColumn fx:id="idCol" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Id" visible="false" />
+                      <TableColumn fx:id="offreCol" minWidth="0.0" prefWidth="150.0" text="Offre" visible="false" />
+                        <TableColumn fx:id="titreOffreCol" maxWidth="500.0" prefWidth="115.0" text="Offre" />
+                        <TableColumn fx:id="recruteurCol" minWidth="0.0" prefWidth="116.0" text="Recruteur" />
+                        <TableColumn fx:id="candidatCol" minWidth="0.0" prefWidth="150.0" text="Candidat" />
+                        <TableColumn fx:id="datePostulationCol" minWidth="0.0" prefWidth="183.0" text="Date de Postulation" />
+                        <TableColumn fx:id="dateModificationCol" minWidth="0.0" prefWidth="185.0" text="Date de Modification" />
+                        <TableColumn fx:id="informationCol" minWidth="0.0" prefWidth="150.0" text="Détails" />
+                        <TableColumn fx:id="buttonsCol" maxWidth="200.0" minWidth="0.0" prefWidth="143.0" style="-fx-alignment: center;" text="." />
+                    
+                    </columns>
+                  </TableView>
+                  <Text fill="#0c2d40" layoutX="565.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Candidatures">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutY="97.0" prefHeight="17.0" prefWidth="1398.0" style="-fx-background-color: #0C2D40;" />
+                  <ImageView fitHeight="117.0" fitWidth="79.0" layoutX="75.0" layoutY="159.0">
+                     <image>
+                        <Image url="@../../../GestionOffreV20_interfaces_1/src/GUI/img/logodark.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="51.0" fitWidth="48.0" layoutX="1262.0" layoutY="26.0" onMouseClicked="#btnClose" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../GestionOffreV20_interfaces_1/src/GUI/img/x.png" />
+                     </image>
+                  </ImageView>
+                  <TableView fx:id="rejectedCandidaturesTable" layoutX="97.0" layoutY="855.0" prefHeight="222.0" prefWidth="1212.0">
+                     <columns>
+                        <TableColumn fx:id="statusCol1" minWidth="0.0" prefWidth="100.0" text="Status" />
+                        <TableColumn fx:id="offreCol1" minWidth="0.0" prefWidth="150.0" text="Offre" visible="false" />
+                        <TableColumn fx:id="titreOffreCol1" prefWidth="115.0" text="Offre" visible="false" />
+                        <TableColumn fx:id="idCol1" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Id" visible="false" />
+                        <TableColumn fx:id="recruteurCol1" minWidth="0.0" prefWidth="150.0" text="Recruteur" />
+                        <TableColumn fx:id="candidatCol1" minWidth="0.0" prefWidth="150.0" text="Candidat" />
+                        <TableColumn fx:id="datePostulationCol1" minWidth="0.0" prefWidth="183.0" text="Date de Postulation" />
+                        <TableColumn fx:id="dateModificationCol1" minWidth="0.0" prefWidth="185.0" text="Date de Modification" />
+                        <TableColumn fx:id="informationCol1" minWidth="0.0" prefWidth="150.0" text="Détails" />
+                        <TableColumn fx:id="buttonsCol1" maxWidth="200.0" minWidth="0.0" prefWidth="82.0" style="-fx-alignment: center;" text="." />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="acceptedCandidaturesTable" layoutX="97.0" layoutY="684.0" prefHeight="98.0" prefWidth="1212.0">
+                     <columns>
+                        <TableColumn fx:id="idCol11" editable="false" prefWidth="100.0" sortType="DESCENDING" sortable="false" text="Id" visible="false" />
+                        <TableColumn fx:id="statusCol11" minWidth="0.0" prefWidth="100.0" text="Status" />
+                        <TableColumn fx:id="offreCol11" minWidth="0.0" prefWidth="150.0" text="Offre" visible="false" />
+                        <TableColumn fx:id="titreOffreCol11" prefWidth="115.0" text="Offre" visible="false" />
+                        <TableColumn fx:id="recruteurCol11" minWidth="0.0" prefWidth="116.0" text="Recruteur" />
+                        <TableColumn fx:id="candidatCol11" minWidth="0.0" prefWidth="150.0" text="Candidat" />
+                        <TableColumn fx:id="datePostulationCol11" minWidth="0.0" prefWidth="183.0" text="Date de Postulation" />
+                        <TableColumn fx:id="dateModificationCol11" minWidth="0.0" prefWidth="185.0" text="Date de Modification" />
+                        <TableColumn fx:id="informationCol11" minWidth="0.0" prefWidth="150.0" text="Détails" />
+                        <TableColumn fx:id="buttonsCol11" maxWidth="200.0" minWidth="0.0" prefWidth="82.0" style="-fx-alignment: center;" text="." visible="false" />
+                     </columns>
+                  </TableView>
+                  <Text fill="#0c2d40" layoutX="703.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En Attente">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="707.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accepté">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="707.0" layoutY="837.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejetées">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="nbAttente" fill="#0c2d40" layoutX="587.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="nbAccepted" fill="#0c2d40" layoutX="591.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="nbRejected" fill="#0c2d40" layoutX="591.0" layoutY="836.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <PieChart fx:id="pieChart" layoutX="231.0" layoutY="118.0" prefHeight="178.0" prefWidth="369.0" />
+                  <Button layoutX="801.0" layoutY="176.0" mnemonicParsing="false" onMouseClicked="#btnViewOffre" text="Refresh" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

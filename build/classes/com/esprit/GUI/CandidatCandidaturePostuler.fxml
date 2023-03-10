@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.GUI.CandidatCandidaturePostulerController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="605.0" style="-fx-background-color: #BBD2D8;">
+         <children>
+            <AnchorPane id="AnchorPane" layoutY="7.0" prefHeight="575.0" prefWidth="605.0" style="-fx-background-color: BBD2D8;">
+               <children>
+                  <Pane layoutY="77.0" prefHeight="17.0" prefWidth="605.0" style="-fx-background-color: #0C2D40;" />
+                  <Text fill="#0c2d40" layoutX="58.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Détails de la candidature">
+                     <font>
+                        <Font name="Bauhaus 93" size="45.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="79.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre de l'Offre">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="79.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du recruteur">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="76.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="79.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du candidat">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="77.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Postulation">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="77.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#0c2d40" layoutX="78.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Modification">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="lbTitreOffre" layoutX="296.0" layoutY="143.0" text="." textFill="#8e5627">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNomRecruteur" layoutX="295.0" layoutY="190.0" text="." textFill="#8e5627">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbNomCandidat" layoutX="296.0" layoutY="237.0" text="." textFill="#8e5627">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbStatus" layoutX="295.0" layoutY="284.0" text="." textFill="#8e5627">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbInformation" layoutX="294.0" layoutY="328.0" text="." textFill="#8e5627">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbDatePostulation" layoutX="294.0" layoutY="374.0" text="." textFill="#8e5627">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbDateModification" layoutX="294.0" layoutY="417.0" text="." textFill="#8e5627">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="426.0" layoutY="494.0" mnemonicParsing="false" onAction="#btnAjouter" style="-fx-background-color: #0C2D40;" text="Confirmer" textFill="#bbd2d8">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Button> 
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
