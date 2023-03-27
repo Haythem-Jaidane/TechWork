@@ -1,0 +1,50 @@
+{% block navbar %}
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img src="assets/img/logo.png" alt="">
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href={{path('app_home')}}>Home</a></li>
+          <li><a href={{path('app_home_other',{'section': 'about' })}}>About</a></li>
+          <li><a href={{path('app_home_other',{'section': 'offre' })}}>Offre</a></li>
+          <li><a href={{path('app_home_other',{'section': 'portfolio' })}}>protfolio</a></li>
+          <li><a href={{path('app_home_other',{'section': 'formation' })}}>formation</a></li>
+          
+          {% if isConnected %}
+          <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="photo">
+                    <img src="{{ asset('assets/img/anime3.png') }}" height="50px" width ="50px" alt="Profile Photo" style="border-radius:50px;">
+                  </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                  <li class="nav-link"><a href={{path('app_home_other',{'section': 'profile' })}}>formation</a></li>
+ class="nav-item dropdown-item">Profile</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                </ul>
+              </li>
+          {% endif %}
+        </ul>
+
+        
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+    
+  </header>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% block toolbar %}
+
+<div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="javascript:void(0)" class="simple-text logo-mini">
+            CT
+          </a>
+          <a href="javascript:void(0)" class="simple-text logo-normal">
+            Creative Tim
+          </a>
+        </div>
+        <ul class="nav">
+          <li class="active ">
+            <a href={{path("app_back_office")}}>
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href={{path("app_back_office")}}>
+              <i class="tim-icons icon-single-02"></i>
+              <p>Utilisateur</p>
+            </a>
+          </li>
+          <li>
+            <a href={{path("app_back_office")}}>
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Offre</p>
+            </a>
+          </li>
+          <li>
+            <a href={{path("app_back_office")}}>
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Profile</p>
+            </a>
+          </li>
+          <li>
+            <a href={{path("app_back_office")}}>
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Portfolio</p>
+            </a>
+          </li>
+          <li>
+            <a href={{path("app_back_office")}}>
+              <i class="tim-icons icon-single-02"></i>
+              <p>Formation</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+{% endblock %}
