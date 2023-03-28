@@ -10,38 +10,38 @@
           </a>
         </div>
         <ul class="nav">
-          <li class="active ">
-            <a href={{path("app_back_office")}}>
+          <li {% if getsion == "" %}class="active"{% endif %}>
+            <a href={{path("app_back_office_index")}}>
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
-            <a href={{path("app_back_office")}}>
+          <li {% if getsion == "utilisateur" %}class="active"{% endif %}>
+            <a href={{path("app_back_office",{'getsion': 'utilisateur' })}}>
               <i class="tim-icons icon-single-02"></i>
               <p>Utilisateur</p>
             </a>
           </li>
-          <li>
-            <a href={{path("app_back_office")}}>
+          <li {% if getsion == "offre" %}class="active"{% endif %}>
+            <a href={{path("app_back_office",{'getsion': 'offre' })}}>
               <i class="tim-icons icon-bell-55"></i>
               <p>Offre</p>
             </a>
           </li>
-          <li>
-            <a href={{path("app_back_office")}}>
+          <li {% if getsion == "profile" %}class="active"{% endif %}>
+            <a href={{path("app_back_office",{'getsion': 'profile' })}}>
               <i class="tim-icons icon-bell-55"></i>
               <p>Profile</p>
             </a>
           </li>
-          <li>
-            <a href={{path("app_back_office")}}>
+          <li {% if getsion == "portfolio" %}class="active"{% endif %}>
+            <a href={{path("app_back_office",{'getsion': 'portfolio' })}}>
               <i class="tim-icons icon-bell-55"></i>
               <p>Portfolio</p>
             </a>
           </li>
-          <li>
-            <a href={{path("app_back_office")}}>
+          <li {% if getsion == "formation" %}class="active"{% endif %}>
+            <a href={{path("app_back_office",{'getsion': 'formation' })}}>
               <i class="tim-icons icon-single-02"></i>
               <p>Formation</p>
             </a>
