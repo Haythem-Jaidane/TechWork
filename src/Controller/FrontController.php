@@ -21,22 +21,6 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/dashboard/{getsion}', name: 'app_back_office')]
-    public function backOffice($getsion): Response
-    {
-        return $this->render('BackOffice/back.html.twig',[
-            "getsion" => $getsion,
-        ]);
-    }
-
-    #[Route('/dashboard', name: 'app_back_office_index')]
-    public function backOfficeindex(): Response
-    {
-        return $this->render('BackOffice/back.html.twig',[
-            "getsion" => "",
-        ]);
-    }
-
     #[Route('/home/{section}', name: 'app_home_other')]
     public function other($section): Response
     {

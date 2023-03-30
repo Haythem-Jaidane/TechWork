@@ -13,7 +13,7 @@ class Projet
 
 
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(name:"id")]
     #[ORM\GeneratedValue]
     private ?int $id;
 

@@ -10,21 +10,21 @@ use App\Repository\LikepubRepository;
 class Likepub
 {
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(name:"id")]
     #[ORM\GeneratedValue]
-    private ?int $idUser;
+    private ?int $id;
 
     #[ORM\ManyToOne(inversedBy: "Utilisateur")]
-    #[ORM\JoinColumn(nullable:false)]
-    private ?Utilisateur $id;
+    #[ORM\JoinColumn(name : "id_user",referencedColumnName:"id",nullable:false)]
+    private ?Utilisateur $id_user;
 
     #[ORM\ManyToOne(inversedBy: "Publication")]
-    #[ORM\JoinColumn(nullable:false)]
+    #[ORM\JoinColumn(name : "id_pub",referencedColumnName:"id_Pub",nullable:false)]
     private ?Publication $idPub;
 
     public function getIdUser(): ?int
     {
-        return $this->idUser;
+        return $this->id;
     }
 
     public function setIdUser(int $idUser): self
@@ -36,12 +36,12 @@ class Likepub
 
     public function getId(): ?Utilisateur
     {
-        return $this->id;
+        return $this->id_user	;
     }
 
     public function setId(?Utilisateur $id): self
     {
-        $this->id = $id;
+        $this->id_user = $id;
 
         return $this;
     }

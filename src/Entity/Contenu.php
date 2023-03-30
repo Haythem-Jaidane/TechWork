@@ -9,9 +9,8 @@ use App\Repository\ContenuRepository;
 class Contenu
 {
     #[ORM\Id]
-    #[ORM\Column]
-    #[ORM\GeneratedValue]
-    private ?string $idContenu;
+    #[ORM\Column(name:"id_contenu")]
+    private ?string $id;
 
     #[ORM\Column]
     private ?string $type;
@@ -25,14 +24,13 @@ class Contenu
     #[ORM\Column]
     private ?string $titre;
 
-    
     #[ORM\ManyToOne(inversedBy: "Chapitre")]
-    #[ORM\JoinColumn(nullable:false)]
-    private ?Chapitre $idChapitre;
+    #[ORM\JoinColumn(name : "id_chapitre",referencedColumnName:"id_chapitre",nullable:false)]
+    private ?Chapitre $id_chapitre;
 
     public function getIdContenu(): ?string
     {
-        return $this->idContenu;
+        return $this->id;
     }
 
     public function getType(): ?string
@@ -85,12 +83,12 @@ class Contenu
 
     public function getIdChapitre(): ?Chapitre
     {
-        return $this->idChapitre;
+        return $this->id_chapitre;
     }
 
     public function setIdChapitre(?Chapitre $idChapitre): self
     {
-        $this->idChapitre = $idChapitre;
+        $this->id_chapitre = $idChapitre;
 
         return $this;
     }

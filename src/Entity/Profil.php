@@ -11,9 +11,9 @@ class Profil
 {
     
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(name:"id_Profil")]
     #[ORM\GeneratedValue]
-    private ?int $idProfil;
+    private ?int $id;
 
     #[ORM\Column]
     private ?string $nom;
@@ -56,7 +56,7 @@ class Profil
 
     public function getIdProfil(): ?int
     {
-        return $this->idProfil;
+        return $this->id;
     }
 
     public function getNom(): ?string
