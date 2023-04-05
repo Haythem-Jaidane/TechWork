@@ -9,7 +9,7 @@ use App\Repository\TypeprojetRepository;
 class Typeprojet
 {
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(name:"idtypeprojet")]
     #[ORM\GeneratedValue]
     private ?int $idtypeprojet;
 
@@ -20,7 +20,7 @@ class Typeprojet
     private ?string $descriptiontype;
 
     #[ORM\ManyToOne(inversedBy: "Projet")]
-    #[ORM\JoinColumn(nullable:false)]
+    #[ORM\JoinColumn(name: "id",referencedColumnName:"id",nullable:false)]
     private ?Projet $id;
 
     public function getIdtypeprojet(): ?int

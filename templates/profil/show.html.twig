@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+    <h1>Profil</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdProfil</th>
+                <td>{{ profil.getIdProfil() }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ profil.getNom() }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ profil.getPrenom() }}</td>
+            </tr>
+            <tr>
+                <th>Numero Telephone</th>
+                <td>{{ profil.getNumeroTelephone() }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ profil.getEmail() }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ profil.getLocalisation() }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ profil.getDescription() }}</td>
+            </tr>
+            <tr>
+                <th>Langues</th>
+                <td>{{ profil.getLangues() }}</td>
+            </tr>
+            <tr>
+                <th>Competences</th>
+                <td>{{ profil.getCompetences() }}</td>
+            </tr>
+            <tr>
+                <th>Formation</th>
+                <td>{{ profil.getFormation() }}</td>
+            </tr>
+            <tr>
+                <th>ExperiencesProfessionnelles</th>
+                <td>{{ profil.getExperiencesProfessionnelles() }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ profil.getlatitude() }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ profil.getlongitude() }}</td>
+            </tr>
+            <tr>
+                <th>Diplome</th>
+                <td>{{ profil.getDiplome() }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_profil_index') }}">Retourner à la liste-----</a>
+
+    <a href="{{ path('app_profil_edit', {'idProfil': profil.idProfil}) }}">Modifier</a>
+
+    {{ include('profil/_delete_form.html.twig') }}
+    
+{% endblock %}

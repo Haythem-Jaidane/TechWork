@@ -11,7 +11,7 @@ class Fichmedia
 {
 
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(name:"idmedia")]
     #[ORM\GeneratedValue]
     private ?int $idmedia;
 
@@ -25,7 +25,7 @@ class Fichmedia
     private ?string $typemedia;
 
     #[ORM\ManyToOne(inversedBy: "Projet")]
-    #[ORM\JoinColumn(nullable:false)]
+    #[ORM\JoinColumn(name: "id",referencedColumnName:"id",nullable:false)]
     private ?Projet $id;
 
     public function getIdmedia(): ?int

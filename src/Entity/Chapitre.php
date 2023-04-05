@@ -9,20 +9,19 @@ use App\Repository\ChapitreRepository;
 class Chapitre
 {
     #[ORM\Id]
-    #[ORM\Column]
-    #[ORM\GeneratedValue]
-    private ?string $idChapitre;
+    #[ORM\Column(name:"id_chapitre")]
+    private ?string $id;
 
     #[ORM\Column]
     private $titre;
 
     #[ORM\ManyToOne(inversedBy: "Cours")]
-    #[ORM\JoinColumn(nullable:false)]
-    private ?Cours $idCours;
+    #[ORM\JoinColumn(name: "id_cours",referencedColumnName:"id",nullable:false)]
+    private ?Cours $id_cours;
 
     public function getIdChapitre(): ?string
     {
-        return $this->idChapitre;
+        return $this->id;
     }
 
     public function getTitre(): ?string
@@ -39,12 +38,12 @@ class Chapitre
 
     public function getIdCours(): ?Cours
     {
-        return $this->idCours;
+        return $this->id_cours;
     }
 
-    public function setIdCours(?Cours $idCours): self
+    public function setIdCours(?Cours $id_cours): self
     {
-        $this->idCours = $idCours;
+        $this->id_cours = $id_cours;
 
         return $this;
     }

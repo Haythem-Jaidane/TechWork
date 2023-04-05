@@ -11,170 +11,170 @@ class Profil
 {
     
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(name:"id_Profil")]
     #[ORM\GeneratedValue]
-    private ?int $idProfil;
+    private ?int $id;
+
+    #[ORM\Column(name:"Nom")]
+    private ?string $Nom;
+
+    #[ORM\Column(name:"Prenom")]
+    private ?string $Prenom;
+
+    #[ORM\Column(name:"NumeroTelephone")]
+    private  ?string $NumeroTelephone;
+
+    #[ORM\Column(name:"Email")]
+    private ?string $Email;
+
+    #[ORM\Column(name:"Localisation")]
+    private ?string $Localisation;
+
+    #[ORM\Column(name:"Description")]
+    private ?string $Description;
+
+    #[ORM\Column(name:"Langues")]
+    private ?string $Langues;
+
+    #[ORM\Column(name:"Competences")]
+    private ?string $Competences;
+
+    #[ORM\Column(name:"Formation")]
+    private ?string $Formation;
+
+    #[ORM\Column(name:"ExperiencesProfessionnelles")]
+    private ?string $ExperiencesProfessionnelles;
 
     #[ORM\Column]
-    private ?string $nom;
+    private ?string $latitude;
 
     #[ORM\Column]
-    private ?string $prenom;
+    private ?string $longitude;
 
-    #[ORM\Column]
-    private  ?string $numéroTéléphone;
-
-    #[ORM\Column]
-    private ?string $eMail;
-
-    #[ORM\Column]
-    private ?string $localisation;
-
-    #[ORM\Column]
-    private ?string $description;
-
-    #[ORM\Column]
-    private ?string $langues;
-
-    #[ORM\Column]
-    private ?string $competences;
-
-    #[ORM\Column]
-    private ?string $formation;
-
-    #[ORM\Column]
-    private ?string $experiencesProfessionnelles;
-
-    #[ORM\Column]
-    private ?string $latitude = '0';
-
-    #[ORM\Column]
-    private ?string $longitude = '0';
-
-    #[ORM\Column]
-    private ?string $diplome;
+    #[ORM\Column(name:"Diplome")]
+    private ?string $Diplome;
 
     public function getIdProfil(): ?int
     {
-        return $this->idProfil;
+        return $this->id;
     }
 
     public function getNom(): ?string
     {
-        return $this->nom;
+        return $this->Nom;
     }
 
     public function setNom(string $nom): self
     {
-        $this->nom = $nom;
+        $this->Nom = $nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->prenom;
+        return $this->Prenom;
     }
 
     public function setPrenom(string $prenom): self
     {
-        $this->prenom = $prenom;
+        $this->Prenom = $prenom;
 
         return $this;
     }
 
-    public function getNuméroTéléphone(): ?string
+    public function getNumeroTelephone(): ?string
     {
-        return $this->numéroTéléphone;
+        return $this->NumeroTelephone;
     }
 
-    public function setNuméroTéléphone(string $numéroTéléphone): self
+    public function setNumeroTelephone(string $numeroTelephone): self
     {
-        $this->numéroTéléphone = $numéroTéléphone;
+        $this->NumeroTelephone = $numeroTelephone;
 
         return $this;
     }
 
-    public function getEMail(): ?string
+    public function getEmail(): ?string
     {
-        return $this->eMail;
+        return $this->Email;
     }
 
-    public function setEMail(string $eMail): self
+    public function setEMail(string $email): self
     {
-        $this->eMail = $eMail;
+        $this->Email = $email;
 
         return $this;
     }
 
     public function getLocalisation(): ?string
     {
-        return $this->localisation;
+        return $this->Localisation;
     }
 
     public function setLocalisation(string $localisation): self
     {
-        $this->localisation = $localisation;
+        $this->Localisation = $localisation;
 
         return $this;
     }
 
     public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->Description;
     }
 
     public function setDescription(string $description): self
     {
-        $this->description = $description;
+        $this->Description = $description;
 
         return $this;
     }
 
     public function getLangues(): ?string
     {
-        return $this->langues;
+        return $this->Langues;
     }
 
     public function setLangues(string $langues): self
     {
-        $this->langues = $langues;
+        $this->Langues = $langues;
 
         return $this;
     }
 
     public function getCompetences(): ?string
     {
-        return $this->competences;
+        return $this->Competences;
     }
 
     public function setCompetences(string $competences): self
     {
-        $this->competences = $competences;
+        $this->Competences = $competences;
 
         return $this;
     }
 
     public function getFormation(): ?string
     {
-        return $this->formation;
+        return $this->Formation;
     }
 
     public function setFormation(string $formation): self
     {
-        $this->formation = $formation;
+        $this->Formation = $formation;
 
         return $this;
     }
 
     public function getExperiencesProfessionnelles(): ?string
     {
-        return $this->experiencesProfessionnelles;
+        return $this->ExperiencesProfessionnelles;
     }
 
     public function setExperiencesProfessionnelles(string $experiencesProfessionnelles): self
     {
-        $this->experiencesProfessionnelles = $experiencesProfessionnelles;
+        $this->ExperiencesProfessionnelles = $experiencesProfessionnelles;
 
         return $this;
     }
@@ -205,12 +205,12 @@ class Profil
 
     public function getDiplome(): ?string
     {
-        return $this->diplome;
+        return $this->Diplome;
     }
 
     public function setDiplome(string $diplome): self
     {
-        $this->diplome = $diplome;
+        $this->Diplome = $diplome;
 
         return $this;
     }

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Profil{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+    <h1>Create new Profil</h1>
+
+    {{ include('profil/_form.html.twig') }}
+
+    <a href="{{ path('app_profil_index') }}">back to list</a>
+     {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}

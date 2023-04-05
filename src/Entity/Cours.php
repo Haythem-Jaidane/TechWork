@@ -14,8 +14,7 @@ use \DateTime;
 class Cours
 {
     #[ORM\Id]
-    #[ORM\Column]
-    #[ORM\GeneratedValue]
+    #[ORM\Column(name:"id")]
     private ?string $id;
 
     #[ORM\Column]

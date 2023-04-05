@@ -12,9 +12,9 @@ class Publication
 {
     
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(name:"id_Pub")]
     #[ORM\GeneratedValue]
-    private ?int $idPub;
+    private ?int $id;
 
     #[ORM\Column]
     private ?string $objet;
@@ -26,12 +26,12 @@ class Publication
     private ?string $idCours;
 
     #[ORM\ManyToOne(inversedBy: "Profil")]
-    #[ORM\JoinColumn(nullable:false)]
-    private ?Profil $idProfil;
+    #[ORM\JoinColumn(name:"id_Profil",referencedColumnName:"id_Profil",nullable:false)]
+    private ?Profil $id_Profil;
 
     public function getIdPub(): ?int
     {
-        return $this->idPub;
+        return $this->id;
     }
 
     public function getObjet(): ?string
@@ -72,12 +72,12 @@ class Publication
 
     public function getIdProfil(): ?Profil
     {
-        return $this->idProfil;
+        return $this->id_Profil;
     }
 
     public function setIdProfil(?Profil $idProfil): self
     {
-        $this->idProfil = $idProfil;
+        $this->id_Profil = $idProfil;
 
         return $this;
     }
