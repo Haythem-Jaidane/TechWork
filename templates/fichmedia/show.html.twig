@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fichmedia{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1>Fichmedia</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idmedia</th>
+                <td>{{ fichmedia.idmedia }}</td>
+            </tr>
+            <tr>
+                <th>Nommedia</th>
+                <td>{{ fichmedia.nommedia }}</td>
+            </tr>
+            <tr>
+                <th>Urlmedia</th>
+                <td>{{ fichmedia.urlmedia }}</td>
+            </tr>
+            <tr>
+                <th>Typemedia</th>
+                <td>{{ fichmedia.typemedia }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fichmedia_index') }}">back to list</a>
+
+    <a href="{{ path('app_fichmedia_edit', {'idmedia': fichmedia.idmedia}) }}">edit</a>
+
+    {{ include('fichmedia/_delete_form.html.twig') }}
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fichmedia index{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1>Fichmedia index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idmedia</th>
+                <th>Nommedia</th>
+                <th>Urlmedia</th>
+                <th>Typemedia</th>
+                <th>nomprojet</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fichmedia in fichmedia %}
+            <tr>
+                <td>{{ fichmedia.idmedia }}</td>
+                <td>{{ fichmedia.nommedia }}</td>
+                <td>{{ fichmedia.urlmedia }}</td>
+                <td>{{ fichmedia.typemedia }}</td>
+                <td>{{ fichmedia.id.nom }}</td>
+                <td>
+                    <a href="{{ path('app_fichmedia_show', {'idmedia': fichmedia.idmedia}) }}">show</a>
+                    <a href="{{ path('app_fichmedia_edit', {'idmedia': fichmedia.idmedia}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fichmedia_new') }}">Create new</a>
+     {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}

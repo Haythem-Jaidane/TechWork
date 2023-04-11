@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Typeprojet index{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+
+    <h1>Typeprojet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idtypeprojet</th>
+                <th>nomprojet</th>
+                <th>Nomtype</th>
+                <th>Descriptiontype</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeprojet in typeprojets %}
+            <tr>
+                <td>{{ typeprojet.idtypeprojet }}</td>
+                <td>{{ typeprojet.id.nom }}</td>
+                <td>{{ typeprojet.nomtype }}</td>
+                <td>{{ typeprojet.descriptiontype }}</td>
+                <td>
+                    <a href="{{ path('app_typeprojet_show', {'idtypeprojet': typeprojet.idtypeprojet}) }}">show</a>
+                    <a href="{{ path('app_typeprojet_edit', {'idtypeprojet': typeprojet.idtypeprojet}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_typeprojet_new') }}">Create new</a>
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}

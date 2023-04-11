@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Projet{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1>Edit Projet</h1>
+
+    {{ include('projet/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_projet_index') }}">back to list</a>
+
+    {{ include('projet/_delete_form.html.twig') }}
+       {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}
