@@ -4,46 +4,49 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Portfolio</h2>
-          <p>Quam sed id excepturi ccusantium dolorem ut quis dolores nisi llum nostrum enim velit qui ut et autem uia reprehenderit sunt deleniti</p>
+          <h2>Liste des Projets </h2>
         </div>
 
         <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
 
-    <h1>Projet index</h1>
+    
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
+                
+                <th>Nom Projet</th>
                 <th>Description</th>
                 <th>Domaine</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for projet in projets %}
             <tr>
-                <td>{{ projet.id }}</td>
+               
                 <td>{{ projet.nom }}</td>
                 <td>{{ projet.description }}</td>
                 <td>{{ projet.domaine }}</td>
                 <td>
-                    <a href="{{ path('app_projet_show', {'id': projet.id}) }}">show</a>
-                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">edit</a>
+                    <a href="{{ path('app_projet_show', {'id': projet.id}) }}">Afficher les detailes</a><br>
+                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun enregistrement</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_projet_new') }}">Create new</a>
+    <a href="{{ path('app_projet_new') }}"><strong>Creer un nouveau Projet </strong></a>
+<div class="d-flex justify-content-between">
+<a href="{{ path( 'app_fichmedia_index') }}"class="btn btn-primary float-right ">Consulter les fichiers media</a>
+<a href="{{ path( 'app_typeprojet_index') }}"class="btn btn-primary float-right ">Consulter les types projets </a><br>
 
+</div>
     </section>
      
      </div>
