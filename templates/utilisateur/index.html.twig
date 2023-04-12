@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+    <h1>Utilisateur index</h1>
+
+    <table class="table" >
+        <thead>
+            <tr> 
+                <th style="color:blue;">Image</th>    
+                <th style="color:blue;">Cin</th>
+                <th style="color:blue;">Nom</th>
+                <th style="color:blue;">Prenom</th>
+                <th style="color:blue;">Motdepasse</th>
+                <th style="color:blue;">Email</th>
+                <th style="color:blue;">Role</th>
+                <th style="color:blue;">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td><img src="/assets/img/anime3.png" height="50px" width="50px" alt="Profile Photo" style="border-radius:50px;"></td>
+                <td>{{ utilisateur.cin }}</td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.motdepasse }}</td>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.role }}</td>
+                <td>
+                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">show</a>
+                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_utilisateur_new') }}">Create new</a>
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}
