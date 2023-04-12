@@ -7,10 +7,10 @@
     {% include 'FrontOffice/Components/Assets/css.html.twig' %}
     {% include 'FrontOffice/Components/navbar.html.twig' %}
 
-    <h1>Create new Fichmedia</h1>
+    <h1 class="text-center mb-4">Creer un nouveau fichier media</h1>
 
     {{ include('fichmedia/_form.html.twig') }}
 
-    <a href="{{ path('app_fichmedia_index') }}">back to list</a>
+    <a href="{{ path('app_fichmedia_index') }}">Retour a la liste</a>
      {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

@@ -7,10 +7,10 @@
     {% include 'FrontOffice/Components/Assets/css.html.twig' %}
     {% include 'FrontOffice/Components/navbar.html.twig' %}
 
-    <h1>Create new Typeprojet</h1>
+    <h1  class="text-center mb-4">Ajouter Un Type Projet</h1>
 
     {{ include('typeprojet/_form.html.twig') }}
 
-    <a href="{{ path('app_typeprojet_index') }}">back to list</a>
+    <a href="{{ path('app_typeprojet_index') }}">--> Retour a la liste</a>
     {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

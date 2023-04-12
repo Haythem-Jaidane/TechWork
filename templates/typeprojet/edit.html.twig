@@ -6,13 +6,20 @@
 {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
     {% include 'FrontOffice/Components/Assets/css.html.twig' %}
     {% include 'FrontOffice/Components/navbar.html.twig' %}
-
-    <h1>Edit Typeprojet</h1>
+<div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+    <h1 class="text-center mb-4">Modifier Un Type </h1>
 
     {{ include('typeprojet/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_typeprojet_index') }}">back to list</a>
+    <div class="d-flex justify-content-between">
 
     {{ include('typeprojet/_delete_form.html.twig') }}
+    <a href="{{ path('app_typeprojet_index') }}"><strong>Retour a la liste </strong></a>
+    </div>
+  
+            </div>
+        </div>
+    </div>
      {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

@@ -8,17 +8,23 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 class TypeprojetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
            
-            ->add('nomtype')
-            ->add('descriptiontype')
+            ->add('nomtype',TextType::class,[
+                "label"=>'Type :',
+            ])
+            ->add('descriptiontype',TextType::class,[
+                "label"=>'Description Type :',
+            ])
             ->add('id',EntityType::class,[
                 'class'=>Projet::class,
-                "choice_label"=>'id',
+                "choice_label"=>'nom',
+                "label"=>'Nom Projet :',
                 'expanded'=>false,
                 'multiple'=>false
             ]) 
