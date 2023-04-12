@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Publication{% endblock %}
+{% block title %}Nouvelle Publication{% endblock %}
 
 {% block body %}
-    <h1>Create new Publication</h1>
+ {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+    <h1>Créer une nouvelle publication</h1>
 
     {{ include('publication/_form.html.twig') }}
 
-    <a href="{{ path('app_publication_index') }}">back to list</a>
+    <a href="{{ path('app_publication_index') }}">Revenir à la liste</a>
 {% endblock %}

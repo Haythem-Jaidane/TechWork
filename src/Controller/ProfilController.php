@@ -22,6 +22,16 @@ class ProfilController extends AbstractController
             'isConnected' => True,
         ]);
     }
+ 
+    #[Route('/dashboard_show_profile', name: 'app_profil_indexe', methods: ['GET'])]
+    public function indexx(ProfilRepository $profilRepository): Response
+    {
+       
+        return $this->render('profil/profileViewBack.html.twig', [
+            'profils' => $profilRepository->findAll(),
+            'isConnected' => True,
+        ]);
+    }
 
     #[Route('/new', name: 'app_profil_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProfilRepository $profilRepository): Response

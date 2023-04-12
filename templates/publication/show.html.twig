@@ -3,14 +3,17 @@
 {% block title %}Publication{% endblock %}
 
 {% block body %}
+ {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
     <h1>Publication</h1>
 
     <table class="table">
         <tbody>
-            <tr>
+           <!-- <tr>
                 <th>Id</th>
-                <td>{{ publication.id }}</td>
-            </tr>
+                <td>{{ publication.getIdPub() }}</td>
+            </tr> -->
             <tr>
                 <th>Objet</th>
                 <td>{{ publication.objet }}</td>
@@ -19,16 +22,16 @@
                 <th>Message</th>
                 <td>{{ publication.message }}</td>
             </tr>
-            <tr>
+          <!--  <tr>
                 <th>IdCours</th>
                 <td>{{ publication.idCours }}</td>
-            </tr>
+            </tr>-->
         </tbody>
     </table>
 
-    <a href="{{ path('app_publication_index') }}">back to list</a>
+    <a href="{{ path('app_publication_index') }}">Revenir à la liste</a>
 
-    <a href="{{ path('app_publication_edit', {'id': publication.id}) }}">edit</a>
+    <a href="{{ path('app_publication_edit', {'id': publication.getIdPub()}) }}">Modifier</a>
 
     {{ include('publication/_delete_form.html.twig') }}
 {% endblock %}

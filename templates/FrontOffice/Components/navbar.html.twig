@@ -15,6 +15,7 @@
           <li><a href={{path('app_home_other',{'section': 'portfolio' })}}>protfolio</a></li>
           <li><a href={{path('app_home_other',{'section': 'formation' })}}>formation</a></li>
           
+          
           {% if isConnected %}
           <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -28,6 +29,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link"><a href={{path('app_profil_index')}}>Profil</a></li>
+                   <li class="nav-link"><a href={{path('app_publication_index')}}>Publication</a></li>
+                  <!--<li class="nav-link"><a href={{path('app_home_other',{'section': 'profile' })}}>Profil</a></li>-->
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
                   <li class="dropdown-divider"></li>
                   <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>

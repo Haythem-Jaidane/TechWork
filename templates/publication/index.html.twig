@@ -3,28 +3,32 @@
 {% block title %}Publication index{% endblock %}
 
 {% block body %}
-    <h1>Publication index</h1>
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+        {% include 'FrontOffice/Components/navbar.html.twig' %}
+  
+    <h1>Publication </h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+               <!--  <th>Id</th>-->
                 <th>Objet</th>
                 <th>Message</th>
-                <th>IdCours</th>
+                <!-- <th>IdCours</th>-->
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for publication in publications %}
             <tr>
-                <td>{{ publication.id }}</td>
+               <!--  <td>{{ publication.getIdPub() }}</td>-->
                 <td>{{ publication.objet }}</td>
                 <td>{{ publication.message }}</td>
-                <td>{{ publication.idCours }}</td>
+               <!--  <td>{{ publication.idCours }}</td> -->
                 <td>
-                    <a href="{{ path('app_publication_show', {'id': publication.id}) }}">show</a>
-                    <a href="{{ path('app_publication_edit', {'id': publication.id}) }}">edit</a>
+                    <a href="{{ path('app_publication_show', {'id': publication.getIdPub()}) }}">Afficher</a>
+                    <a href="{{ path('app_publication_edit', {'id': publication.getIdPub()}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -36,4 +40,5 @@
     </table>
 
     <a href="{{ path('app_publication_new') }}">Create new</a>
+     {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

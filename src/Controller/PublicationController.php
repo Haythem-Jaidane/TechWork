@@ -16,8 +16,10 @@ class PublicationController extends AbstractController
     #[Route('/', name: 'app_publication_index', methods: ['GET'])]
     public function index(PublicationRepository $publicationRepository): Response
     {
-        return $this->render('publication/index.html.twig', [
+        return $this->render('FrontOffice/Components/profileView.html.twig', [
             'publications' => $publicationRepository->findAll(),
+            'isConnected' => True,
+
         ]);
     }
 
@@ -37,6 +39,7 @@ class PublicationController extends AbstractController
         return $this->renderForm('publication/new.html.twig', [
             'publication' => $publication,
             'form' => $form,
+            'isConnected' => True,
         ]);
     }
 
@@ -45,6 +48,7 @@ class PublicationController extends AbstractController
     {
         return $this->render('publication/show.html.twig', [
             'publication' => $publication,
+            'isConnected' => True,
         ]);
     }
 
@@ -63,13 +67,14 @@ class PublicationController extends AbstractController
         return $this->renderForm('publication/edit.html.twig', [
             'publication' => $publication,
             'form' => $form,
+            'isConnected' => True,
         ]);
     }
 
     #[Route('/{id}', name: 'app_publication_delete', methods: ['POST'])]
     public function delete(Request $request, Publication $publication, PublicationRepository $publicationRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$publication->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$publication->getIdPub(), $request->request->get('_token'))) {
             $publicationRepository->remove($publication, true);
         }
 

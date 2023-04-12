@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProfilRepository;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
 class Profil
 {
@@ -15,8 +15,10 @@ class Profil
     #[ORM\GeneratedValue]
     private ?int $id;
 
+    
+    #[Assert\NotBlank(message:"nom is required")]
     #[ORM\Column(name:"Nom")]
-    private ?string $Nom;
+    private ?string $Nom=null;
 
     #[ORM\Column(name:"Prenom")]
     private ?string $Prenom;
