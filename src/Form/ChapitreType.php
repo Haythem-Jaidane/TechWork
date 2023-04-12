@@ -6,15 +6,15 @@ use App\Entity\Chapitre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ChapitreType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('id')
             ->add('titre')
-            ->add('id_cours')
+            ->add('Ajouter',SubmitType::class)
         ;
     }
 

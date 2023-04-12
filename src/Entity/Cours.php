@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CoursRepository;
 use \DateTime;
+use Ramsey\Uuid\Uuid;
+
 
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
@@ -17,14 +17,24 @@ class Cours
     #[ORM\Column(name:"id")]
     private ?string $id;
 
+    
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié le titre entré")]
     private ?string $titre;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié la Categorie entré")]
     private ?string $categorie;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié la durée entré")]
+    #[Assert\Positive(message:"la durée doit etre positive")]
     private ?int $duree;
+
+    #[ORM\Column]
+    #[Assert\NotBlank(message:"enter un fichier")]
+    #[Assert\File(mimeTypes : ['image/*',],mimeTypesMessage : 'enter une image valide')]
+    private ?String $Img_url;
 
     #[ORM\Column]
     private ?DateTime $dateDeLancement;
@@ -34,7 +44,16 @@ class Cours
     #[ORM\JoinColumn(nullable:false)]
     private ?Utilisateur $idTuteur;
 
+    public function __construct(){
+        $this->id = Uuid::uuid4()->toString();
+    }
 
+    public function setId(?string $id): ?self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getId(): ?string
     {
@@ -73,6 +92,18 @@ class Cours
     public function setDuree(?int $duree): self
     {
         $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getImgUrl(): ?String
+    {
+        return $this->Img_url;
+    }
+
+    public function setImgUrl(?String $Img_url): self
+    {
+        $this->Img_url = $Img_url;
 
         return $this;
     }

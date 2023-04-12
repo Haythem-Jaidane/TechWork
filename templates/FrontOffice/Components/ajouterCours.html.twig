@@ -1,0 +1,21 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1>{{ Cours.getTitre() }}</h1>
+
+    {{form_start(Chpitre_form ,{'attr': {'novalidate': 'novalidate'}})}}
+        {{form_label(Chpitre_form.titre,"Titre du Chapitre :")}}</td>
+        {{form_widget(Chpitre_form.titre)}}
+        {{form_errors(Chpitre_form.titre)}}
+    {{form_end(Chpitre_form)}}
+
+
+    
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/js.html.twig' %}
+{% endblock %}

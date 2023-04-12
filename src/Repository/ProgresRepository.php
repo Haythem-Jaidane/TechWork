@@ -39,6 +39,18 @@ class ProgresRepository extends ServiceEntityRepository
         }
     }
 
+    
+
+    public function findByIdCours($value): ?Progres
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.idCours = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    /**
 //     * @return Progres[] Returns an array of Progres objects
 //     */

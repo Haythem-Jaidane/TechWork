@@ -20,6 +20,7 @@ class Progres
     #[ORM\ManyToOne(inversedBy: "Profil")]
     #[ORM\JoinColumn(nullable:false)]
     #[ORM\Id]
+
     private ?Cours $idCours;
 
     

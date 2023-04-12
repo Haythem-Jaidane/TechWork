@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ContenuRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: ContenuRepository::class)]
 class Contenu
@@ -16,19 +18,28 @@ class Contenu
     private ?string $type;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié la durée entré")]
+    #[Assert\Positive(message:"la durée doit etre positive")]
     private ?int $duree;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"enter un fichier")]
+    #[Assert\File(mimeTypes : ['text/plain','video/mp4',],mimeTypesMessage : 'enter une image valide')]
     private ?string $lienContenu;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié le titre entré")]
     private ?string $titre;
 
     #[ORM\ManyToOne(inversedBy: "Chapitre")]
     #[ORM\JoinColumn(name : "id_chapitre",referencedColumnName:"id_chapitre",nullable:false)]
     private ?Chapitre $id_chapitre;
 
-    public function getIdContenu(): ?string
+    public function __construct(){
+        $this->id = Uuid::uuid4()->toString();
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }

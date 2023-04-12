@@ -6,18 +6,18 @@ use App\Entity\Contenu;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ContenuType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('id')
-            ->add('type')
             ->add('duree')
-            ->add('lienContenu')
+            ->add('lienContenu',FileType::class)
             ->add('titre')
-            ->add('id_chapitre')
+            ->add('Ajouter',SubmitType::class)
         ;
     }
 

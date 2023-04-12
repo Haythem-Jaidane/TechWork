@@ -1,0 +1,139 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <style>
+        .active-modal {
+            filter: blur(2px);
+        }
+        
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+    </style>
+
+    <section id="portfolio" class="portfolio sections-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Formation</h2>
+          <p>Quam sed id excepturi ccusantium dolorem ut quis dolores nisi llum nostrum enim velit qui ut et autem uia reprehenderit sunt deleniti</p>
+        </div>
+
+    <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+    
+    <div>
+            <ul class="portfolio-flters">
+              <li data-filter="*"><a href="{{path('app_formation_afficher_Cours')}}">Recommandé</a></li>
+              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout')}}">tout</a></li>
+              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance')}}">commancé</a></li>
+              <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer')}}">terminer</a></li>
+              <li data-filter=".filter-books" class="filter-active"><a href="{{path('app_formation_afficher_Mes_Cours')}}">Mes Cours</a></li>
+            </ul><!-- End Portfolio Filters -->
+          </div>
+    
+    <div class="row gy-4 portfolio-container">
+
+        {% for cours in list_cours %}
+            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                    <a href="{{asset('assets/img/portfolio/app-1.jpg')}}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+                    <div class="portfolio-info" style="display: flex;">
+                        <div>
+                            <h4><a href="portfolio-details.html" title="More Details">{{ cours.titre }}</a></h4>
+                            <p>Par      : {{ cours.idTuteur.nom }}</p>
+                            <p>Categorie: {{ cours.categorie }}</p>
+                            <p>Durrée   : {{ cours.duree }}  min</p>
+                        </div>
+                        <div>
+                            <a href={{ path('app_formation_supprimer_Cours',{'id': cours.id } ) }}>Supprimer</a>
+                            <a href={{ path('app_formation_modifier_Cours', {'id': cours.id } ) }}>Modiffier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+    <button id="ajouter">Ajouter Un Cours</button>
+    </section>
+
+    <div class="modal" id="myModal">
+    <div class="modal-content">
+            
+            {{form_start(Cours_form ,{'attr': {'novalidate': 'novalidate'}})}}
+                <table>
+                    <tr>
+                        <td>{{form_label(Cours_form.titre,"Titre")}}</td>
+                        <td>{{form_widget(Cours_form.titre,{"name":"titre"})}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{form_errors(Cours_form.titre)}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{form_label(Cours_form.categorie,"Categorie")}}</td>
+                        <td>{{form_widget(Cours_form.categorie)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{form_errors(Cours_form.categorie)}}</td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <td>{{form_label(Cours_form.Img_url,"Image de Couverture")}}</td>
+                        <td>{{form_widget(Cours_form.Img_url)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{form_errors(Cours_form.Img_url)}}</td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <td>{{form_label(Cours_form.duree,"Durée en min")}}</td>
+                        <td>{{form_widget(Cours_form.duree)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{form_errors(Cours_form.duree)}}</td>
+                    </tr>
+
+                </table>
+                {{form_widget(Cours_form.Ajouter)}}
+            {{form_end(Cours_form)}}
+        </div>
+    </div>
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/js.html.twig' %}
+    <script>
+        document.getElementById("ajouter").addEventListener('click', function(){
+            //document.section.classList.add('active-modal');
+            document.getElementById("myModal").style.display = "block";
+        });
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myModal")) {
+                document.getElementById("myModal").style.display = "none";
+            }
+        }
+    </script>
+{% endblock %}

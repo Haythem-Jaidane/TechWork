@@ -29,6 +29,10 @@
     <div class="row gy-4 portfolio-container">
 
         {% for cours in list_cours %}
+        {% for p in prog %}
+        {% if loop.first %}
+           
+        
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
                 <div class="portfolio-wrap">
                     <a href="{{asset('assets/img/portfolio/app-1.jpg')}}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
@@ -39,18 +43,23 @@
                             <p>Categorie: {{ cours.categorie }}</p>
                             <p>Durrée   : {{ cours.duree }}  min</p>
                         </div>
+                        {% endif %}
+                        {% if loop.last %}
+            <!-- Code to display when it's the last iteration of the loop -->
+        
                         <div>
-                            <a href={{ path('app_formation_supprimer_Cours',{'id': cours.id } ) }}>Supprimer</a>
-                            <button>Modiffier</button>
+                            <a>{{ p }} %</a>
+                            <button> Commancer </button>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
+        {% endfor %}
         {% endfor %}
     </div>
     </div>
     </div>
-
     </section>
 
     

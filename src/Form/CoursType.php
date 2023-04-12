@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Cours;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,7 +17,16 @@ class CoursType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('categorie',ChoiceType::class)
+            ->add('categorie',ChoiceType::class,[
+                'choices' => [
+                    // Array of choices, you can populate it dynamically from your data
+                    'Web' => 'Web',
+                    'Cloud' => 'Cloud',
+                    'Dev' => 'Dev',
+                    'Reseau' => 'Reseau',
+                ],
+            ])
+            ->add('Img_url',FileType::class)
             ->add('duree')
             ->add('Ajouter',SubmitType::class)
         ;
@@ -26,6 +36,7 @@ class CoursType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Cours::class,
+            'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
 }

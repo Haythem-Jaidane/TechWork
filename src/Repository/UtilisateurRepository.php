@@ -39,6 +39,16 @@ class UtilisateurRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneById($value): ?Utilisateur
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.id = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    /**
 //     * @return Utilisateur[] Returns an array of Utilisateur objects
 //     */

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1>{{ Chapitre.getTitre() }}</h1>
+
+    {{form_start(Contenu_form ,{'attr': {'novalidate': 'novalidate'}})}}
+        {{form_label(Contenu_form.titre,"Titre du Contenu :")}}</td>
+        {{form_widget(Contenu_form.titre)}}
+        {{form_errors(Contenu_form.titre)}}
+        {{form_label(Contenu_form.duree,"Duree :")}}</td>
+        {{form_widget(Contenu_form.duree)}}
+        {{form_errors(Contenu_form.duree)}}
+        {{form_label(Contenu_form.lienContenu,"Contenu :")}}</td>
+        {{form_widget(Contenu_form.lienContenu)}}
+        {{form_errors(Contenu_form.lienContenu)}}
+
+        {{form_widget(Contenu_form.Ajouter)}}
+    {{form_end(Contenu_form)}}
+
+    <a href="{{ path('app_formation_ajouter_Chapitre', {'cour':Cour.getId()}) }}">completer le chapitre</a>
+    <a href="{{ path("app_formation_afficher_Mes_Cours") }}">completer le cours</a
+
+
+    
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/js.html.twig' %}
+{% endblock %}
