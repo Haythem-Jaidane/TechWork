@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Spatie\Dropbox\Client;
 use App\Entity\Cours;
 use App\Entity\Chapitre;
 use App\Entity\Contenu;
@@ -109,8 +110,10 @@ class FormationController extends AbstractController
         $repo_Chapitre = $doctrine->getRepository(Chapitre::class);
         $repo_Utilisateur = $doctrine->getRepository(Utilisateur::class);
         $repo_Contenu = $doctrine->getRepository(Contenu::class);
-        $cours = new Cours();
-        $cours->setId($id);
+        $cours = $repo_Cours->findOneById($id);
+        $file = $req->files->get($cours->getImgUrl());
+        $cours->setImgUrl($file);
+        $chap = $repo_Chapitre->findByIdCours($id);
         $form=$this->createForm(CoursType::class,$cours);
         $form->handleRequest($req);
         $em=$doctrine->getManager();
@@ -125,7 +128,8 @@ class FormationController extends AbstractController
         }
         return $this->renderForm('FrontOffice/Components/modifierCours.html.twig',[
             'Cours_form'=>$form,
-            "isConnected" => $this->isConnected
+            "isConnected" => $this->isConnected,
+            "Chap" => $chap,
         ]);
     }
 
@@ -142,12 +146,12 @@ class FormationController extends AbstractController
         
     }
 
-    #[Route('/afficherTousCours',name:'app_formation_afficher_Cours_Tout')]
-    public function afficherTout(ManagerRegistry $doctrine)
+    #[Route('/afficherTousCours/{id_user}',name:'app_formation_afficher_Cours_Tout')]
+    public function afficherTout($id_user,ManagerRegistry $doctrine)
     {
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
-        $cours = $repo->findByIdNoTuto(8);
+        $cours = $repo->findByIdNoTuto($id_user);
         $prog = array();
         foreach ($cours as $i) {
             if($repo_prog->findByIdCours($i) == null){
@@ -189,22 +193,35 @@ class FormationController extends AbstractController
         ]);
     }
 
-    #[Route('/afficherMesCours',name:'app_formation_afficher_Mes_Cours')]
-    public function afficherMesCours(ManagerRegistry $doctrine,Request $req)
+    #[Route('/afficherMesCours/{id_user}',name:'app_formation_afficher_Mes_Cours')]
+    public function afficherMesCours($id_user,ManagerRegistry $doctrine,Request $req)
     {
-        $this->redirect("app_formation");
+        $dropbox = new Client("sl.Bc_uNcEyOHMcaGhKYjaSFzyhJXgQr7U4AqlsEnI-mj0P_XV-g36pwghwxFipa1bxmmjw51jqRfbZg1iWL-KmZR2oC11vyABA4jfBNA-SDo_xfTIonVmh0xamMfK6ispr1nNO5VE");
         $repo = $doctrine->getManager();
         $repo_Utilisateur = $doctrine->getRepository(Utilisateur::class);
         $repo_Cours = $doctrine->getRepository(Cours::class);
-        $cours = $repo_Cours->findByIdTuto(8);
+        $cours = $repo_Cours->findByIdTuto($id_user);
         $cour_a_ajouté = new Cours();
+        $cour_a_ajouté->setDuree(0);
         $form= $this->createForm(CoursType::class,$cour_a_ajouté);
         $form->handleRequest($req);
         if($form->isSubmitted()){
             if($form->isValid()){
+                $file = $cour_a_ajouté->getId().".". $form["Img_url"]->getData()->getClientOriginalExtension();
+                $form["Img_url"]->getData()->move(
+                    $this->getParameter('file_directory'),
+                    $file
+                );
+                $file_path = $this->getParameter('file_directory').'/'.$file;
                 $cour_a_ajouté->setDateDeLancement(new \DateTime('@'.strtotime('now')));
-                $utilisateur = $repo_Utilisateur->findOneById(8);
+                $cour_a_ajouté->setImgUrl("Teckwork/".$cour_a_ajouté->getId().'/'.$file);
+                
+                $utilisateur = $repo_Utilisateur->findOneById($id_user);
                 $cour_a_ajouté->setIdTuteur($utilisateur);
+                $dropbox->createFolder("Teckwork/".$cour_a_ajouté->getId());
+                $dropbox->upload("Teckwork/".$cour_a_ajouté->getId().'/'.$file,
+                                fopen($file_path,'r'));
+                var_dump($dropbox->getTemporaryLink("Teckwork/".$cour_a_ajouté->getId().'/'.$file));
                 $repo->persist($cour_a_ajouté);
                 $repo->flush();
                 return $this->redirectToRoute("app_formation_ajouter_Chapitre" , [
@@ -217,6 +234,7 @@ class FormationController extends AbstractController
                     "isConnected" => $this->isConnected,
                     'Cours_form' => $form,
                     "isForm" => true,
+                    "DropBox" => $dropbox,
                 ]);
             }
         }
@@ -226,6 +244,7 @@ class FormationController extends AbstractController
             'Cours_form' => $form,
             "isForm" => false,
             "monCour" => $cour_a_ajouté,
+            "DropBox" => $dropbox,
         ]);
 
     }

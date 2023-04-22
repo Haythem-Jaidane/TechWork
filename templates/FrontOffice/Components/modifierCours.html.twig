@@ -40,7 +40,19 @@
 
                 </table>
                 {{form_widget(Cours_form.Ajouter)}}
+
+                <h1> Chapitre </h1>
+    <ul>
+    {% for i in Chap %}
+        
+        <li>{{ i.titre }} <a href="">modifier<a> <a href="">Supprimer<a></li>
+
+        
+    {% endfor %}
+    <ul>
             {{form_end(Cours_form)}}
+
+    
     {% include 'FrontOffice/Components/footerbar.html.twig' %}
     {% include 'FrontOffice/Components/Assets/js.html.twig' %}
 {% endblock %}

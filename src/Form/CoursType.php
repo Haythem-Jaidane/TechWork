@@ -19,7 +19,6 @@ class CoursType extends AbstractType
             ->add('titre')
             ->add('categorie',ChoiceType::class,[
                 'choices' => [
-                    // Array of choices, you can populate it dynamically from your data
                     'Web' => 'Web',
                     'Cloud' => 'Cloud',
                     'Dev' => 'Dev',
@@ -27,7 +26,6 @@ class CoursType extends AbstractType
                 ],
             ])
             ->add('Img_url',FileType::class)
-            ->add('duree')
             ->add('Ajouter',SubmitType::class)
         ;
     }

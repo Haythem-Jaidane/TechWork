@@ -27,8 +27,6 @@ class Cours
     private ?string $categorie;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"verifié la durée entré")]
-    #[Assert\Positive(message:"la durée doit etre positive")]
     private ?int $duree;
 
     #[ORM\Column]
