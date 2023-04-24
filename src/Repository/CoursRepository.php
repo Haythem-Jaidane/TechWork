@@ -71,6 +71,16 @@ class CoursRepository extends ServiceEntityRepository
             ;
     }
 
+    public function rechercheByTitre($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.titre Like :val')
+            ->setParameter('val', "%".$value."%")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Cours[] Returns an array of Cours objects
 //     */

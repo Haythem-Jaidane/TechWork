@@ -18,19 +18,21 @@
     <div>
             <ul class="portfolio-flters">
               <li data-filter="*" class="filter-active"><a href="{{path('app_formation_afficher_Cours')}}">Recommandé</a></li>
-              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout')}}">tout</a></li>
-              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance')}}">commancé</a></li>
+              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout',{'id_user':'8'})}}">tout</a></li>
+              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance',{'id_user':'8'})}}">commancé</a></li>
               <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer')}}">terminer</li>
-              <li data-filter=".filter-books"><a href="{{path('app_formation_afficher_Mes_Cours')}}">Mes Cours</a></li>
+              <li data-filter=".filter-books"><a href="{{path('app_formation_afficher_Mes_Cours',{'id_user':'8'})}}">Mes Cours</a></li>
             </ul><!-- End Portfolio Filters -->
           </div>
     
     <div class="row gy-4 portfolio-container">
 
         {% for cours in list_cours %}
+        {% for p in prog %}
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
                 <div class="portfolio-wrap">
-                    <a href="{{asset('assets/img/portfolio/app-1.jpg')}}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+                    {% set externalUrl = DropBox.getTemporaryLink(cours.getImgUrl()) %}
+                    <a href="{{externalUrl}}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{{externalUrl}}" class="img-fluid" alt=""></a>
                     <div class="portfolio-info" style="display: flex;">
                         <div>
                             <h4><a href="portfolio-details.html" title="More Details">{{ cours.titre }}</a></h4>
@@ -38,13 +40,13 @@
                             <p>Categorie: {{ cours.categorie }}</p>
                             <p>Durrée   : {{ cours.duree }}  min</p>
                         </div>
-                        <div>
-                            <a href={{ path('app_formation_supprimer_Cours',{'id': cours.id } ) }}>Supprimer</a>
-                            <button>Modiffier</button>
+                            <a>{{ p }} %</a>
+                            <a> Poursuivre </a>
                         </div>
                     </div>
                 </div>
             </div>
+        {% endfor %}
         {% endfor %}
     </div>
     </div>

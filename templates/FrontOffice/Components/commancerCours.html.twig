@@ -1,0 +1,33 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+
+    <div>
+
+        <ul id="myUL">
+        {% for item in chapiters %}
+        <li><span class="caret">{{ item.titre }}</span>
+            
+            <ul class="nested">
+            {% for i in contenu.findByIdChapitre(item)%}
+                <li>{{ i.titre }}</li>
+            
+            {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+  
+        </ul>
+    </div>
+
+    <div>
+        </a>Lesson Terminé</a>
+    </div>
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/js.html.twig' %}
+{% endblock %}

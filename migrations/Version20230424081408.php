@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230411211203 extends AbstractMigration
+final class Version20230424081408 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -29,7 +29,7 @@ final class Version20230411211203 extends AbstractMigration
         $this->addSql('CREATE TABLE likepub (id INT AUTO_INCREMENT NOT NULL, id_user INT NOT NULL, id_pub INT NOT NULL, INDEX IDX_B99E03876B3CA4B (id_user), INDEX IDX_B99E0387C4E0D4DF (id_pub), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE offre (id INT AUTO_INCREMENT NOT NULL, titre VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, post VARCHAR(255) NOT NULL, salaire INT NOT NULL, lieu VARCHAR(255) NOT NULL, typecontrat VARCHAR(255) NOT NULL, duree INT NOT NULL, status VARCHAR(255) NOT NULL, domaineoffre VARCHAR(255) NOT NULL, nomrecruteur VARCHAR(255) NOT NULL, emailrecruteur VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE profil (id_Profil INT AUTO_INCREMENT NOT NULL, Nom VARCHAR(255) NOT NULL, Prenom VARCHAR(255) NOT NULL, NumeroTelephone VARCHAR(255) NOT NULL, Email VARCHAR(255) NOT NULL, localisation VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, langues VARCHAR(255) NOT NULL, competences VARCHAR(255) NOT NULL, formation VARCHAR(255) NOT NULL, experiences_professionnelles VARCHAR(255) NOT NULL, latitude VARCHAR(255) NOT NULL, longitude VARCHAR(255) NOT NULL, diplome VARCHAR(255) NOT NULL, PRIMARY KEY(id_Profil)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE progres (id_cours_id VARCHAR(255) NOT NULL, progres_utilisateur INT NOT NULL, note_examen INT NOT NULL, iscomplete TINYINT(1) NOT NULL, PRIMARY KEY(id_cours_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE progres (id_cours_id VARCHAR(255) NOT NULL, id_utilisateur_id INT NOT NULL, progres_utilisateur INT NOT NULL, note_examen INT NOT NULL, iscomplete TINYINT(1) NOT NULL, INDEX IDX_C8E8FE32E149425 (id_cours_id), INDEX IDX_C8E8FE3C6EE5C49 (id_utilisateur_id), PRIMARY KEY(id_cours_id, id_utilisateur_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE projet (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, domaine VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE publication (id_Pub INT AUTO_INCREMENT NOT NULL, objet VARCHAR(255) NOT NULL, message VARCHAR(255) NOT NULL, id_cours VARCHAR(255) NOT NULL, id_Profil INT NOT NULL, INDEX IDX_AF3C6779C74D024C (id_Profil), PRIMARY KEY(id_Pub)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE typeprojet (idtypeprojet INT AUTO_INCREMENT NOT NULL, id INT NOT NULL, nomtype VARCHAR(255) NOT NULL, descriptiontype VARCHAR(255) NOT NULL, INDEX IDX_D421F7C2BF396750 (id), PRIMARY KEY(idtypeprojet)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -43,6 +43,7 @@ final class Version20230411211203 extends AbstractMigration
         $this->addSql('ALTER TABLE likepub ADD CONSTRAINT FK_B99E03876B3CA4B FOREIGN KEY (id_user) REFERENCES utilisateur (id)');
         $this->addSql('ALTER TABLE likepub ADD CONSTRAINT FK_B99E0387C4E0D4DF FOREIGN KEY (id_pub) REFERENCES publication (id_Pub)');
         $this->addSql('ALTER TABLE progres ADD CONSTRAINT FK_C8E8FE32E149425 FOREIGN KEY (id_cours_id) REFERENCES cours (id)');
+        $this->addSql('ALTER TABLE progres ADD CONSTRAINT FK_C8E8FE3C6EE5C49 FOREIGN KEY (id_utilisateur_id) REFERENCES utilisateur (id)');
         $this->addSql('ALTER TABLE publication ADD CONSTRAINT FK_AF3C6779C74D024C FOREIGN KEY (id_Profil) REFERENCES profil (id_Profil)');
         $this->addSql('ALTER TABLE typeprojet ADD CONSTRAINT FK_D421F7C2BF396750 FOREIGN KEY (id) REFERENCES projet (id)');
     }
@@ -58,6 +59,7 @@ final class Version20230411211203 extends AbstractMigration
         $this->addSql('ALTER TABLE likepub DROP FOREIGN KEY FK_B99E03876B3CA4B');
         $this->addSql('ALTER TABLE likepub DROP FOREIGN KEY FK_B99E0387C4E0D4DF');
         $this->addSql('ALTER TABLE progres DROP FOREIGN KEY FK_C8E8FE32E149425');
+        $this->addSql('ALTER TABLE progres DROP FOREIGN KEY FK_C8E8FE3C6EE5C49');
         $this->addSql('ALTER TABLE publication DROP FOREIGN KEY FK_AF3C6779C74D024C');
         $this->addSql('ALTER TABLE typeprojet DROP FOREIGN KEY FK_D421F7C2BF396750');
         $this->addSql('DROP TABLE candidature');
