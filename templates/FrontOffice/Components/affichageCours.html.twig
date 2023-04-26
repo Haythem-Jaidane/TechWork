@@ -41,8 +41,7 @@
                             <p>Durrée   : {{ cours.duree }}  min</p>
                         </div>
                         <div>
-                            <a href={{ path('app_formation_supprimer_Cours',{'id': cours.id } ) }}>Supprimer</a>
-                            <button>Modiffier</button>
+                            <a href="{{ path('CommancerCour',{'id_cours':cours.id,'id_user':iduser}) }}"> Commancer </a>
                         </div>
                     </div>
                 </div>

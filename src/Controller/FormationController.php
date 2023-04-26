@@ -171,7 +171,7 @@ class FormationController extends AbstractController
         foreach($cours as $i){
             $a = 1;
             foreach($cours_entre as $j){
-                if($i->getId()== $j->getIdCours()){
+                if($i->getId()== $j->getIdCours()->getId()){
                     $a=0;
                     break;
                 }
@@ -192,10 +192,10 @@ class FormationController extends AbstractController
             foreach($cour_entre_ as $j){
                 $distance = 0;
                 if($i->getCategorie() == $j->getCategorie()){
-                    $distance = 100;
+                    $distance = 0;
                 }
                 else{
-                    $distance = 0;
+                    $distance = 100;
                 }
                 $distance = $distance + (abs($i->getDuree() - $j->getDuree()));
 
@@ -226,7 +226,7 @@ class FormationController extends AbstractController
         $i=0;
 
         foreach($distances as $d) {
-            if($i<10){
+            if($i<3){
                 array_push($cour_a_ajouté,$d[1]);
             }
             else{
@@ -240,6 +240,7 @@ class FormationController extends AbstractController
             'list_cours' => $cour_a_ajouté,
             "isConnected" => $this->isConnected,
             "DropBox" => $dropbox,
+            "iduser" => $id_user,
         ]);
         
         
@@ -251,7 +252,32 @@ class FormationController extends AbstractController
         $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
-        $cours = $repo->findByIdNoTuto($id_user);
+
+
+        $cours_entre = $repo_prog->findByIdUtilisateur($id_user);
+        $cour_entre_ = array();
+        foreach($cours_entre as $i){
+            array_push($cour_entre_,$repo->findOneById($i->getIdCours()));
+        }
+        $cours_ = $repo->findByIdNoTuto($id_user);
+        $cours= array();
+
+        
+        foreach($cours_ as $i){
+            $a = 1;
+            foreach($cours_entre as $j){
+                if($i->getId() == $j->getIdCours()->getId()){
+                    $a=0;
+                    break;
+                }
+            }
+            if($a){
+                array_push($cours,$i);
+            }
+
+            
+        }
+
         $prog = array();
         foreach ($cours as $i) {
             if($repo_prog->findOneByIdCours($i) == null){
