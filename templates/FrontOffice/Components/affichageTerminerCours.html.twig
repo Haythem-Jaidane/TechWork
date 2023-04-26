@@ -18,11 +18,11 @@
     
     <div>
             <ul class="portfolio-flters">
-              <li data-filter="*" class="filter-active"><a href="{{path('app_formation_afficher_Cours')}}">Recommandé</a></li>
-              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout')}}">tout</a></li>
-              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance')}}">commancé</a></li>
-              <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer')}}">terminer</li>
-              <li data-filter=".filter-books"><a href="{{path('app_formation_afficher_Mes_Cours')}}">Mes Cours</a></li>
+              <li data-filter="*" class="filter-active"><a href="{{path('app_formation_afficher_Cours',{'id_user':'8'})}}">Recommandé</a></li>
+              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout',{'id_user':'8'})}}">tout</a></li>
+              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance',{'id_user':'8'})}}">commancé</a></li>
+              <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer',{'id_user':'8'})}}">terminer</li>
+              <li data-filter=".filter-books"><a href="{{path('app_formation_afficher_Mes_Cours',{'id_user':'8'})}}">Mes Cours</a></li>
             </ul><!-- End Portfolio Filters -->
           </div>
     

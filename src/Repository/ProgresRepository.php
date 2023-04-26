@@ -51,6 +51,15 @@ class ProgresRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findFinshedCoursByIdUtilisateur($id_utilisateur){
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.idUtilisateur = :val and p.iscomplete = 1')
+            ->setParameter('val', $id_utilisateur)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Progres[] Returns an array of Progres objects
 //     */

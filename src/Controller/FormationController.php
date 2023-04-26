@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Spatie\Dropbox\Client;
+use Spatie\Dropbox\TokenStore\AutoRefreshTokenStore;
 use App\Entity\Cours;
 use App\Entity\Chapitre;
 use App\Entity\Contenu;
@@ -134,11 +135,63 @@ class FormationController extends AbstractController
         ]);
     }
 
-    #[Route('/afficherCours',name:'app_formation_afficher_Cours')]
-    public function afficher(ManagerRegistry $doctrine)
+    #[Route('/afficherCours/{id_user}',name:'app_formation_afficher_Cours')]
+    public function afficher($id_user,ManagerRegistry $doctrine)
     {
+        $dropbox = new Client("sl.BdNCm5Gn-SL9HBMYMWOEdVB6cfaxYJ6H3P2cEFYj8O-FLNh7VejbuPBI_hM2pYI4ff3JHXmgp3Z4G8WFexOyR236GWV3pYN3k1Z-vi2NU4dwl-OhUHzyfoCflS7Uj3Z32oeudhAe");
+        $repo_progres = $doctrine->getRepository(Progres::class);
+        $repo_Cours = $doctrine->getRepository(Cours::class);
         
-        $cour_a_ajouté = null;
+        $cours_entre = $repo_progres->findByIdUtilisateur($id_user);
+        var_dump(sizeof($cours_entre));
+        $cour_entre_ = array();
+        foreach($cours_entre as $i){
+            array_push($cour_entre_,$repo_Cours->findOneById($i->getIdCours()));
+        }
+        $cours = $repo_Cours->findByIdNoTuto($id_user);
+        $cours_a_recommande = array();
+        foreach($cours as $i){
+                array_push($cours_a_recommande,$i);
+        }
+        var_dump(sizeof($cours_a_recommande));
+        $distances = array();
+        foreach($cours_a_recommande as $i){
+            
+            $distance_ = 0;
+            foreach($cour_entre_ as $j){
+                $distance = 0;
+                var_dump($i->getCategorie());
+                if($i->getCategorie() == $j->getCategorie()){
+                    $distance = 10;
+                }
+                else{
+                    $distance = 0;
+                }
+                $distance = $distance + (abs($i->getDuree() - $j->getDuree()));
+
+                $distance_ = $distance_ + $distance;
+            }
+
+            $distances += array($distance_ => $j);
+
+        }
+        asort($distances);
+
+        $cour_a_ajouté =array();
+
+        $i=0;
+
+        foreach($distances as $d => $cours) {
+            if($i<10){
+                array_push($cour_a_ajouté,$cours);
+            }
+            else{
+                break;
+            }
+            $i++;
+        }
+
+        var_dump(sizeof($cour_a_ajouté));
         return $this->renderForm('FrontOffice/Components/affichageCours.html.twig', [
             'list_cours' => $cour_a_ajouté,
             "isConnected" => $this->isConnected
@@ -150,17 +203,17 @@ class FormationController extends AbstractController
     #[Route('/afficherTousCours/{id_user}',name:'app_formation_afficher_Cours_Tout')]
     public function afficherTout($id_user,ManagerRegistry $doctrine)
     {
-        $dropbox = new Client("sl.BdGxtUYLOblW3AVHFC6P7rJD-EBCjwfJvA6SeOACd-3AGFV5Tw07tEM1AQfDvZUhCu15SgecA7BT3uoCNQP78KK53NmVQCbN7rH2tfh9BoINjBdABNxckxYmj23MmdqTuCeVW1s");
+        $dropbox = new Client("sl.BdNCm5Gn-SL9HBMYMWOEdVB6cfaxYJ6H3P2cEFYj8O-FLNh7VejbuPBI_hM2pYI4ff3JHXmgp3Z4G8WFexOyR236GWV3pYN3k1Z-vi2NU4dwl-OhUHzyfoCflS7Uj3Z32oeudhAe");
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
         $cours = $repo->findByIdNoTuto($id_user);
         $prog = array();
         foreach ($cours as $i) {
-            if($repo_prog->findByIdCours($i) == null){
+            if($repo_prog->findOneByIdCours($i) == null){
                 array_push($prog,0);
             }
             else{
-                array_push($prog,$repo_prog->findByIdCours($i)->getProgresUtilisateur());
+                array_push($prog,$repo_prog->findOneByIdCours($i)->getProgresUtilisateur());
             }
             
         }
@@ -169,13 +222,14 @@ class FormationController extends AbstractController
             "isConnected" => $this->isConnected,
             "prog" => $prog,
             "DropBox" => $dropbox,
+            "iduser" => $id_user,
         ]);
     }
 
     #[Route('/afficherCoursCommance/{id_user}',name:'app_formation_afficher_Cours_Commance')]
     public function afficherCommance($id_user,ManagerRegistry $doctrine)
     {
-        $dropbox = new Client("sl.BdGxtUYLOblW3AVHFC6P7rJD-EBCjwfJvA6SeOACd-3AGFV5Tw07tEM1AQfDvZUhCu15SgecA7BT3uoCNQP78KK53NmVQCbN7rH2tfh9BoINjBdABNxckxYmj23MmdqTuCeVW1s");
+        $dropbox = new Client("sl.BdNCm5Gn-SL9HBMYMWOEdVB6cfaxYJ6H3P2cEFYj8O-FLNh7VejbuPBI_hM2pYI4ff3JHXmgp3Z4G8WFexOyR236GWV3pYN3k1Z-vi2NU4dwl-OhUHzyfoCflS7Uj3Z32oeudhAe");
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
         $user_array = $repo_prog->findByidUtilisateur($id_user);
@@ -204,11 +258,26 @@ class FormationController extends AbstractController
         
     }
 
-    #[Route('/afficherCoursTerminer',name:'app_formation_afficher_Cours_Terminer')]
-    public function afficherTerminer(ManagerRegistry $doctrine)
+    #[Route('/afficherCoursTerminer/{id_user}',name:'app_formation_afficher_Cours_Terminer')]
+    public function afficherTerminer($id_user,ManagerRegistry $doctrine)
     {
+        $dropbox = new Client("sl.BdNCm5Gn-SL9HBMYMWOEdVB6cfaxYJ6H3P2cEFYj8O-FLNh7VejbuPBI_hM2pYI4ff3JHXmgp3Z4G8WFexOyR236GWV3pYN3k1Z-vi2NU4dwl-OhUHzyfoCflS7Uj3Z32oeudhAe");
         $repo = $doctrine->getRepository(Cours::class);
-        $cours = $repo->findAll();
+        $repo_prog = $doctrine->getRepository(Progres::class);
+        $user_array = $repo_prog->findFinshedCoursByIdUtilisateur($id_user);
+        $user_array2 = array();
+        $prog = array();
+        foreach($user_array as $i){
+            array_push($user_array2,$i->getIdCours()->getId());
+            array_push($prog,$i->getProgresUtilisateur());
+        }
+        print_r($user_array2);
+        $cours = array();
+        
+        foreach($user_array2 as $i){
+            //var_dump($i);
+            array_push($cours,$repo->findOneById($i));
+        }
         return $this->render('FrontOffice/Components/affichageTerminerCours.html.twig', [
             'list_cours' => $cours,
             "isConnected" => $this->isConnected,
@@ -218,7 +287,7 @@ class FormationController extends AbstractController
     #[Route('/afficherMesCours/{id_user}',name:'app_formation_afficher_Mes_Cours')]
     public function afficherMesCours($id_user,ManagerRegistry $doctrine,Request $req)
     {
-        $dropbox = new Client("sl.BdGxtUYLOblW3AVHFC6P7rJD-EBCjwfJvA6SeOACd-3AGFV5Tw07tEM1AQfDvZUhCu15SgecA7BT3uoCNQP78KK53NmVQCbN7rH2tfh9BoINjBdABNxckxYmj23MmdqTuCeVW1s");
+        $dropbox = new Client("sl.BdNCm5Gn-SL9HBMYMWOEdVB6cfaxYJ6H3P2cEFYj8O-FLNh7VejbuPBI_hM2pYI4ff3JHXmgp3Z4G8WFexOyR236GWV3pYN3k1Z-vi2NU4dwl-OhUHzyfoCflS7Uj3Z32oeudhAe");
         $repo = $doctrine->getManager();
         $repo_Utilisateur = $doctrine->getRepository(Utilisateur::class);
         $repo_Cours = $doctrine->getRepository(Cours::class);
@@ -302,7 +371,6 @@ class FormationController extends AbstractController
         $cours = $repo_Cours->findOneById($id_cours);
         $user = $repo_Utilisateur->findOneById($id_user);
         $chapitres = $repo_chapitre->findByIdCours($id_cours);
-        var_dump($cours->getTitre());
         $pro = new Progres();
         $pro->setId($user);
         $pro->setidCours($cours);
