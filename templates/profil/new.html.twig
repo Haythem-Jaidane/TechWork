@@ -6,10 +6,12 @@
 {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
     {% include 'FrontOffice/Components/Assets/css.html.twig' %}
     {% include 'FrontOffice/Components/navbar.html.twig' %}
-    <h1>Create new Profil</h1>
+    <h1>Créer nouveau Profil</h1>
 
     {{ include('profil/_form.html.twig') }}
 
-    <a href="{{ path('app_profil_index') }}">back to list</a>
+    <a href="{{ path('app_profil_index') }}" class="btn btn-secondary">
+  <i class="fas fa-arrow-left"></i> Revenir à la liste
+</a>
      {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

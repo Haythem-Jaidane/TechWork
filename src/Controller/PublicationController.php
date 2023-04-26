@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Endroid\QrCode\QrCode;
 
 #[Route('/publication')]
 class PublicationController extends AbstractController
@@ -16,9 +17,10 @@ class PublicationController extends AbstractController
     #[Route('/', name: 'app_publication_index', methods: ['GET'])]
     public function index(PublicationRepository $publicationRepository): Response
     {
+        $qrCode = new QrCode('https://www.example.com');
         return $this->render('FrontOffice/Components/profileView.html.twig', [
             'publications' => $publicationRepository->findAll(),
-            'isConnected' => True,
+            'isConnected' => True, 'qrCode' => $qrCode,
 
         ]);
     }
@@ -40,6 +42,7 @@ class PublicationController extends AbstractController
             'publication' => $publication,
             'form' => $form,
             'isConnected' => True,
+           
         ]);
     }
 

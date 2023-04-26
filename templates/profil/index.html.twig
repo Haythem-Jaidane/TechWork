@@ -46,8 +46,12 @@
                 <td>{{ profil.longitude }}</td>
                 <td>{{ profil.Diplome }}</td>
                 <td>
-                    <a href="{{ path('app_profil_show', {'profil': profil.idProfil}) }}">Afficher</a>
-                    <a href="{{ path('app_profil_edit', {'idProfil': profil.idProfil}) }}">Modifier</a>
+                    <a href="{{ path('app_profil_show', {'profil': profil.idProfil}) }}" class="btn btn-info">
+  <i class="fas fa-eye"></i> Afficher
+</a>
+                   <a href="{{ path('app_profil_edit', {'idProfil': profil.idProfil}) }}" class="btn btn-warning">
+  <i class="fas fa-edit"></i> Modifier
+</a>
                 </td>
             </tr>
         {% else %}
@@ -58,7 +62,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_profil_new') }}">Créer nouveau profil</a>
+    <a href="{{ path('app_profil_new') }}" class="btn btn-primary">
+  <i class="fas fa-plus"></i> Créer nouveau profil
+</a>
      {% include 'FrontOffice/Components/footerbar.html.twig' %}
     
 {% endblock %}

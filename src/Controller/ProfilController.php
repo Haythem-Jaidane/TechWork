@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Extension\StringLoaderExtension ;
+
+
 
 #[Route('/profil')]
 class ProfilController extends AbstractController
@@ -16,7 +19,8 @@ class ProfilController extends AbstractController
     #[Route('/', name: 'app_profil_index', methods: ['GET'])]
     public function index(ProfilRepository $profilRepository): Response
     {
-       
+ 
+
         return $this->render('profil/index.html.twig', [
             'profils' => $profilRepository->findAll(),
             'isConnected' => True,
@@ -63,6 +67,26 @@ class ProfilController extends AbstractController
              'isConnected' => True,
         ]);
     }
+
+/**
+ * @Route("/qr-code")
+ */
+public function qrCode(): Response
+{
+    $renderer = new Png();
+    $renderer->setWidth(250);
+    $renderer->setHeight(250);
+
+    $writer = new Writer($renderer);
+    $qrCode = new QrCode('Your text goes here');
+
+    $response = new Response();
+    $response->headers->set('Content-Type', 'image/png');
+    $response->setContent($writer->write($qrCode));
+
+    return $response;
+}
+
 
     #[Route('/{idProfil}/edit', name: 'app_profil_edit', methods: ['GET', 'POST'])]
     public function edit(Profil $idProfil,Request $request, ProfilRepository $profilRepository): Response
