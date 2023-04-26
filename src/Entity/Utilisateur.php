@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class Utilisateur implements UserInterface
 {
     #[ORM\Id]
     #[ORM\Column]
@@ -32,7 +35,8 @@ class Utilisateur
     #[ORM\Column]
     private ?string $role;
 
-
+    #[ORM\Column(type: 'boolean')]
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -110,5 +114,44 @@ class Utilisateur
         return $this;
     }
 
+    // Required methods for UserInterface
 
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->motdepasse;
+    }
+
+    public function getSalt(): ?string
+    {
+        // you can leave this empty if you don't need to use a salt
+        return null;
+    }
+
+    public function getRoles(): array
+    {
+        // return an array of roles, for example:
+        return [$this->role];
+    }
+
+    public function eraseCredentials()
+    {
+        // do nothing, as we don't store any sensitive data in plain text
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
 }
