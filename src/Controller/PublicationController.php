@@ -10,16 +10,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Endroid\QrCode\QrCode;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/publication')]
 class PublicationController extends AbstractController
 {
     #[Route('/', name: 'app_publication_index', methods: ['GET'])]
-    public function index(PublicationRepository $publicationRepository): Response
+    public function index(Request $request,PublicationRepository $publicationRepository,PaginatorInterface $paginator,EntityManagerInterface $entityManager): Response
     {
         $qrCode = new QrCode('https://www.example.com');
+        $publications = $entityManager->getRepository(Publication::class)->findAll();
+            $publications = $paginator->paginate(
+                $publications,
+                $request->query->getInt(key:'page',default:1),
+                limit:3
+            );
         return $this->render('FrontOffice/Components/profileView.html.twig', [
-            'publications' => $publicationRepository->findAll(),
+            'publications' => $publications,
+
             'isConnected' => True, 'qrCode' => $qrCode,
 
         ]);
@@ -34,6 +43,7 @@ class PublicationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $publicationRepository->save($publication, true);
+            $publicationRepository->sms();
 
             return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
         }

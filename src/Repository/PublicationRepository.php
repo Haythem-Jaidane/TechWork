@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Publication;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Twilio\Rest\Client;
 
 /**
  * @extends ServiceEntityRepository<Publication>
@@ -20,6 +21,28 @@ class PublicationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Publication::class);
     }
+
+    public  function sms(){
+        // Your Account SID and Auth Token from twilio.com/console
+                $sid = 'AC991c00a4699ebc1eb7624e594d098588';
+                $auth_token = 'c2dda7f3a9db1f9c5fae1b07118f0097';
+        // In production, these should be environment variables. E.g.:
+        // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
+        // A Twilio number you own with SMS capabilities
+                $twilio_number = "+16814004173";
+        
+                $client = new Client($sid, $auth_token);
+                $client->messages->create(
+                // the number you'd like to send the message to
+                    '+21654398220',
+                    [
+                        // A Twilio phone number you purchased at twilio.com/console
+                        'from' => '+16814004173',
+                        // the body of the text message you'd like to send
+                        'body' => 'votre publication a été crée'
+                    ]
+                );
+            }
 
     public function save(Publication $entity, bool $flush = false): void
     {

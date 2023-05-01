@@ -93,10 +93,23 @@
             </tr>
         </tbody>
     </table>
+    
 
     <a href="{{ path('app_profil_index') }}">Retourner à la liste-----</a>
 
     <a href="{{ path('app_profil_edit', {'idProfil': profil.idProfil}) }}">Modifier</a>
+    <div class="post-details2  mb-50">
+                            <!-- Small Section Tittle -->
+                            <div class="small-section-tittle">
+                                <h4>Export your profil details into PDF</h4>
+                            </div>
+                            <ul>
+                            <a href="{{ path('PDF_profil', {'id': profil.idProfil}) }}" class="btn btn-secondary" tabindex="-1" role="button">PDF</a>
+
+                            </ul>
+                            
+
+                        </div>
 
     {{ include('profil/_delete_form.html.twig') }}
 
