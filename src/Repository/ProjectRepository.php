@@ -73,5 +73,15 @@ public function findByName($nom){
             ->getQuery()
             ->getResult();
 }
+public function countByDomaine(string $domaine): int
+{
+    $qb = $this->createQueryBuilder('p')
+        ->select('COUNT(p.id)')
+        ->where('p.domaine = :domaine')
+        ->setParameter('domaine', $domaine);
+
+    return $qb->getQuery()->getSingleScalarResult();
+}
+
 
 }

@@ -13,7 +13,6 @@ class SearchProjetType extends AbstractType
     {
         $builder
         ->add('search')
-        ->add('submit',SubmitType::class)
         ;
     }
 

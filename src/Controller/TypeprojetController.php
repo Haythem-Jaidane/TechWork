@@ -12,7 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/typeprojet')]
 class TypeprojetController extends AbstractController
-{
+{ #[Route('/typeprojet/affich2', name: 'app_typeprojet_index2', methods: ['GET'])]
+    public function index2(TypeprojetRepository $typeprojetRepository): Response
+    {
+        return $this->render('typeprojet/index2.html.twig', [
+            'typeprojets' => $typeprojetRepository->findAll(),
+            'isConnected'=>True,
+        ]);
+    }
     #[Route('/', name: 'app_typeprojet_index', methods: ['GET'])]
     public function index(TypeprojetRepository $typeprojetRepository): Response
     {

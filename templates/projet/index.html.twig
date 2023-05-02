@@ -6,10 +6,13 @@
 {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
     {% include 'FrontOffice/Components/Assets/css.html.twig' %}
     {% include 'FrontOffice/Components/navbar.html.twig' %}
+    
 
     <h1>Listes Des Projets</h1>
+    
 
-    <table class="table">
+                
+    <table>
         <thead>
             <tr>
                 
@@ -36,8 +39,9 @@
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+          </tbody>
+        </table>
+        
 
     
     <a href="{{ path('app_projet_new') }}"><strong>Creer un nouveau Projet </strong></a>
@@ -47,6 +51,8 @@
 <a href="{{ path( 'app_typeprojet_index') }}"class="btn btn-primary float-right ">Consulter les types projets </a><br>
 
 </div>
-
+ <a href="{{ path('app_genprojet_index') }}"> imprimer Projet</a>
+<h5>Page: {{ knp_pagination_render(projets) }}</h5>
+ 
       {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

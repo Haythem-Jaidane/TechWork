@@ -9,7 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+/*Use Symfony instead;
+Use symfony/mailer instead;
+Use symfony/mailer instead;*/
 #[Route('/fichmedia')]
 class FichmediaController extends AbstractController
 {
@@ -17,6 +19,15 @@ class FichmediaController extends AbstractController
     public function index(FichmediaRepository $fichmediaRepository): Response
     {
         return $this->render('fichmedia/index.html.twig', [
+            'fichmedia' => $fichmediaRepository->findAll(),
+            'isConnected'=>True,
+        ]);
+    }
+    
+    #[Route('/fichmedia/affich2', name: 'app_fichmedia_index2', methods: ['GET'])]
+    public function index2(FichmediaRepository $fichmediaRepository): Response
+    {
+        return $this->render('fichmedia/index2.html.twig', [
             'fichmedia' => $fichmediaRepository->findAll(),
             'isConnected'=>True,
         ]);

@@ -17,7 +17,7 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Domaine</th>
-                <th>actions</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -27,10 +27,7 @@
                 <td>{{ projet.nom }}</td>
                 <td>{{ projet.description }}</td>
                 <td>{{ projet.domaine }}</td>
-                <td>
-                    <a href="{{ path('app_projet_show', {'id': projet.id}) }}">show</a>
-                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">edit</a>
-                </td>
+                
             </tr>
         {% else %}
             <tr>
@@ -39,8 +36,9 @@
         {% endfor %}
         </tbody>
                   </table>
-                   <a href="{{ path('app_projet_new') }}">Create new</a>
-                   <a href="{{ path( 'app_fichmedia_index') }}">Consulter fichiers media</a>
+                   
+                   <a href="{{ path( 'app_fichmedia_index2') }}"> consulter fichiers media</a>
+                   <a href="{{ path( 'app_typeprojet_index2') }}"> consulter les categories</a>
                 </div>
               </div>
             </div>
