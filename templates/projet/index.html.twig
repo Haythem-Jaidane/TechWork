@@ -4,55 +4,52 @@
 
 {% block body %}
 {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
-    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
-    {% include 'FrontOffice/Components/navbar.html.twig' %}
-    
+{% include 'FrontOffice/Components/Assets/css.html.twig' %}
+{% include 'FrontOffice/Components/navbar.html.twig' %}
 
-    <h1>Listes Des Projets</h1>
-    
+<div class="container mt-5">
+    <h1 class="mb-4">Liste des projets</h1>
 
-                
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Domaine</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for projet in projets %}
+            {% for projet in projets %}
             <tr>
-               
                 <td>{{ projet.nom }}</td>
                 <td>{{ projet.description }}</td>
                 <td>{{ projet.domaine }}</td>
                 <td>
-                   <a href="{{ path('app_projet_show', {'id': projet.id}) }}">Afficher les detailes</a><br>
-                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">Modifier</a>
+                    <a href="{{ path('app_projet_show', {'id': projet.id}) }}" class="btn btn-primary btn-sm mr-1">Afficher les détails</a>
+                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
                 </td>
             </tr>
-        {% else %}
+            {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="4">No records found</td>
             </tr>
-        {% endfor %}
-          </tbody>
-        </table>
-        
+            {% endfor %}
+        </tbody>
+    </table>
 
-    
-    <a href="{{ path('app_projet_new') }}"><strong>Creer un nouveau Projet </strong></a>
-<div class="d-flex justify-content-between">
-<a href="{{ path( 'app_fichmedia_index') }}"class="btn btn-primary float-right ">Consulter les fichiers media</a>
-     <a href="{{ path('app_projet_search') }}">Chercher Projet</a>
-<a href="{{ path( 'app_typeprojet_index') }}"class="btn btn-primary float-right ">Consulter les types projets </a><br>
+    <div class="my-4">
+        <a href="{{ path('app_projet_new') }}" class="btn btn-primary">Créer un nouveau projet</a>
+        <a href="{{ path( 'app_fichmedia_index') }}" class="btn btn-secondary">Consulter les fichiers media</a>
+        <a href="{{ path('app_projet_search') }}" class="btn btn-secondary">Chercher projet</a>
+        <a href="{{ path( 'app_typeprojet_index') }}" class="btn btn-secondary">Consulter les types projets</a>
+        <a href="{{ path('app_genprojet_index') }}" class="btn btn-secondary">Imprimer projets</a>
+    </div>
 
+    <div class="mb-4">
+        <h5>Page: {{ knp_pagination_render(projets) }}</h5>
+    </div>
+
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
 </div>
- <a href="{{ path('app_genprojet_index') }}"> imprimer Projet</a>
-<h5>Page: {{ knp_pagination_render(projets) }}</h5>
- 
-      {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

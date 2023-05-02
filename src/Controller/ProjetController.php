@@ -41,7 +41,7 @@ private $from = 'techwork414@gmail.com';
     #[Route('/', name: 'app_projet_index', methods: ['GET'])]
     public function index(ProjectRepository $projectRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        $pagination = $paginator->paginate($projectRepository->findAll(), $request->query->getInt('page', 1), 2);
+        $pagination = $paginator->paginate($projectRepository->findAll(), $request->query->getInt('page', 1), 4);
         return $this->render('projet/index.html.twig', [
             'projets' => $pagination,
             "isConnected" => true, 
@@ -124,40 +124,30 @@ $pdf->SetLineWidth(0.1);
             'projets'=>$projets,
             ]);
     }
-    /*public function sendNewProjectEmail( string $nom)
-    {
-        $email = (new Email())
-            ->from($this->from)
-            ->to('manar.boukhris@esprit.tn')
-            ->subject('New Project Created')
-            ->html(sprintf('A new project has been created with the name "%s".', $nom));
-    
-        $this->mailer->send($email);
-    }*/
-
     #[Route('/new', name: 'app_projet_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProjectRepository $projectRepository ,MailerInterface $mailer): Response
-    {
-       // private $from = 'techwork414@gmail.com';
-        $projet = new Projet();
-        $form = $this->createForm(ProjetType::class, $projet);
-        $form->handleRequest($request);
+public function new(Request $request, ProjectRepository $projectRepository, MailerInterface $mailer): Response
+{
+    $projet = new Projet();
+    $form = $this->createForm(ProjetType::class, $projet);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $projectRepository->save($projet, true);
-            $nom = $projet->getNom();
-            $email = (new Email())
+    if ($form->isSubmitted() && $form->isValid()) {
+        $projectRepository->save($projet, true);
+        $nom = $projet->getNom();
+        
+        // send email
+        $email = (new Email())
             ->from('techwork414@gmail.com')
             ->to('manarboukhris8@gmail.com')
             ->subject('New Project Created')
-            ->html(sprintf('Voici les informations de la base de données : "%s".',$nom));
+            ->html(sprintf('Voici les informations de la base de données : "%s".', $nom));
     
-            $mailer->send($email);
-            /*
-        // Envoyer un SMS
+        $mailer->send($email);
+        /*
+        // send SMS
         $sid = 'AC5f382709f0dc165bba6e84ceb95dc455';
         $token = '0df8489b47f3cb82c43a0d02d0a5a5b8';
-        $client = new Client($sid, $token);
+        $client = new \Twilio\Rest\Client($sid, $token);
 
         $message = $client->messages->create(
             '+21695643106',
@@ -166,23 +156,21 @@ $pdf->SetLineWidth(0.1);
                 'body' => sprintf('Un nouveau projet a été créé dans votre portfolio sous le nom : "%s"!', $nom)
             ]
         );
-           */
-          
-         
-
-
-            return $this->redirectToRoute('app_projet_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('projet/new.html.twig', [
-            'projet' => $projet,
-            'form' => $form,
-            'isConnected'=>True,
-        ]);
-       
-        return $this->redirectToRoute('project_show', ['id' => $project->getId()]);
+        
+        // add flash message
+        $this->addFlash('success', 'Le projet a été ajouté avec succès!');
+*/
+        return $this->redirectToRoute('app_projet_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    return $this->renderForm('projet/new.html.twig', [
+        'projet' => $projet,
+        'form' => $form,
+        'isConnected' => true,
+    ]);
+}
+
+    
     
 
     #[Route('/{id}', name: 'app_projet_show', methods: ['GET'])]
