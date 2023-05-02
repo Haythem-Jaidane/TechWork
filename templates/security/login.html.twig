@@ -3,6 +3,10 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -13,8 +17,9 @@
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-
+<img src="/assets/img/anime3.png" height="50px" width="50px" alt="Profile Photo" style="border-radius:50px;">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    
     <div class="container">
     <label for="inputEmail">Email</label>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -43,4 +48,5 @@
     </button>
     </div>
 </form>
+  {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}

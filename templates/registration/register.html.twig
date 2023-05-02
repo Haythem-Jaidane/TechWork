@@ -3,9 +3,12 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+  <img src="/assets/img/anime3.png" height="50px" width="50px" alt="Profile Photo" style="border-radius:50px;">  <h1>sign up</h1>
+  
+    &nbsp;&nbsp;&nbsp;{{ form_start(registrationForm) }}
     {{ form_row(registrationForm.cin) }}
     {{ form_row(registrationForm.nom) }}
     {{ form_row(registrationForm.prenom) }}
@@ -19,4 +22,5 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+      {% include 'FrontOffice/Components/footerbar.html.twig' %}
 {% endblock %}
