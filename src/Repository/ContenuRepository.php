@@ -39,6 +39,19 @@ class ContenuRepository extends ServiceEntityRepository
         }
     }
 
+    
+
+    public function findbyIdChapitre($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id_chapitre = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+           }
+
+
 //    /**
 //     * @return Contenu[] Returns an array of Contenu objects
 //     */

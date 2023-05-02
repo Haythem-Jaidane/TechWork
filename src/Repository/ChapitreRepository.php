@@ -39,6 +39,38 @@ class ChapitreRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneById($value): ?Chapitre
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByIdCours($value): ?Chapitre
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id_cours = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findByIdCours($value): array
+   {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id_cours = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Chapitre[] Returns an array of Chapitre objects
 //     */

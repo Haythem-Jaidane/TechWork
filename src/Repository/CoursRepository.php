@@ -39,6 +39,59 @@ class CoursRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByIdTuto($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idTuteur = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.dateDeLancement', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByIdNoTuto($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idTuteur != :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.dateDeLancement', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findOneById($value): ?Cours
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function rechercheByTitre($value,$user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.titre Like :val and c.idTuteur = :user')
+            ->setParameter('val', "%".$value."%")
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countByDate($value){
+        return $this->createQueryBuilder('c')
+            ->select("count(c)")
+            ->andWhere("c.categorie = :val")
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    /**
 //     * @return Cours[] Returns an array of Cours objects
 //     */

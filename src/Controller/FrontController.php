@@ -30,10 +30,19 @@ class FrontController extends AbstractController
             "isConnected" => true, 
         ]);
     }
-  
 
     #[Route('/home', name: 'app_home_connected')]
-    public function session($section = 'default-section'): Response
+    public function session($section = 'default-section')
+    {
+        return $this->redirectToRoute("app_formation_token_Cours");
+        /*return $this->render('FrontOffice/Components/homeNewSession.html.twig', [
+            "section" => $section,
+            "isConnected" => true, 
+        ]);*/
+    }
+
+    #[Route('/home_user', name: 'app_home_connected_user')]
+    public function user_home($section = 'default-section')
     {
         return $this->render('FrontOffice/Components/homeNewSession.html.twig', [
             "section" => $section,

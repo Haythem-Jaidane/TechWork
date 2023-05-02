@@ -20,10 +20,12 @@ class Progres
     #[ORM\ManyToOne(inversedBy: "Profil")]
     #[ORM\JoinColumn(nullable:false)]
     #[ORM\Id]
+
     private ?Cours $idCours;
 
     
-    #[ORM\OneToMany(mappedBy: "Utilisateur",targetEntity:Utilisateur::class)]
+    #[ORM\ManyToOne(inversedBy: "Utilisateur")]
+    #[ORM\JoinColumn(nullable:false)]
     #[ORM\Id]
     private ?Utilisateur $idUtilisateur;
 

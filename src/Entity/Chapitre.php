@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ChapitreRepository;
+use Ramsey\Uuid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ChapitreRepository::class)]
 class Chapitre
@@ -13,13 +15,18 @@ class Chapitre
     private ?string $id;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié le titre entré")]
     private $titre;
 
     #[ORM\ManyToOne(inversedBy: "Cours")]
     #[ORM\JoinColumn(name: "id_cours",referencedColumnName:"id",nullable:false)]
     private ?Cours $id_cours;
 
-    public function getIdChapitre(): ?string
+    public function __construct(){
+        $this->id = Uuid::uuid4()->toString();
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }

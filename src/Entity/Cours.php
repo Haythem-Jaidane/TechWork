@@ -2,39 +2,63 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CoursRepository;
 use \DateTime;
-
+use Ramsey\Uuid\Uuid;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
 class Cours
 {
     #[ORM\Id]
     #[ORM\Column(name:"id")]
+    #[Groups("cours")]
     private ?string $id;
 
+    
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié le titre entré")]
+    #[Groups("cours")]
+
     private ?string $titre;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"verifié la Categorie entré")]
+    #[Groups("cours")]
     private ?string $categorie;
 
     #[ORM\Column]
+    #[Groups("cours")]
     private ?int $duree;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"enter un fichier")]
+    #[Assert\File(mimeTypes : ['image/*',],mimeTypesMessage : 'enter une image valide')]
+    #[Groups("cours")]
+    private ?String $Img_url;
+
+    #[ORM\Column]
+    #[Groups("cours")]
     private ?DateTime $dateDeLancement;
 
     
     #[ORM\ManyToOne(inversedBy: "Utilisateur")]
     #[ORM\JoinColumn(nullable:false)]
+    #[Groups("cours")]
     private ?Utilisateur $idTuteur;
 
+    public function __construct(){
+        $this->id = Uuid::uuid4()->toString();
+    }
 
+    public function setId(?string $id): ?self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getId(): ?string
     {
@@ -73,6 +97,18 @@ class Cours
     public function setDuree(?int $duree): self
     {
         $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getImgUrl(): ?String
+    {
+        return $this->Img_url;
+    }
+
+    public function setImgUrl(?String $Img_url): self
+    {
+        $this->Img_url = $Img_url;
 
         return $this;
     }
