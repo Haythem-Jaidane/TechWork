@@ -121,11 +121,11 @@ label{
     
     <div>
             <ul class="portfolio-flters">
-              <li data-filter="*"><a href="{{path('app_formation_afficher_Cours',{'id_user':'8'})}}">Recommandé</a></li>
-              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout',{'id_user':'8'})}}">tout</a></li>
-              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance',{'id_user':'8'})}}">commancé</a></li>
-              <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer',{'id_user':'8'})}}">terminer</a></li>
-              <li data-filter=".filter-books" class="filter-active"><a href="{{path('app_formation_afficher_Mes_Cours',{'id_user':'8'})}}">Mes Cours</a></li>
+              <li data-filter="*"><a href="{{path('app_formation_afficher_Cours',{'id_user':iduser})}}">Recommandé</a></li>
+              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout',{'id_user':iduser})}}">tout</a></li>
+              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance',{'id_user':iduser})}}">commancé</a></li>
+              <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer',{'id_user':iduser})}}">terminer</a></li>
+              <li data-filter=".filter-books" class="filter-active"><a href="{{path('app_formation_afficher_Mes_Cours',{'id_user':iduser})}}">Mes Cours</a></li>
             </ul><!-- End Portfolio Filters -->
           </div>
     
@@ -135,7 +135,7 @@ label{
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
                 <div class="portfolio-wrap">
                     {% set externalUrl = DropBox.getTemporaryLink(cours.getImgUrl()) %}
-                    <a href={{ externalUrl }} data-gallery="portfolio-gallery-app" class="glightbox"><img src={{ externalUrl }} class="img-fluid" alt=""></a>
+                    <a href={{ externalUrl }} data-gallery="portfolio-gallery-app" class="glightbox"><img style="height: 50%;width: 50%;"width="1000" height="1000" src={{ externalUrl }} class="img-fluid" alt=""></a>
                     <div class="portfolio-info" style="display: flex;background-color: #0C2C40;">
                         <div style="padding-right: 30%;">
                             <h4><a href="portfolio-details.html" style="color:#fff" title="More Details">{{ cours.titre }}</a></h4>

@@ -71,13 +71,24 @@ class CoursRepository extends ServiceEntityRepository
             ;
     }
 
-    public function rechercheByTitre($value): array
+    public function rechercheByTitre($value,$user): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.titre Like :val')
+            ->andWhere('c.titre Like :val and c.idTuteur = :user')
             ->setParameter('val', "%".$value."%")
+            ->setParameter('user', $user)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    public function countByDate($value){
+        return $this->createQueryBuilder('c')
+            ->select("count(c)")
+            ->andWhere("c.categorie = :val")
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 

@@ -18,11 +18,11 @@
     
     <div>
             <ul class="portfolio-flters">
-              <li data-filter="*" class="filter-active"><a href="{{path('app_formation_afficher_Cours',{'id_user':'8'})}}">Recommandé</a></li>
-              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout',{'id_user':'8'})}}">tout</a></li>
-              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance',{'id_user':'8'})}}">commancé</a></li>
-              <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer',{'id_user':'8'})}}">terminer</li>
-              <li data-filter=".filter-books"><a href="{{path('app_formation_afficher_Mes_Cours',{'id_user':'8'})}}">Mes Cours</a></li>
+              <li data-filter="*"><a href="{{path('app_formation_afficher_Cours',{'id_user':iduser})}}">Recommandé</a></li>
+              <li data-filter=".filter-app"><a href="{{path('app_formation_afficher_Cours_Tout',{'id_user':iduser})}}">tout</a></li>
+              <li data-filter=".filter-product"><a href="{{path('app_formation_afficher_Cours_Commance',{'id_user':iduser})}}">commancé</a></li>
+              <li data-filter=".filter-branding"><a href="{{path('app_formation_afficher_Cours_Terminer',{'id_user':iduser})}}">terminer</a></li>
+              <li data-filter=".filter-books" class="filter-active"><a href="{{path('app_formation_afficher_Mes_Cours',{'id_user':iduser})}}">Mes Cours</a></li>
             </ul><!-- End Portfolio Filters -->
           </div>
     
@@ -71,47 +71,28 @@
     {% include 'FrontOffice/Components/footerbar.html.twig' %}
     {% include 'FrontOffice/Components/Assets/js.html.twig' %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $( document ).ready(function() {
-            $("#search").keyup(function(e){
 
-            var value = $(this).val();
+<script>
+  const ctx = document.getElementById('search');
 
-            $.ajax({
+  ctx.addEventListener('change', function() {
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", '{{ path("recherche_formation_api") }}');
+  xhr.onload = function() {
+  if (xhr.status === 200) {
+    // Handle the response here
+    var data = JSON.parse(xhr.responseText);
+    console.log(data);
+  }
+ else {
+    console.log('Request failed. Returned status of ' + xhr.status);
+  }
+  }
+  xhr.send('search=' + encodeURIComponent(ctx.value)+'&user='+{{iduser}});
+  });
 
-            url : "{{ path('recherche_formation_api') }}"
 
-            type : "POST";,
-
-            data: {
-                "search" : value
-            },
-
-            success : function(retour){
-            if(retour){
-            $(".row").empty();
-            /*$.each(JSON.parse(retour), function(i, obj) {
-                $(".row").hide();
-                $(".row").append('<div class="col-xl-4 col-md-6 portfolio-item filter-app"><div class="portfolio-wrap">\
-                                  <div class="portfolio-info" style="display: flex;"><div><h4>\
-                                  <a href="portfolio-details.html" title="More Details">'+obj.titre+'</a></h4>'+
-                                  '<p>Par      : '+obj.idTuteur.nom+'</p>'+
-                                  '<p>Categorie: '+obj.categorie+'</p>'+
-                                  '<p>Durrée   : '+obj.duree+'  min</p>'+
-                                  '</div><div><button> Commancer </button></div></div></div></div>');
-            });*/
-            }
-else
-{
-$(".row").show();
-$(".row").empty();
-$(".row").fadeIn("fast");
-}
-},
-});
-return false;
-});
-});
-&lt;/script&gt;
+  
+  
+</script>
 {% endblock %}

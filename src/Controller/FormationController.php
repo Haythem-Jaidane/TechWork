@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use Spatie\Dropbox\Client;
-use Spatie\Dropbox\TokenStore\AutoRefreshTokenStore;
+use Spatie\Dropbox\Exceptions\BadRequest;
+use Spatie\Dropbox\TokenProvider;
 use App\Entity\Cours;
 use App\Entity\Chapitre;
 use App\Entity\Contenu;
 use App\Entity\Utilisateur;
 use App\Entity\Progres;
-use App\Repository\CoursRepository;
 use App\Form\CoursType;
 use App\Form\ChapitreType;
 use App\Form\ContenuType;
@@ -18,15 +18,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
+
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use function Ramsey\Uuid\v1;
+
+
+
 
 class FormationController extends AbstractController
 {
 
+    
+
     private bool $isConnected = true;
     private Utilisateur $CurrentUser;
+    private $token;
+
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->token = $session->get('token');
+    }
 
 
     #[Route('/formation', name: 'app_formation')]
@@ -38,9 +52,11 @@ class FormationController extends AbstractController
     }
 
     #[Route('/ajouterChapitre/{cour}',name:'app_formation_ajouter_Chapitre')]
-    public function ajouter($cour,ManagerRegistry $doctrine,Request $request)
+    public function ajouter(SessionInterface $session,$cour,ManagerRegistry $doctrine,Request $request)
     {
-        $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
+        $this->token = $session->get('token');
+
+        $dropbox = new Client($this->token);
             $chapitre_a_ajouté = new Chapitre();
             $repo_Cours = $doctrine->getRepository(Cours::class);
             $repo = $doctrine->getManager();
@@ -67,8 +83,10 @@ class FormationController extends AbstractController
     }
 
     #[Route('/ajouterContenu/{cour}/{chapitre}',name:'app_formation_ajouter_Contenu')]
-    public function ajouterContenu($cour,$chapitre,ManagerRegistry $doctrine,Request $request){
-        $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
+    public function ajouterContenu(SessionInterface $session,$cour,$chapitre,ManagerRegistry $doctrine,Request $request){
+        $this->token = $session->get('token');
+
+        $dropbox = new Client($this->token);
         $contenu_a_ajouté = new Contenu();
         $repo_Cours = $doctrine->getRepository(Cours::class);
         $repo_Chapitre = $doctrine->getRepository(Chapitre::class);
@@ -155,9 +173,15 @@ class FormationController extends AbstractController
     }
 
     #[Route('/afficherCours/{id_user}',name:'app_formation_afficher_Cours')]
-    public function afficher($id_user,ManagerRegistry $doctrine)
+    public function afficher($id_user,SessionInterface $session,Request $request,ManagerRegistry $doctrine)
     {
-        $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
+        $this->token = $session->get('token');
+
+        try {
+            $dropbox = new Client($this->token);
+        } catch (BadRequest $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
         $repo_progres = $doctrine->getRepository(Progres::class);
         $repo_Cours = $doctrine->getRepository(Cours::class);
         
@@ -184,9 +208,6 @@ class FormationController extends AbstractController
         
         $distances = array();
         foreach($cours_a_recommande as $i){
-
-            /*echo $i->getTitre() ;
-            echo "/";*/
             
             $distance_ = 0;
             foreach($cour_entre_ as $j){
@@ -216,10 +237,10 @@ class FormationController extends AbstractController
             }
            }
 
-        foreach($distances as $d) {
+        /*foreach($distances as $d) {
             echo "|".$d[0].",".$d[1]->getTitre();
             echo "|";
-        }
+        }*/
 
         $cour_a_ajouté =array();
 
@@ -235,21 +256,86 @@ class FormationController extends AbstractController
             $i++;
         }
 
-        var_dump(sizeof($cour_a_ajouté));
+
         return $this->renderForm('FrontOffice/Components/affichageCours.html.twig', [
             'list_cours' => $cour_a_ajouté,
             "isConnected" => $this->isConnected,
             "DropBox" => $dropbox,
             "iduser" => $id_user,
         ]);
+
+       
+
         
         
     }
 
-    #[Route('/afficherTousCours/{id_user}',name:'app_formation_afficher_Cours_Tout')]
-    public function afficherTout($id_user,ManagerRegistry $doctrine)
+    #[Route("/autorization")]
+    public function autorization_token(SessionInterface $session,Request $request,HttpClientInterface $httpClient){
+        $authUrl = 'https://api.dropboxapi.com/oauth2/token';
+        $clientId = 't186ceszuy8at19';
+        $clientSecret = 'zuy61of02l5ohcb';
+        $redirectUri = 'http://localhost:8000/autorization';
+
+        $code = $request->query->get('code');
+
+        $response = $httpClient->request('POST', $authUrl, [
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'body' => [
+                'code' => $code,
+                'grant_type' => 'authorization_code',
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
+                'redirect_uri' => $redirectUri,
+                //"refresh_token " => "offline"
+            ],
+        ]);
+
+        $data = json_decode($response->getContent(), true);
+
+        $accessToken = $data['access_token'];
+
+        $session->set("token",$accessToken);
+
+        $url = 'http://localhost:8000/afficherCours/8';
+
+        return $this->redirect($url);
+    }
+
+    #[Route('/token',name:'app_formation_token_Cours')]
+    public function myTokenProvider()/*: TokenProvider*/
     {
-        $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
+
+        $authUrl = 'https://www.dropbox.com/oauth2/authorize';
+        $clientId = 't186ceszuy8at19';
+        $redirectUri = 'http://localhost:8000/autorization';
+
+        $params = [
+            'client_id' => $clientId,
+            'response_type' => 'code',
+            'redirect_uri' => $redirectUri,
+            "token_access_type" => "offline" ,
+        ];
+
+        $url = $authUrl . '?' . http_build_query($params);
+
+        return $this->redirect($url);
+
+    }
+
+    #[Route('/afficherTousCours/{id_user}',name:'app_formation_afficher_Cours_Tout')]
+    public function afficherTout($id_user,SessionInterface $session,Request $request,ManagerRegistry $doctrine)
+    {
+
+        $this->token = $session->get('token');
+    
+        try {
+            $dropbox = new Client($this->token);
+        } catch (BadRequest $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
 
@@ -288,6 +374,7 @@ class FormationController extends AbstractController
             }
             
         }
+
         return $this->render('FrontOffice/Components/affichageTousCours.html.twig', [
             'list_cours' => $cours,
             "isConnected" => $this->isConnected,
@@ -295,12 +382,20 @@ class FormationController extends AbstractController
             "DropBox" => $dropbox,
             "iduser" => $id_user,
         ]);
+
     }
 
     #[Route('/afficherCoursCommance/{id_user}',name:'app_formation_afficher_Cours_Commance')]
-    public function afficherCommance($id_user,ManagerRegistry $doctrine)
+    public function afficherCommance($id_user,SessionInterface $session,ManagerRegistry $doctrine)
     {
-        $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
+
+        $this->token = $session->get('token');
+
+        try {
+            $dropbox = new Client($this->token);
+        } catch (BadRequest $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
         $user_array = $repo_prog->findByidUtilisateur($id_user);
@@ -324,15 +419,23 @@ class FormationController extends AbstractController
             "isConnected" => $this->isConnected,
             "prog" => $prog,
             "DropBox" => $dropbox,
+            "iduser" => $id_user,
         ]);
 
         
     }
 
     #[Route('/afficherCoursTerminer/{id_user}',name:'app_formation_afficher_Cours_Terminer')]
-    public function afficherTerminer($id_user,ManagerRegistry $doctrine)
+    public function afficherTerminer($id_user,SessionInterface $session,ManagerRegistry $doctrine)
     {
-        $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
+
+        $this->token = $session->get('token');
+        
+        try {
+            $dropbox = new Client($this->token);
+        } catch (BadRequest $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
         $user_array = $repo_prog->findFinshedCoursByIdUtilisateur($id_user);
@@ -352,13 +455,20 @@ class FormationController extends AbstractController
         return $this->render('FrontOffice/Components/affichageTerminerCours.html.twig', [
             'list_cours' => $cours,
             "isConnected" => $this->isConnected,
+            "iduser" => $id_user,
         ]);
     }
 
     #[Route('/afficherMesCours/{id_user}',name:'app_formation_afficher_Mes_Cours')]
-    public function afficherMesCours($id_user,ManagerRegistry $doctrine,Request $req)
+    public function afficherMesCours($id_user,SessionInterface $session,ManagerRegistry $doctrine,Request $req)
     {
-        $dropbox = new Client("sl.BdNy6wk0SipCLIlO47I2bYbnkxwnIMbGG53p-7U3ih_BaLSNJ77nYmjgoBAkKqi-4SFH2FrAvgEm72oTq46yzigW6U8_iMYysDXaCCFTQFlGgyYBAtSoe65jSXcw7wcGCrdKtxuh");
+        $this->token = $session->get('token');
+
+        try {
+            $dropbox = new Client($this->token);
+        } catch (BadRequest $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
         $repo = $doctrine->getManager();
         $repo_Utilisateur = $doctrine->getRepository(Utilisateur::class);
         $repo_Cours = $doctrine->getRepository(Cours::class);
@@ -396,6 +506,7 @@ class FormationController extends AbstractController
                     'Cours_form' => $form,
                     "isForm" => true,
                     "DropBox" => $dropbox,
+                    "iduser" => $id_user,
                 ]);
             }
         }
@@ -406,6 +517,7 @@ class FormationController extends AbstractController
             "isForm" => false,
             "monCour" => $cour_a_ajouté,
             "DropBox" => $dropbox,
+            "iduser" => $id_user,
         ]);
 
     }
@@ -433,7 +545,16 @@ class FormationController extends AbstractController
     }
 
     #[Route("CommancerCour/{id_cours}/{id_user}",name:"CommancerCour")]
-    public function commancer($id_cours,$id_user,ManagerRegistry $doctrine,Request $req){
+    public function commancer($id_cours,SessionInterface $session,$id_user,ManagerRegistry $doctrine,HttpClientInterface $httpClient){
+
+        $this->token = $session->get('token');
+
+        try {
+            $dropbox = new Client($this->token);
+        } catch (BadRequest $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+
         $repo = $doctrine->getManager();
         $repo_Cours = $doctrine->getRepository(Cours::class);
         $repo_Utilisateur = $doctrine->getRepository(Utilisateur::class);
@@ -454,6 +575,8 @@ class FormationController extends AbstractController
             'chapiters' => $chapitres,
             "isConnected" => $this->isConnected,
             "contenu" => $repo_contenu,
+            "DropBox" => $dropbox,
+            "httpClient" => $httpClient,
         ]);
     }
 }
