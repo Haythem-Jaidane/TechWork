@@ -62,6 +62,16 @@ class PublicationRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByIdProfil($value): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id_Profil = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Publication[] Returns an array of Publication objects
 //     */

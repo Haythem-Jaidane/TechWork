@@ -27,7 +27,7 @@ class Publication
 
     #[ORM\ManyToOne(inversedBy: "Profil")]
     #[ORM\JoinColumn(name:"id_Profil",referencedColumnName:"id_Profil",nullable:false)]
-    private ?Profil $id_Profil;
+    private ?Profil $id_Profil= null; 
 
     public function getIdPub(): ?int
     {

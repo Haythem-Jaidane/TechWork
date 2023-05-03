@@ -88,8 +88,8 @@ class ProfilController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
           //  $profil->setNuméroTéléphone("55");
             $profilRepository->save($profil, true);
-
-            return $this->redirectToRoute('app_profil_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home_off', ['profil' => $profil->getIdProfil()], Response::HTTP_SEE_OTHER);
+           // return $this->redirectToRoute('app_profil_msg', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('profil/new.html.twig', [
@@ -99,6 +99,9 @@ class ProfilController extends AbstractController
         ]);
     }
 
+
+ 
+
     #[Route('/{profil}', name: 'app_profil_show', methods: ['GET'])]
     public function show(Profil $profil): Response
     {
@@ -107,6 +110,8 @@ class ProfilController extends AbstractController
              'isConnected' => True,
         ]);
     }
+
+
 
 /**
  * @Route("/qr-code")
@@ -137,7 +142,7 @@ public function qrCode(): Response
         if ($form->isSubmitted() && $form->isValid()) {
             $profilRepository->save($idProfil, true);
 
-            return $this->redirectToRoute('app_profil_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_profil_show',['profil' => $idProfil->getIdProfil()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('profil/edit.html.twig', [
@@ -148,6 +153,7 @@ public function qrCode(): Response
         ]);
     }
 
+
     #[Route('/{idProfil}', name: 'app_profil_delete', methods: ['POST'])]
     public function delete(Request $request, Profil $idProfil, ProfilRepository $profilRepository): Response
     {
@@ -157,4 +163,8 @@ public function qrCode(): Response
 
         return $this->redirectToRoute('app_profil_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+    
 }
