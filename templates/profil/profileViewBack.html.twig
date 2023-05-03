@@ -182,7 +182,7 @@
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>Diplome</th>
-                <th>Actions</th>
+               <!-- <th>Actions</th>-->
             </tr>
         </thead>
         <tbody>
@@ -203,8 +203,8 @@
                 <td>{{ profil.longitude }}</td>
                 <td>{{ profil.Diplome }}</td>
                 <td>
-                    <a href="{{ path('app_profil_show', {'profil': profil.idProfil}) }}">Afficher</a>
-                    <a href="{{ path('app_profil_edit', {'idProfil': profil.idProfil}) }}">Modifier</a>
+                   <!-- <a href="{{ path('app_profil_show', {'profil': profil.idProfil}) }}">Afficher</a>
+                    <a href="{{ path('app_profil_edit', {'idProfil': profil.idProfil}) }}">Modifier</a> -->
                 </td>
             </tr>
         {% else %}

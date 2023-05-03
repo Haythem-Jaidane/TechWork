@@ -29,9 +29,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_publication_index') }}">Revenir à la liste</a>
+    <a href="{{ path('app_publication_index' , {'id_Profil' : publication.getIdProfil().getIdProfil()}) }}">Revenir à la liste</a>
 
-    <a href="{{ path('app_publication_edit', {'id': publication.getIdPub()}) }}">Modifier</a>
+    <a href="{{ path('app_publication_edit', {'id' : publication.getIdPub()}) }}">Modifier</a>
 
     {{ include('publication/_delete_form.html.twig') }}
 {% endblock %}

@@ -5,7 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Profil;
+use App\Form\ProfilType;
+use App\Repository\ProfilRepository;
 use App\Repository\ProjectRepository;
+use Symfony\Component\HttpFoundation\Request; 
 
 class FrontController extends AbstractController
 {
@@ -48,7 +52,21 @@ class FrontController extends AbstractController
             "isConnected" => true, 
         ]);
     }
-    #[Route('/home/{section}', name: 'app_home_other', methods: ['GET'])]
+
+
+    
+    #[Route('/home/{profil}/profil_', name: 'app_home_off', methods: ['GET'])]
+    public function off(Profil $profil,Request $request, ProfilRepository $profilRepository): Response
+    {
+        return $this->render('FrontOffice/Components/ProfilRedirect.html.twig', [
+            'profile' => $profil,
+ 
+        ]);
+    }
+    
+
+    
+    #[Route('/home/{section}', name: 'app_home_other')]
     public function other_($section,ProjectRepository $projectRepository): Response
     {
 
