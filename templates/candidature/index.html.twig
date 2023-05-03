@@ -256,8 +256,9 @@
                 <td class="text-center">
                  <a href="{{ path('app_candidature_show', {'id': candidature.id}) }}"><button class="btn btn-primary btn-fab btn-icon btn-round"><i class="tim-icons icon-tap-02"></i></button></a>_
               <a href="{{ path('app_candidature_edit', {'id': candidature.id}) }}"><button class="btn btn-primary btn-fab btn-icon btn-round"><i class="tim-icons icon-pencil"></i></button></a> 
-                    
-                       <button  ><i > {{ include('candidature/_delete_form.html.twig') }} </i></button> 
+                   <button  ><i > {{ include('candidature/_delete_form.html.twig') }} </i></button> 
+                     <a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn btn-primary btn-fab btn-icon btn-round"><i class="tim-icons icon-single-copy-04"></i></button></a> 
+                       
                 </td>
             </tr>
         {% else %}

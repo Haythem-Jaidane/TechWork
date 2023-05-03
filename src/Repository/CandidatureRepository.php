@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Candidature;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Twilio\Rest\Client;
 
 /**
  * @extends ServiceEntityRepository<Candidature>
@@ -20,6 +21,28 @@ class CandidatureRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Candidature::class);
     }
+
+    public  function sms(){
+        // Your Account SID and Auth Token from twilio.com/console
+                $sid = 'ACed59c2efc292602af3f856aad90c6bb6';
+                $auth_token = 'f4fc9826d7cb10067d6450dad8321172';
+        // In production, these should be environment variables. E.g.:
+        // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
+        // A Twilio number you own with SMS capabilities
+                $twilio_number = "+12762849300";
+        
+                $client = new Client($sid, $auth_token);
+                $client->messages->create(
+                // the number you'd like to send the message to
+                    '+21650742776',
+                    [
+                        // A Twilio phone number you purchased at twilio.com/console
+                        'from' => '+13204164063',
+                        // the body of the text message you'd like to send
+                        'body' => 'votre candidature à été mise à jour!'
+                    ]
+                );
+            }
 
     public function save(Candidature $entity, bool $flush = false): void
     {

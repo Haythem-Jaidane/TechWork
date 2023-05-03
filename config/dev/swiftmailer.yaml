@@ -1,0 +1,7 @@
+swiftmailer:
+    transport: smtp
+    host: mailhog
+    port: 1025
+    encryption: ~
+    auth_mode: null
+    spool: { type: null }

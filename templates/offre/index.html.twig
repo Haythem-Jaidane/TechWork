@@ -550,7 +550,7 @@
             btn_process.onclick = function() {
 
                 (async () => {
-                    const rawResponse = await fetch('./templates/offre/processing.php', {
+                    const rawResponse = await fetch('app_offre_record', {
                         method: 'POST',
                         body: blob
                     });

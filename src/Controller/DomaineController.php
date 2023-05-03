@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-
+use App\Repository\CandidatureRepository;
 #[Route('/domaine')]
 class DomaineController extends AbstractController
 {
@@ -21,6 +21,7 @@ class DomaineController extends AbstractController
         $this->entityManager = $entityManager;
     }
  
+
     #[Route('/', name: 'app_domaine_index', methods: ['GET'])]
     public function index(DomaineRepository $domaineRepository): Response
     {
@@ -56,7 +57,7 @@ class DomaineController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $domaineRepository->save($domaine, true);
-
+ 
             return $this->redirectToRoute('app_domaine_index', [], Response::HTTP_SEE_OTHER);
         }
 

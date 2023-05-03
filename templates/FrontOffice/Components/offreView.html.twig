@@ -64,7 +64,7 @@
           							<td class="text-center">
           								   
                           <a href="{{ path('app_offre_show_postuler', {'id': offre.id}) }}"><button class="btn text-primary">Postuler</button></a> 
-  
+
           							</td>
           						</tr> {% else %} <tr>
           							<td colspan="9">no records found</td>
@@ -90,7 +90,7 @@
           							<th>datepostulation</th> 
   
                         							 
-          							<th class="text-center"> status </th>
+          							<th class="text-center"> status </th> 
           						</tr>
           					</thead>
           					<tbody> {% for candidature in candidaturesPending %} <tr>
@@ -105,6 +105,9 @@
 
  
           														<td class="text-center">{{ candidature.status }}</td>
+           							<td class="text-center">
+									<a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn text-primary">Imprimer</button></a> 
+                   					</td>
           						</tr> {% else %} <tr>
           							<td colspan="9">no records found</td>
           						</tr> {% endfor %} </tbody>
@@ -146,7 +149,10 @@
 
 
                         			<td>{{ candidature.details }}
-          														<td class="text-center">{{ candidature.status }}</td>
+                														<td class="text-center">{{ candidature.status }}</td>
+           							<td class="text-center">
+									<a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn text-primary">Imprimer</button></a> 
+                   					</td>
           						</tr> {% else %} <tr>
           							<td colspan="9">no records found</td>
           						</tr> {% endfor %} </tbody>
@@ -189,7 +195,10 @@
 
 
                         			<td>{{ candidature.details }}
-          														<td class="text-center">{{ candidature.status }}</td>
+          											          														<td class="text-center">{{ candidature.status }}</td>
+           							<td class="text-center">
+									<a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn text-primary">Imprimer</button></a> 
+                   					</td>
           						</tr> {% else %} <tr>
           							<td colspan="9">no records found</td>
           						</tr> {% endfor %} </tbody>

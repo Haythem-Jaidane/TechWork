@@ -21,6 +21,7 @@ class DomaineRepository extends ServiceEntityRepository
         parent::__construct($registry, Domaine::class);
     }
 
+    
     public function save(Domaine $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

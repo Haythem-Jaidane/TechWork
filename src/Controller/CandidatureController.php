@@ -23,7 +23,18 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;  
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
-  
+use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+
+use Symfony\Component\HttpFoundation\RedirectResponse;  
+
+use Twilio\Rest\Client;
+
+//use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
  
 
@@ -31,12 +42,40 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 class CandidatureController extends AbstractController
 {
 
-    private $mailer;
+//    private $mailer;
 
-    public function __construct(MailerInterface $mailer)
+    public function __construct(/*MailerInterface $mailer*/)
     {
-        $this->mailer = $mailer;
+     //   $this->mailer = $mailer;
     }
+
+
+    #[Route('/pdf/{id}', name: 'candidature_pdf', methods: ['GET'])]
+public function pdf($id, EntityManagerInterface $entityManager): Response
+{
+    $candidature = $entityManager
+        ->getRepository(Candidature::class)
+        ->find($id);
+
+    $pdfOptions = new Options();
+    $pdfOptions->set('defaultFont', 'Arial');
+    $dompdf = new Dompdf($pdfOptions);
+
+    $html = $this->renderView('candidature/pdf.html.twig', [
+        'candidature' => $candidature,
+    ]);
+
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    $pdfOutput = $dompdf->output();
+
+    return new Response($pdfOutput, 200, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'attachment; filename="candidature.pdf"'
+    ]);
+}
     #[Route('/', name: 'app_candidature_index', methods: ['GET'])]
     public function index(CandidatureRepository $candidatureRepository): Response
     {
@@ -59,17 +98,7 @@ class CandidatureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
  
-
-// Create the email message
-$email = (new Email())
-    ->from('ines.bouraoui@esprit.tn')
-    ->to('bouraouines7@gmail.com')
-    ->subject('Test email')
-    ->text('This is a test email sent from Symfony.');
-
-// Send the email
-//$mailer->send($email);
-$this->mailer->send($email);
+       
 
 
             $candidature->setDatepostulation(new \DateTime());
@@ -105,35 +134,30 @@ $this->mailer->send($email);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-       //     $email="bouraouines5@gmail.com";
-      
-      //      $uppcode="abc";
-            
-    //        $this->SendCodeMail($email,$mailer,$uppcode);
+            {
+
+                $email = (new Email())
+                ->from('ines.bouraoui@esprit.tn')
+                ->to('bouraouines5@gmail.com')
+                ->subject('Candidature Updated')
+                ->text(
+                    'The candidature with ID %d has been updated at %s',
+                    $candidature->getId(),
+                    $candidature->getDatemodification()->format('Y-m-d H:i:s')
+                );
+                 $mailer->send($email);
+            }
 
 
             $candidature->setDatemodification(new \DateTime());
- 
 
-            
             $candidatureRepository->save($candidature, true);
  
             
  
-        
-            $email = (new Email())
-            ->from('ines.bouraoui@esprit.tn')
-            ->to('bouraouines5@gmail.com')
-            ->subject('Candidature Updated')
-            ->text(sprintf(
-                'The candidature with ID %d has been updated at %s',
-                $candidature->getId(),
-                $candidature->getDatemodification()->format('Y-m-d H:i:s')
-            ));
-        
        // $this->mailer->send($email);
  
-
+       $CandidatureRepository->sms();
 
             return $this->redirectToRoute('app_candidature_index', [], Response::HTTP_SEE_OTHER);
         }

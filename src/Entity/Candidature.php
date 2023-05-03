@@ -34,6 +34,20 @@ class Candidature
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $datemodification = null;
 
+    
+    private $mail;
+
+    public function getmail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setmail(?string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
 
 
     public function getId(): ?int
