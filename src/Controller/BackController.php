@@ -16,19 +16,28 @@ use App\Entity\Contrat;
 
 class BackController extends AbstractController
 {
-    #[Route('/dashboard/{getsion}', name: 'app_back_office', methods: ['GET'])]
-    public function backOffice($getsion,ProjectRepository $projectRepository): Response
+    #[Route('/dashboard/portfolio', name: 'app_back_office_portfolio', methods: ['GET'])]
+    public function backOffice(ProjectRepository $projectRepository): Response
     {
         return $this->render('BackOffice/back.html.twig',[
-            "getsion" => $getsion,'projets' => $projectRepository->findAll(),
+            "getsion" => "portfolio",'projets' => $projectRepository->findAll(),
         ]);
     }
 
-    #[Route('/dashboard/{getsion}', name: 'app_back_office', methods: ['GET'])]
-    public function backOffic($getsion,ProfilRepository $profilRepository): Response
+    #[Route('/dashboard/profile', name: 'app_back_office_profile', methods: ['GET'])]
+    public function backOffic(ProfilRepository $profilRepository,ProjectRepository $projectRepository): Response
     {
         return $this->render('BackOffice/back.html.twig',[
-            "getsion" => $getsion,'profils' => $profilRepository->findAll(),
+            "getsion" => "profile",'profils' => $profilRepository->findAll(),'projets ' => $projectRepository->findAll(),
+            
+        ]);
+    }
+
+    #[Route('/dashboard/utilisateur', name: 'app_back_office_utilisateur', methods: ['GET'])]
+    public function backOfficeUser(ProfilRepository $profilRepository,ProjectRepository $projectRepository): Response
+    {
+        return $this->render('BackOffice/back.html.twig',[
+            "getsion" => "utilisateur",'profils' => $profilRepository->findAll(),'projets ' => $projectRepository->findAll(),
             
         ]);
     }
@@ -44,8 +53,8 @@ class BackController extends AbstractController
 
 
 
-    #[Route('/dashboard/{getsion}', name: 'app_back_office')]
-    public function backOffice_($getsion,OffreRepository $offreRepository,CandidatureRepository $candidatureRepository): Response
+    #[Route('/dashboard/offre', name: 'app_back_office_offre')]
+    public function backOffice_(ProfilRepository $profilRepository,ProjectRepository $projectRepository,OffreRepository $offreRepository,CandidatureRepository $candidatureRepository): Response
     {
         $em = $this->getDoctrine()->getManager();
         $countt = $em->getRepository(Offre::class)->createQueryBuilder('o')
@@ -172,7 +181,7 @@ class BackController extends AbstractController
  
 
         return $this->render('BackOffice/back.html.twig', [
-            "getsion" => $getsion,
+            "getsion" => "offre",
 
             'countt' => $countt,
             'countt2' => $countt2,
@@ -198,7 +207,10 @@ class BackController extends AbstractController
 
       /*      'categNomOff3' => json_encode($categNomOff3), 
             'categCountOff3' => json_encode($categCountOff3),*/
-
+            "getsion" => "offre",
+            'profils' => $profilRepository->findAll(),
+            'projets ' => $projectRepository->findAll(),
+           
 
         ]);
     }

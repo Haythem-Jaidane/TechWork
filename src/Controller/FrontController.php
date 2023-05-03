@@ -118,7 +118,7 @@ class FrontController extends AbstractController
 
 
     
-    #[Route('/home/{profil}/profil_', name: 'app_home_off', methods: ['GET'])]
+    #[Route('/home/{profil}/profil_', name: 'app_home_offf', methods: ['GET'])]
     public function off_(Profil $profil,Request $request, ProfilRepository $profilRepository): Response
     {
         return $this->render('FrontOffice/Components/ProfilRedirect.html.twig', [

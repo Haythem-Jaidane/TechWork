@@ -134,7 +134,7 @@ public function pdf($id, EntityManagerInterface $entityManager): Response
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            {
+            {/*
 
                 $email = (new Email())
                 ->from('ines.bouraoui@esprit.tn')
@@ -145,7 +145,7 @@ public function pdf($id, EntityManagerInterface $entityManager): Response
                     $candidature->getId(),
                     $candidature->getDatemodification()->format('Y-m-d H:i:s')
                 );
-                 $mailer->send($email);
+                 $mailer->send($email);*/
             }
 
 
@@ -157,8 +157,22 @@ public function pdf($id, EntityManagerInterface $entityManager): Response
  
        // $this->mailer->send($email);
  
-       $CandidatureRepository->sms();
+       
+// $CandidatureRepository->sms();
 
+      
+        // send SMS
+        $sid = 'AC13b9414bbadc9d75ca964a42994882d3';
+        $token = '2a20df51446d641d8743d486ff961c0f';
+        $client = new \Twilio\Rest\Client($sid, $token);
+        $message = $client->messages->create(
+            '+21650742776',
+            [
+                'from' => '+13204164063',
+                'body' => sprintf('votre candidature à été mise à jour',"!")
+            ]
+        );
+ 
             return $this->redirectToRoute('app_candidature_index', [], Response::HTTP_SEE_OTHER);
         }
 

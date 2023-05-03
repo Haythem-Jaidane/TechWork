@@ -18,6 +18,8 @@ use Symfony\Component\Mime\Email;
 use App\Mailer\ProjectMailer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Twilio\Rest\Client;
+
+
 //use Nexmo\Client as NexmoClient;
 //use NexmoBundle;
 //use Nexmo\Client;
@@ -143,7 +145,7 @@ public function new(Request $request, ProjectRepository $projectRepository, Mail
             ->html(sprintf('Voici les informations de la base de données : "%s".', $nom));
     
         $mailer->send($email);
-        /*
+       /* 
         // send SMS
         $sid = 'AC5f382709f0dc165bba6e84ceb95dc455';
         $token = '0df8489b47f3cb82c43a0d02d0a5a5b8';
@@ -244,7 +246,7 @@ public function searchProjet(Request $request): JsonResponse
 
 
 
-   // #[Route("/stats", name:"app_stats")]
+    #[Route("/stats", name:"app_stats")]
  
 public function stats(): Response
 {

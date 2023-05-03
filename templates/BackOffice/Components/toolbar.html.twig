@@ -17,25 +17,25 @@
             </a>
           </li>
           <li {% if getsion == "utilisateur" %}class="active"{% endif %}>
-            <a href={{path("app_back_office",{'getsion': 'utilisateur' })}}>
+            <a href={{path("app_back_office_utilisateur")}}>
               <i class="tim-icons icon-single-02"></i>
               <p>Utilisateur</p>
             </a>
           </li>
           <li {% if getsion == "offre" %}class="active"{% endif %}>
-            <a href={{path("app_back_office",{'getsion': 'offre' })}}>
+            <a href={{path("app_back_office_offre")}}>
               <i class="tim-icons icon-bell-55"></i>
               <p>Offre</p>
             </a>
           </li>
           <li {% if getsion == "profile" %}class="active"{% endif %}>
-            <a href={{path("app_back_office",{'getsion': 'profile' })}}>
+            <a href={{path("app_back_office_profile")}}>
               <i class="tim-icons icon-bell-55"></i>
               <p>Profile</p>
             </a>
           </li>
           <li {% if getsion == "portfolio" %}class="active"{% endif %}>
-            <a href={{path("app_back_office",{'getsion': 'portfolio' })}}>
+            <a href={{path("app_back_office_portfolio")}}>
               <i class="tim-icons icon-bell-55"></i>
               <p>Portfolio</p>
             </a>
