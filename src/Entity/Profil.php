@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProfilRepository;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
 class Profil
 {
@@ -15,8 +15,10 @@ class Profil
     #[ORM\GeneratedValue]
     private ?int $id;
 
+    
+    #[Assert\NotBlank(message:"nom is required")]
     #[ORM\Column(name:"Nom")]
-    private ?string $Nom;
+    private ?string $Nom=null;
 
     #[ORM\Column(name:"Prenom")]
     private ?string $Prenom;
@@ -27,22 +29,22 @@ class Profil
     #[ORM\Column(name:"Email")]
     private ?string $Email;
 
-    #[ORM\Column]
+    #[ORM\Column(name:"Localisation")]
     private ?string $Localisation;
 
-    #[ORM\Column]
+    #[ORM\Column(name:"Description")]
     private ?string $Description;
 
-    #[ORM\Column]
+    #[ORM\Column(name:"Langues")]
     private ?string $Langues;
 
-    #[ORM\Column]
+    #[ORM\Column(name:"Competences")]
     private ?string $Competences;
 
-    #[ORM\Column]
+    #[ORM\Column(name:"Formation")]
     private ?string $Formation;
 
-    #[ORM\Column]
+    #[ORM\Column(name:"ExperiencesProfessionnelles")]
     private ?string $ExperiencesProfessionnelles;
 
     #[ORM\Column]
@@ -51,7 +53,7 @@ class Profil
     #[ORM\Column]
     private ?string $longitude;
 
-    #[ORM\Column]
+    #[ORM\Column(name:"Diplome")]
     private ?string $Diplome;
 
     public function getIdProfil(): ?int
@@ -83,26 +85,26 @@ class Profil
         return $this;
     }
 
-    public function getNuméroTéléphone(): ?string
+    public function getNumeroTelephone(): ?string
     {
         return $this->NumeroTelephone;
     }
 
-    public function setNuméroTéléphone(string $numéroTéléphone): self
+    public function setNumeroTelephone(string $numeroTelephone): self
     {
-        $this->NumeroTelephone = $numéroTéléphone;
+        $this->NumeroTelephone = $numeroTelephone;
 
         return $this;
     }
 
-    public function getEMail(): ?string
+    public function getEmail(): ?string
     {
         return $this->Email;
     }
 
-    public function setEMail(string $eMail): self
+    public function setEMail(string $email): self
     {
-        $this->Email = $eMail;
+        $this->Email = $email;
 
         return $this;
     }

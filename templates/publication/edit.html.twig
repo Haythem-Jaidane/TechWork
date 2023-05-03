@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Publication{% endblock %}
+
+{% block body %}
+ {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+    <h1>Modifier Publication</h1>
+
+    {{ include('publication/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_publication_index') }}">Revenir à la liste</a>
+
+    {{ include('publication/_delete_form.html.twig') }}
+{% endblock %}
