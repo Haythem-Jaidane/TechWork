@@ -45,7 +45,7 @@ class PublicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $publicationRepository->save($publication, true);
-          //  $publicationRepository->sms();
+            $publicationRepository->sms();
 
             return $this->redirectToRoute('app_publication_index', ['id_Profil' => $publication->getIdProfil()->getIdProfil()], Response::HTTP_SEE_OTHER);
         }

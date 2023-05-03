@@ -18,10 +18,11 @@
       </a>
       <nav id="navbar" class="navbar">
         <ul>
-       
+          <li><a href={{path('app_home')}}>Home</a></li>
+          <li><a href={{path('app_home_other',{'section': 'about' })}}>About</a></li>
           <li><a href={{path('app_home_other',{'section': 'offre' })}}>Offre</a></li>
           <li><a href={{path('app_home_other',{'section': 'portfolio' })}}>protfolio</a></li>
-          <li><a href={{path('app_home_other',{'section': 'formation' })}}>formation</a></li>
+          <li><a href={{path('app_formation_afficher_Cours',{"id_user":8})}}>formation</a></li>
           
           {% if isConnected %}
           <li class="dropdown nav-item">

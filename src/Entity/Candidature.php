@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CandidatureRepository;
+use App\Entity\Offre;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
 class Candidature
@@ -14,43 +15,48 @@ class Candidature
     #[ORM\GeneratedValue]
     private ?int $id;
 
-    #[ORM\Column]
-    private ?string $offre;
-
-    #[ORM\Column]
-    private ?string $recruteur;
-
-    #[ORM\Column]
-    private ?string $candidat;
+    #[ORM\ManyToOne(inversedBy: 'candidatures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Offre $offre = null;
+ 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $candidat = null;
 
     #[ORM\Column]
     private ?string $status;
 
     #[ORM\Column]
-    private ?string $informations;
+    private ?string $details;
 
-    #[ORM\Column]
-    private ?string $datepostulation;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datepostulation = null;
 
-    #[ORM\Column]
-    private ?string $datemodification;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datemodification = null;
+
+    
+    private $mail;
+
+    public function getmail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setmail(?string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getOffre(): ?string
-    {
-        return $this->offre;
-    }
 
-    public function setOffre(string $offre): self
-    {
-        $this->offre = $offre;
-
-        return $this;
-    }
 
     public function getRecruteur(): ?string
     {
@@ -64,17 +70,7 @@ class Candidature
         return $this;
     }
 
-    public function getCandidat(): ?string
-    {
-        return $this->candidat;
-    }
-
-    public function setCandidat(string $candidat): self
-    {
-        $this->candidat = $candidat;
-
-        return $this;
-    }
+ 
 
     public function getStatus(): ?string
     {
@@ -96,33 +92,72 @@ class Candidature
     public function setInformations(string $informations): self
     {
         $this->informations = $informations;
+    }
+    
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(string $details): self
+    {
+        $this->details = $details;
 
         return $this;
     }
 
-    public function getDatepostulation(): ?string
+    public function getDatepostulation(): ?\DateTimeInterface
     {
         return $this->datepostulation;
     }
 
-    public function setDatepostulation(string $datepostulation): self
+    public function setDatepostulation(?\DateTimeInterface $datepostulation): self
     {
         $this->datepostulation = $datepostulation;
 
         return $this;
     }
 
-    public function getDatemodification(): ?string
+    public function getDatemodification(): ?\DateTimeInterface
     {
         return $this->datemodification;
     }
 
-    public function setDatemodification(string $datemodification): self
+    public function setDatemodification(?\DateTimeInterface $datemodification): self
     {
         $this->datemodification = $datemodification;
 
         return $this;
     }
 
+    public function getOffre(): ?Offre
+    {
+        return $this->offre;
+    }
+
+    public function setOffre(?Offre $offre): self
+    {
+        $this->offre = $offre;
+
+        return $this;
+    }
+
+    public function getCandidat(): ?Utilisateur
+    {
+        return $this->candidat;
+    }
+
+    public function setCandidat(?Utilisateur $candidat): self
+    {
+        $this->candidat = $candidat;
+
+        return $this;
+    }
+
+    
+        public function __toString()
+        {
+            return(string)$this->getId();
+        }
 
 }

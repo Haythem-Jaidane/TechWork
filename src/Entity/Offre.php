@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OffreRepository;
 
@@ -14,14 +16,32 @@ class Offre
     #[ORM\GeneratedValue]
     private ?int $id;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $recruteur = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Domaine $domaine = null;
+ /*   #[ORM\JoinTable(name:"offre_domaine",
+       joinColumns{ORM\JoinColumn(name:"offre_id", referencedColumnName:"id")},
+       inverseJoinColumns{ORM\JoinColumn(name:"domaine_id", referencedColumnName:"id")}
+ )]*/
+  
+
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Contrat $contrat = null;
+
+    #[ORM\OneToMany(mappedBy: 'offre', targetEntity: Candidature::class)]
+    private Collection $candidatures;
+
     #[ORM\Column]
     private ?string $titre;
 
     #[ORM\Column]
     private ?string $description;
-
-    #[ORM\Column]
-    private ?string $post;
 
     #[ORM\Column]
     private ?int $salaire;
@@ -30,22 +50,15 @@ class Offre
     private ?string $lieu;
 
     #[ORM\Column]
-    private ?string $typecontrat;
-
-    #[ORM\Column]
-    private ?int $duree;
-
-    #[ORM\Column]
     private ?string $status;
+ 
 
-    #[ORM\Column]
-    private ?string $domaineoffre;
 
-    #[ORM\Column]
-    private ?string $nomrecruteur;
 
-    #[ORM\Column]
-    private ?string $emailrecruteur;
+    public function __construct()
+    {
+        $this->candidatures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,29 +125,8 @@ class Offre
         return $this;
     }
 
-    public function getTypecontrat(): ?string
-    {
-        return $this->typecontrat;
-    }
-
-    public function setTypecontrat(string $typecontrat): self
-    {
-        $this->typecontrat = $typecontrat;
-
-        return $this;
-    }
-
-    public function getDuree(): ?int
-    {
-        return $this->duree;
-    }
-
-    public function setDuree(int $duree): self
-    {
-        $this->duree = $duree;
-
-        return $this;
-    }
+ 
+ 
 
     public function getStatus(): ?string
     {
@@ -148,41 +140,82 @@ class Offre
         return $this;
     }
 
-    public function getDomaineoffre(): ?string
+
+
+    public function getRecruteur(): ?Utilisateur
     {
-        return $this->domaineoffre;
+        return $this->recruteur;
     }
 
-    public function setDomaineoffre(string $domaineoffre): self
+    public function setRecruteur(?Utilisateur $recruteur): self
     {
-        $this->domaineoffre = $domaineoffre;
+        $this->recruteur = $recruteur;
 
         return $this;
     }
 
-    public function getNomrecruteur(): ?string
+    
+    public function getDomaine(): ?Domaine
     {
-        return $this->nomrecruteur;
+        return $this->domaine;
     }
 
-    public function setNomrecruteur(string $nomrecruteur): self
+    public function setDomaine(?Domaine $domaine): self
     {
-        $this->nomrecruteur = $nomrecruteur;
+        $this->domaine = $domaine;
 
         return $this;
     }
 
-    public function getEmailrecruteur(): ?string
+    
+
+    public function getContrat(): ?Contrat
     {
-        return $this->emailrecruteur;
+        return $this->contrat;
     }
 
-    public function setEmailrecruteur(string $emailrecruteur): self
+    public function setContrat(?Contrat $contrat): self
     {
-        $this->emailrecruteur = $emailrecruteur;
+        $this->contrat = $contrat;
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Candidature>
+     */
+    public function getCandidatures(): Collection
+    {
+        return $this->candidatures;
+    }
+
+    public function addCandidature(Candidature $candidature): self
+    {
+        if (!$this->candidatures->contains($candidature)) {
+            $this->candidatures->add($candidature);
+            $candidature->setOffre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidature(Candidature $candidature): self
+    {
+        if ($this->candidatures->removeElement($candidature)) {
+            // set the owning side to null (unless already changed)
+            if ($candidature->getOffre() === $this) {
+                $candidature->setOffre(null);
+            }
+        }
+
+        return $this;
+    }
+
+        //MOD
+        public function __toString()
+        {
+            return(string)$this->getTitre();
+        }
 
 
 }

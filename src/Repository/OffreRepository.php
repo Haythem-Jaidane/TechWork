@@ -39,6 +39,30 @@ class OffreRepository extends ServiceEntityRepository
         }
     }
 
+ 
+
+
+    public function countByDomaine(){
+        $query = $this->createQueryBuilder('o')
+  
+            ->select('SUBSTRING(d.nom, 1, 10) as cbysmth, COUNT(o) as count')
+            ->leftJoin('App\Entity\Domaine', 'd', 'WITH', 'o.domaine = d.id')
+            ->groupBy('cbysmth')
+         ;
+        return $query->getQuery()->getResult(); 
+  }
+    
+
+  public function countByContrat(){
+    $query = $this->createQueryBuilder('o')
+
+        ->select('SUBSTRING(d.nom, 1, 10) as cbysmth2, COUNT(o) as count')
+        ->leftJoin('App\Entity\Contrat', 'd', 'WITH', 'o.contrat = d.id')
+        ->groupBy('cbysmth2')
+     ;
+    return $query->getQuery()->getResult(); 
+}
+
 //    /**
 //     * @return Offre[] Returns an array of Offre objects
 //     */

@@ -1,0 +1,67 @@
+
+{% block offre %}
+<div class="content">
+  <div class="row">
+    <div class="col-12">
+  <div class="card ">
+    <div class="card-header">
+      <h4 class="card-title"> Mes Offres</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table tablesorter " id="">
+
+          <thead class=" text-primary">
+          <tr>
+
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Post</th>
+            <th>Salaire</th>
+            <th>Lieu</th>
+            <th>Typecontrat</th>
+            <th>Duree</th>
+            <th>Domaineoffre</th>
+            <th>Nomrecruteur</th>
+            <th>Emailrecruteur</th>
+            <th>Status</th>
+            <th class="text-center">
+              actions
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for offre in offres %}
+          <tr>
+
+            <td>{{ offre.titre }}</td>
+            <td>{{ offre.description }}</td>
+            <td>{{ offre.post }}</td>
+            <td>{{ offre.salaire }}</td>
+            <td>{{ offre.lieu }}</td>
+            <td>{{ offre.typecontrat }}</td>
+            <td>{{ offre.duree }}</td>
+            <td>{{ offre.domaineoffre }}</td>
+            <td>{{ offre.nomrecruteur }}</td>
+            <td>{{ offre.emailrecruteur }}</td>
+            <td>{{ offre.status }}</td>
+            <td class="text-center">
+              <a href="{{ path('app_back_offre_show', {'id': offre.id}) }}">show</a>
+              <a href="{{ path('app_offre_edit', {'id': offre.id}) }}">edit</a>
+            </td>
+          </tr>
+          {% else %}
+            <tr>
+              <td colspan="13">no records found</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+{% endblock %}

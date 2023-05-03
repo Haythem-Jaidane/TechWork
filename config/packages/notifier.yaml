@@ -13,6 +13,7 @@ framework:
    # api_secret: 'ishCYmv2eWOL36nL'
 
        
+        #    nexmo: '%env(NEXMO_DSN)%'
         channel_policy:
             # use chat/slack, chat/telegram, sms/twilio or sms/nexmo
             urgent: ['email']
@@ -21,4 +22,3 @@ framework:
             low: ['email']
         admin_recipients:
             - { email: admin@example.com }
-

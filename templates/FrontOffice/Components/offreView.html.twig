@@ -4,144 +4,277 @@
 
         <div class="section-header">
           <h2>Offre</h2>
-          <p>Quam sed id excepturi ccusantium dolorem ut quis dolores nisi llum nostrum enim velit qui ut et autem uia reprehenderit sunt deleniti</p>
+         <!-- <p>Quam sed id excepturi ccusantium dolorem ut quis dolores nisi llum nostrum enim velit qui ut et autem uia reprehenderit sunt deleniti</p>-->
         </div>
 
         <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
 
           <div>
             <ul class="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-product">Product</li>
-              <li data-filter=".filter-branding">Branding</li>
-              <li data-filter=".filter-books">Books</li>
+              <li data-filter="*" class="filter-active">Tous</li>
+              <li data-filter=".filter-offres">Offres d'emplois</li>
+              <li data-filter=".filter-candidatures">Candidatures</li>
+              <li data-filter=".filter-accepted">Candidatures Acceptées</li>
+              <li data-filter=".filter-rejected">Candidatures Rejetées</li>
+			                <li data-filter=".filter-contrats">Contrats</li>
+							     <li data-filter=".filter-domaines">Domaines</li>
             </ul><!-- End Portfolio Filters -->
           </div>
 
-          <div class="row gy-4 portfolio-container">
+            <div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-offres">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Offres d'emplois</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+ 
+          							<th>Titre</th>
+          							<th>Domaine</th>
+                                  							<th>Contrat</th>
+          							<th>Salaire</th>
+          							<th>Lieu</th>
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
+
+          							<th>Description</th>
+                                  							<th>Recruteur</th>
+          							<th>Status</th>
+          							<th class="text-center"> Actions </th>
+          						</tr>
+          					</thead>
+          					<tbody> {% for offre in offres %} <tr>
+ 
+          							<td>{{ offre.titre }}</td>          							<td>{{ offre.domaine }}
+          							</td>
+                                  							<td>{{ offre.contrat }}
+          							</td>
+          							<td>{{ offre.salaire }}
+          							</td>
+          							<td>{{ offre.lieu }}</td>
+
+
+
+          							<td>{{ offre.description }}
+          							</td>
+                                  							<td>{{ offre.recruteur }}
+          							</td>
+          							<td>{{ offre.status }}</td>
+          							<td class="text-center">
+          								   
+                          <a href="{{ path('app_offre_show_postuler', {'id': offre.id}) }}"><button class="btn text-primary">Postuler</button></a> 
+
+          							</td>
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
+          				</table>
+          			</div>
+          		</div>
+          	</div><!-- End Portfolio Item -->
+
+
+            <div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-candidatures">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Candidatures En Attente</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+                      <th>Titre</th>
+          		          							<th>Recruteur</th>
+          			<th>Candidat</th> 		
+          							<th>datepostulation</th> 
+  
+                        							 
+          							<th class="text-center"> status </th> 
+          						</tr>
+          					</thead>
+          					<tbody> {% for candidature in candidaturesPending %} <tr>
+                    						                    							<td>{{ candidature.offre.titre }}
+          							</td> 
+                                	<td>{{ candidature.offre.recruteur }}
+          							</td> 
+          							<td>{{ candidature.candidat }}</td>	
+          							</td>
+          							<td>{{ candidature.datepostulation|date('Y-m-d H:i')  }}</td>
+          		 
+
+ 
+          														<td class="text-center">{{ candidature.status }}</td>
+           							<td class="text-center">
+									<a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn text-primary">Imprimer</button></a> 
+                   					</td>
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
+          				</table>
+          			</div>
+          		</div>
               </div>
-            </div><!-- End Portfolio Item -->
+          	</div><!-- End Portfolio Item -->
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
+            <div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-candidatures filter-accepted">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Candidatures Acceptées</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+                      <th>Titre</th>
+          		          							<th>Recruteur</th>
+          			<th>Candidat</th> 		
+          							<th>datepostulation</th>
+          							<th>datemodification</th>
+  
+                        									<th>details</th>
+          							<th class="text-center"> status </th>
+          						</tr>
+          					</thead>
+          					<tbody> {% for candidature in candidaturesAccepted %} <tr>
+                    						                    							<td>{{ candidature.offre.titre }}
+          							</td> 
+                                	<td>{{ candidature.offre.recruteur }}
+          							</td> 
+          							<td>{{ candidature.candidat }}</td>	
+          							</td>
+          							<td>{{ candidature.datepostulation|date('Y-m-d H:i')  }}</td>
+          							<td>{{ candidature.datemodification|date('Y-m-d H:i')  }}
+          							</td>
+
+
+                        			<td>{{ candidature.details }}
+                														<td class="text-center">{{ candidature.status }}</td>
+           							<td class="text-center">
+									<a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn text-primary">Imprimer</button></a> 
+                   					</td>
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
+          				</table>
+          			</div>
+          		</div>
               </div>
-            </div><!-- End Portfolio Item -->
+          	</div><!-- End Portfolio Item -->
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
+
+            <div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-candidatures filter-rejected">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Candidatures Rejetées</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+                      <th>Titre</th>
+          		          							<th>Recruteur</th>
+          			<th>Candidat</th> 		
+          							<th>datepostulation</th>
+          							<th>datemodification</th>
+  
+                        									<th>details</th>
+          							<th class="text-center"> status </th>
+          						</tr>
+          					</thead>
+          					<tbody> {% for candidature in candidaturesRejected %} <tr>
+                    						                    							<td>{{ candidature.offre.titre }}
+          							</td> 
+                                	<td>{{ candidature.offre.recruteur }}
+          							</td> 
+          							<td>{{ candidature.candidat }}</td>	
+          							</td>
+          							<td>{{ candidature.datepostulation|date('Y-m-d H:i')  }}</td>
+          							<td>{{ candidature.datemodification|date('Y-m-d H:i')  }}
+          							</td>
+
+
+                        			<td>{{ candidature.details }}
+          											          														<td class="text-center">{{ candidature.status }}</td>
+           							<td class="text-center">
+									<a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn text-primary">Imprimer</button></a> 
+                   					</td>
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
+          				</table>
+          			</div>
+          		</div>
               </div>
-            </div><!-- End Portfolio Item -->
+          	</div><!-- End Portfolio Item -->
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
+            <div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-contrats">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Contrats de Travail</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+                      <th>Nom</th>
+          		          							<th>Nom Complet</th>
+          			<th>Description</th> 		
+          				
+          			
+          						</tr>
+          					</thead>
+          					<tbody> {% for contrat in contrats %} <tr>
+                    						                    					 
+          							</td> 
+                                	<td>{{ contrat.nom }}
+          							</td> 
+          							<td>{{ contrat.fullname }}</td>	
+          							</td>
+          							<td>{{ contrat.description}}</td>
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
+          				</table>
+          			</div>
+          		</div>
               </div>
-            </div><!-- End Portfolio Item -->
+          	</div><!-- End Portfolio Item -->
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
+            <div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-domaines">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Domaines de Travail</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+                      <th>Nom</th>
+          		          						 
+          			<th>Description</th> 		
+          				
+          			
+          						</tr>
+          					</thead>
+          					<tbody> {% for domaine in domaines %} <tr>
+                    						                    					 
+          							</td> 
+                                	<td>{{ domaine.nom }}
+          							</td> 
+          					 
+          							<td>{{ domaine.description}}</td>
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
+          				</table>
+          			</div>
+          		</div>
               </div>
-            </div><!-- End Portfolio Item -->
+          	</div><!-- End Portfolio Item -->
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
-            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-              <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-          </div><!-- End Portfolio Container -->
 
         </div>
 
