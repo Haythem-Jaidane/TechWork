@@ -35,8 +35,6 @@ class Utilisateur implements UserInterface
     #[ORM\Column]
     private ?string $role;
 
-    #[ORM\Column(type: 'boolean')]
-    
     public function getId(): ?int
     {
         return $this->id;

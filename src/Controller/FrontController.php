@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ProjectRepository;
 
 class FrontController extends AbstractController
 {
@@ -13,10 +14,8 @@ class FrontController extends AbstractController
     public function index(): Response
     {
 
-        $section = '';
-
         return $this->render('FrontOffice/home.html.twig',[
-            "section" => $section,
+            "section" => "",
             "isConnected" => true, 
         ]);
     }
@@ -49,4 +48,18 @@ class FrontController extends AbstractController
             "isConnected" => true, 
         ]);
     }
+    #[Route('/home/{section}', name: 'app_home_other', methods: ['GET'])]
+    public function other_($section,ProjectRepository $projectRepository): Response
+    {
+
+        return $this->render('FrontOffice/home.html.twig',[
+            "section" => $section,'projets' => $projectRepository->findAll(),
+            "isConnected" => true, 
+        ]);
+    } 
+
+
+  
+
+    
 }

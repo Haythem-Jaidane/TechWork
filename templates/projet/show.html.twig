@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1>Detail Projet</h1>
+
+    <table class="table">
+        <tbody>
+           
+            <tr>
+                <th>Nom Projet</th>
+                <td>{{ projet.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description Projet</th>
+                <td>{{ projet.description }}</td>
+            </tr>
+            <tr>
+                <th>Domaine</th>
+                <td>{{ projet.domaine }}</td>
+            </tr>
+        </tbody>
+    </table>
+<div class="d-flex justify-content-between">
+    
+
+    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">Modifier ce projet</a>
+
+    {{ include('projet/_delete_form.html.twig') }}
+    <a href="{{ path('app_projet_index') }}">retour a la liste des projets</a>
+    </div>
+       {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}

@@ -63,4 +63,25 @@ class ProjectRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+
+public function findByName($nom){
+    return $this->createQueryBuilder('projet')
+            ->where('projet.nom LIKE ?1')
+            ->setParameter('1', $nom)
+            ->getQuery()
+            ->getResult();
+}
+public function countByDomaine(string $domaine): int
+{
+    $qb = $this->createQueryBuilder('p')
+        ->select('COUNT(p.id)')
+        ->where('p.domaine = :domaine')
+        ->setParameter('domaine', $domaine);
+
+    return $qb->getQuery()->getSingleScalarResult();
+}
+
+
 }

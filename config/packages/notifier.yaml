@@ -1,11 +1,18 @@
 framework:
     notifier:
+        texter_transports:
+            nexmo: 'Nexmo\Client'
+                
         #chatter_transports:
         #    slack: '%env(SLACK_DSN)%'
         #    telegram: '%env(TELEGRAM_DSN)%'
         #texter_transports:
         #    twilio: '%env(TWILIO_DSN)%'
-        #    nexmo: '%env(NEXMO_DSN)%'
+       # nexmo:
+   # api_key: 'e21b491d'
+   # api_secret: 'ishCYmv2eWOL36nL'
+
+       
         channel_policy:
             # use chat/slack, chat/telegram, sms/twilio or sms/nexmo
             urgent: ['email']
@@ -14,3 +21,4 @@ framework:
             low: ['email']
         admin_recipients:
             - { email: admin@example.com }
+
