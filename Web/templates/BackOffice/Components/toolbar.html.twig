@@ -1,0 +1,53 @@
+{% block toolbar %}
+
+<div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="javascript:void(0)" class="simple-text logo-mini">
+            CT
+          </a>
+          <a href="javascript:void(0)" class="simple-text logo-normal">
+            Creative Tim
+          </a>
+        </div>
+        <ul class="nav">
+          <li {% if getsion == "" %}class="active"{% endif %}>
+            <a href={{path("app_back_office_index")}}>
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li {% if getsion == "utilisateur" %}class="active"{% endif %}>
+            <a href={{path("app_back_office_utilisateur")}}>
+              <i class="tim-icons icon-single-02"></i>
+              <p>Utilisateur</p>
+            </a>
+          </li>
+          <li {% if getsion == "offre" %}class="active"{% endif %}>
+            <a href={{path("app_back_office_offre")}}>
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Offre</p>
+            </a>
+          </li>
+          <li {% if getsion == "profile" %}class="active"{% endif %}>
+            <a href={{path("app_back_office_profile")}}>
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Profile</p>
+            </a>
+          </li>
+          <li {% if getsion == "portfolio" %}class="active"{% endif %}>
+            <a href={{path("app_back_office_portfolio")}}>
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Portfolio</p>
+            </a>
+          </li>
+          <li {% if getsion == "formation" %}class="active"{% endif %}>
+            <a href={{path("app_formation_back_afficher")}}>
+              <i class="tim-icons icon-single-02"></i>
+              <p>Formation</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+{% endblock %}

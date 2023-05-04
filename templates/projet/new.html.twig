@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Projet{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1 class="text-center mb-4">Creer Un Nouveau Projet</h1>
+
+    {{ include('projet/_form.html.twig') }}
+
+    <a href="{{ path('app_projet_index') }}"><strong>----> retour a la liste </strong></a>
+       {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}

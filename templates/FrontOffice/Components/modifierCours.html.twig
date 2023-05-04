@@ -1,0 +1,50 @@
+{% extends 'base.html.twig'%}
+
+
+{% block body %}
+    {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+    {{form_start(Cours_form ,{'attr': {'novalidate': 'novalidate'}})}}
+                <table>
+                    <tr>
+                        <td>{{form_label(Cours_form.titre,"Titre")}}</td>
+                        <td>{{form_widget(Cours_form.titre,{"name":"titre"})}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{form_errors(Cours_form.titre)}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{form_label(Cours_form.categorie,"Categorie")}}</td>
+                        <td>{{form_widget(Cours_form.categorie)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{form_errors(Cours_form.categorie)}}</td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <td>{{form_label(Cours_form.Img_url,"Image de Couverture")}}</td>
+                        <td>{{form_widget(Cours_form.Img_url)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{form_errors(Cours_form.Img_url)}}</td>
+                    </tr>
+
+                </table>
+                {{form_widget(Cours_form.Ajouter)}}
+
+                <h1> Chapitre </h1>
+    <ul>
+    {% for i in Chap %}
+        
+        <li>{{ i.titre }} <a href="">modifier<a> <a href="">Supprimer<a></li>
+
+        
+    {% endfor %}
+    <ul>
+            {{form_end(Cours_form)}}
+
+    
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/js.html.twig' %}
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  {% block portfolioView %}
+
+    <section id="portfolio" class="portfolio sections-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+          <h2>Liste des Projets </h2>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="search-bar" placeholder="Rechercher un projet">
+        </div>
+
+        <div id="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nom Projet</th>
+                <th>Description</th>
+                <th>Domaine</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for projet in projets %}
+                <tr>
+                  <td>{{ projet.nom }}</td>
+                  <td>{{ projet.description }}</td>
+                  <td>{{ projet.domaine }}</td>
+                  <td>
+                    <a href="{{ path('app_projet_show', {'id': projet.id}) }}">Afficher les détails</a><br>
+                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">Modifier</a>
+                  </td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td colspan="5">Aucun enregistrement</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <a href="{{ path('app_projet_new') }}"><strong>Créer un nouveau Projet </strong></a>
+          <div class="d-flex justify-content-between">
+            <a href="{{ path( 'app_fichmedia_index') }}"class="btn btn-primary float-right">Consulter les fichiers media</a>
+            <a href="{{ path( 'app_typeprojet_index') }}"class="btn btn-primary float-right">Consulter les types projets </a><br>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  {% endblock %}
+
+{% endblock %}
+{% block javascripts %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      // Référence le champ de recherche
+      var $searchBar = $('#search-bar');
+
+      // Référence le corps de la table
+      var $tableBody = $('#table-container tbody');
+
+      // Écoute les changements dans le champ de recherche
+      $searchBar.on('input', function() {
+        // Obtient la requête de recherche depuis le champ de recherche
+        var searchQuery = $(this).val().toLowerCase();
+
+        // Envoie la requête de recherche au serveur en utilisant AJAX
+        $.ajax({
+          url: '{{ path("searchh_projet") }}',
+          type: 'GET',
+          data: {query: searchQuery},
+          success: function(results) {
+            // Vide le corps de la table
+            $tableBody.empty();
+
+            // Ajoute les résultats de la recherche au corps de la table
+            for (var i = 0; i < results.length; i++) {
+              var result = results[i];
+              var row = '<tr><td>' + result.nom + '</td><td>' + result.description + '</td></tr>';
+              $tableBody.append(row);
+            }
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}

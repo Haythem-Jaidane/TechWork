@@ -1,0 +1,212 @@
+{% block offre %}
+      <div class="content">
+ 
+
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h4 class="card-header"><i class="tim-icons icon-book-bookmark text-primary"></i> Offres                   <p>Nombre Total: {{ countt }}</p></h4>
+        <!--         <h4 class="card-header">3 en totale</h4>
+                <h4 class="card-header">3 disponibles</h4>
+                <h4 class="card-header">3 non disponibles</h4>-->
+              </div>
+               <div class="card-body">
+ 
+                <div class="chart-area">
+                 <!-- <canvas id="chartLinePurple"></canvas>-->
+
+
+                  <div class="container"> 
+                  <canvas id="offres" width="700" height="250"></canvas>
+                  </div>
+                </div>
+ 
+                <div class="col-md-55">
+                  <a href="../../offre/">
+                    <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','center')">Voir Offres</button>
+                    </a>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h4 class="card-header"><i class="tim-icons icon-badge text-info"></i> Candidatures <p>Nombre Total: {{ countt2 }}</p></h4>
+        <!--         <h4 class="card-header">3 en totale</h4>
+                <h4 class="card-header">3 disponibles</h4>
+                <h4 class="card-header">3 non disponibles</h4>-->
+              </div>
+               <div class="card-body">
+      
+                <div class="chart-area">
+                                      <div class="container">
+                                   
+                  <canvas id="candidatures" width="400" height="100"></canvas>
+                  </div>
+                  </div>
+ 
+                <div class="col-md-55">
+                  <a href="../../candidature/">
+                    <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','center')">Voir Candidatures</button>
+                  </a>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+              <div class="card card-chart">
+                <div class="card-header">
+                  <h4 class="card-header"><i class="tim-icons icon-book-bookmark text-success"></i> Contrats <p>Nombre Total: {{ countt3 }}</p></h4>
+          <!--         <h4 class="card-header">3 en totale</h4>
+                  <h4 class="card-header">3 disponibles</h4>
+                  <h4 class="card-header">3 non disponibles</h4>-->
+                </div>
+                 <div class="card-body">
+   
+                  <div class="chart-area">
+                                                        <div class="container">
+                                                    
+                  <canvas id="contrats" width="700" height="250"></canvas>
+                  </div>
+                 </div>
+
+                <div class="col-md-55">
+                  <a href="../../contrat/">
+                    <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','center')">Voir Contrats</button>
+                  </a>
+                </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card card-chart">
+                <div class="card-header">
+                  <h4 class="card-header"><i class="tim-icons icon-badge text-muted"></i> Domaines <p>Nombre Total: {{ countt4 }}</p></h4>
+          <!--         <h4 class="card-header">3 en totale</h4>
+                  <h4 class="card-header">3 disponibles</h4>
+                  <h4 class="card-header">3 non disponibles</h4>-->
+                </div>
+                 <div class="card-body">
+        
+                <div class="chart-area">
+                                      <div class="container">
+                  <canvas id="domaines" width="700" height="250"></canvas>
+                  </div>
+                  </div>
+   
+                <div class="col-md-55">
+                  <a href="../../domaine/">
+                    <button class="btn btn-primary btn-block" onclick="demo.showNotification('top','center')">Voir Domaines</button>
+                  </a>
+                </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      
+      
+      
+      
+     
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+<script>
+    let categoriesOff = document.querySelector("#offres")
+    let categGraphOff = new Chart(offres, {
+        type: "bar",
+        data: {
+            labels: {{ categNomOff|raw }},
+            datasets: [{
+                label: "Répartition des offres par candidatures",
+                data: {{ categCountOff|raw }}, 
+            }]
+        }
+    }) 
+
+
+       let bysmth = document.querySelector("#candidatures")
+    let annGraph = new Chart(candidatures, {
+        type: "line",
+        data: {
+            labels: {{ dates|raw }},
+            datasets: [{
+                label: "Dates de Postulation",
+                data: {{ candidaturesCount|raw }}
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+
+
+
+
+       let bysmth1 = document.querySelector("#domaines")
+    let annGraph1 = new Chart(domaines, {
+        type: "bar",
+        data: {
+            labels: {{ smth|raw }},
+            datasets: [{
+                label: "Offres par domaines",
+                data: {{ cbyCount|raw }}
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+
+
+
+       let bysmth2 = document.querySelector("#contrats")
+    let annGraph2 = new Chart(contrats, {
+        type: "bar",
+        data: {
+            labels: {{ smth2|raw }},
+            datasets: [{
+                label: "Offres par contrats",
+                data: {{ cbyCount2|raw }}
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+
+  
+
+ 
+</script>
+ 
+{% endblock %}

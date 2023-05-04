@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fichmedia index{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <h1>Les Fichiers Médias</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom Fichier</th>
+                <th>URL Fichier</th>
+                <th>Type Fichier</th>
+                <th>Nom Projet</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for fichmedia in fichmedia %}
+            <tr>
+                <td>{{ fichmedia.idmedia}}</td>
+                <td>{{ fichmedia.nommedia }}</td>
+                <td>{{ fichmedia.urlmedia }}</td>
+                <td>{{ fichmedia.typemedia }}</td>
+                <td>{{ fichmedia.id.nom }}</td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+     {% include 'FrontOffice/Components/footerbar.html.twig' %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil index{% endblock %}
+
+{% block body %}
+{% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+    
+
+  
+
+    <a href="{{ path('app_profil_new') }}" class="btn btn-primary">
+  <i class="fas fa-plus"></i> Créer nouveau profil
+</a>
+<style>
+  .btn-primary {
+    background-color: #ff6347;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .btn-primary:hover {
+    background-color: #e74c3c;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-primary i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+  }
+</style>
+
+
+
+
+
+
+
+     {% include 'FrontOffice/Components/footerbar.html.twig' %}
+    
+{% endblock %}

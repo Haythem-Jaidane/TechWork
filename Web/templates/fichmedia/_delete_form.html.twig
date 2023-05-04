@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_fichmedia_delete', {'idmedia': fichmedia.idmedia}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fichmedia.idmedia) }}">
+    <button class="btn"style="background-color: white; color: black; "><strong>Supprimer Fichier Media</strong></button>
+</form>

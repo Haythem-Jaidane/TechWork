@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <canvas id="myChart"></canvas>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var jsonData = {{ jsonData|raw }};
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: jsonData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
