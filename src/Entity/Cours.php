@@ -31,7 +31,7 @@ class Cours
 
     #[ORM\Column]
     #[Groups("cours")]
-    private ?int $duree;
+    public ?int $duree;
 
     #[ORM\Column]
     #[Assert\NotBlank(message:"enter un fichier")]
