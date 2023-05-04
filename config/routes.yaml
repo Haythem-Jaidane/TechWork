@@ -1,6 +1,0 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-app_stats:
-    path: /stats
-    controller: App\Controller\ProjetController::stats
