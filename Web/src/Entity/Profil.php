@@ -11,54 +11,65 @@ class Profil
 {
     
     #[ORM\Id]
-    #[ORM\Column(name:"id_Profil")]
-    #[ORM\GeneratedValue]
-    private ?int $id;
+    #[ORM\OneToOne(targetEntity:"Utilisateur")]
+    #[ORM\JoinColumn(name:"id_Profil", referencedColumnName:"id")]
+    private ?Utilisateur $id;
 
     
     #[Assert\NotBlank(message:"nom is required")]
     #[ORM\Column(name:"Nom")]
-    private ?string $Nom=null;
+    private ?string $Nom=" ";
 
     #[ORM\Column(name:"Prenom")]
-    private ?string $Prenom;
+    private ?string $Prenom=" ";
 
     #[ORM\Column(name:"NumeroTelephone")]
-    private  ?string $NumeroTelephone;
+    private  ?string $NumeroTelephone=" ";
 
     #[ORM\Column(name:"Email")]
-    private ?string $Email;
+    private ?string $Email=" ";
 
     #[ORM\Column(name:"Localisation")]
-    private ?string $Localisation;
+    private ?string $Localisation=" ";
 
     #[ORM\Column(name:"Description")]
-    private ?string $Description;
+    private ?string $Description=" ";
 
     #[ORM\Column(name:"Langues")]
-    private ?string $Langues;
+    private ?string $Langues=" ";
 
     #[ORM\Column(name:"Competences")]
-    private ?string $Competences;
+    private ?string $Competences=" ";
 
     #[ORM\Column(name:"Formation")]
-    private ?string $Formation;
+    private ?string $Formation=" ";
 
     #[ORM\Column(name:"ExperiencesProfessionnelles")]
-    private ?string $ExperiencesProfessionnelles;
+    private ?string $ExperiencesProfessionnelles=" ";
 
     #[ORM\Column]
-    private ?string $latitude;
+    private ?string $latitude=" ";
 
     #[ORM\Column]
-    private ?string $longitude;
+    private ?string $longitude=" ";
 
     #[ORM\Column(name:"Diplome")]
-    private ?string $Diplome;
+    private ?string $Diplome=" ";
 
-    public function getIdProfil(): ?int
+    /*public __construct(int $id,string $Nom,string $Prenom,string $NumeroTelephone,string $Email,string $Localisation,string $Description,string $Langues,string $Competences,string $Formation,?string $ExperiencesProfessionnelles,string $latitude,string $longitude,string $Diplome){
+        
+    }*/
+
+    public function getIdProfil(): ?Utilisateur
     {
         return $this->id;
+    }
+
+    public function setIdProfil(Utilisateur $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getNom(): ?string

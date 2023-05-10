@@ -21,6 +21,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Security;
+
+use App\Repository\UtilisateurRepository;
 
 use function Ramsey\Uuid\v1;
 
@@ -28,19 +31,27 @@ use function Ramsey\Uuid\v1;
 
 
 class FormationController extends AbstractController
-{
+{   
 
-    
-
-    private bool $isConnected = true;
+    private bool $isConnected;
     private Utilisateur $CurrentUser;
     private $token;
+    private $security;
 
-
-    public function __construct(SessionInterface $session)
+    public function __construct(Security $security,SessionInterface $session,UtilisateurRepository $UtilisateurManager)
     {
-        $this->token = $session->get('token');
+        $this->security = $security;
+        $user = $this->security->getUser();
+
+        if ($user) {
+            $this->token = $session->get('token');
+            $this->isConnected = true;
+            $this->CurrentUser = $UtilisateurManager->findOneById($user->getId());
+        } else {
+            $this->isConnected = false;
+        }
     }
+
 
 
     #[Route('/formation', name: 'app_formation')]
@@ -172,8 +183,8 @@ class FormationController extends AbstractController
         ]);
     }
 
-    #[Route('/afficherCours/{id_user}',name:'app_formation_afficher_Cours')]
-    public function afficher($id_user,SessionInterface $session,Request $request,ManagerRegistry $doctrine)
+    #[Route('/afficherCours',name:'app_formation_afficher_Cours')]
+    public function afficher(SessionInterface $session,Request $request,ManagerRegistry $doctrine)
     {
         $this->token = $session->get('token');
 
@@ -185,12 +196,12 @@ class FormationController extends AbstractController
         $repo_progres = $doctrine->getRepository(Progres::class);
         $repo_Cours = $doctrine->getRepository(Cours::class);
         
-        $cours_entre = $repo_progres->findByIdUtilisateur($id_user);
+        $cours_entre = $repo_progres->findByIdUtilisateur($this->CurrentUser->getId());
         $cour_entre_ = array();
         foreach($cours_entre as $i){
             array_push($cour_entre_,$repo_Cours->findOneById($i->getIdCours()));
         }
-        $cours = $repo_Cours->findByIdNoTuto($id_user);
+        $cours = $repo_Cours->findByIdNoTuto($this->CurrentUser->getId());
         $cours_a_recommande = array();
         foreach($cours as $i){
             $a = 1;
@@ -261,7 +272,7 @@ class FormationController extends AbstractController
             'list_cours' => $cour_a_ajouté,
             "isConnected" => $this->isConnected,
             "DropBox" => $dropbox,
-            "iduser" => $id_user,
+            "iduser" => $this->CurrentUser->getId(),
         ]);
 
        
@@ -275,7 +286,7 @@ class FormationController extends AbstractController
         $authUrl = 'https://api.dropboxapi.com/oauth2/token';
         $clientId = 't186ceszuy8at19';
         $clientSecret = 'zuy61of02l5ohcb';
-        $redirectUri = 'http://localhost:8001/autorization';
+        $redirectUri = 'http://localhost:8000/autorization';
 
         $code = $request->query->get('code');
 
@@ -299,7 +310,13 @@ class FormationController extends AbstractController
 
         $session->set("token",$accessToken);
 
-        $url = 'http://localhost:8001/home_user';
+        if($this->CurrentUser->getRole() != "Admin"){
+            $url = 'http://localhost:8000/';
+        }
+        else{
+            $url = 'http://localhost:8000/dashboard/';
+        }
+        
 
         return $this->redirect($url);
     }
@@ -310,7 +327,7 @@ class FormationController extends AbstractController
 
         $authUrl = 'https://www.dropbox.com/oauth2/authorize';
         $clientId = 't186ceszuy8at19';
-        $redirectUri = 'http://localhost:8001/autorization';
+        $redirectUri = 'http://localhost:8000/autorization';
 
         $params = [
             'client_id' => $clientId,
@@ -325,8 +342,8 @@ class FormationController extends AbstractController
 
     }
 
-    #[Route('/afficherTousCours/{id_user}',name:'app_formation_afficher_Cours_Tout')]
-    public function afficherTout($id_user,SessionInterface $session,Request $request,ManagerRegistry $doctrine)
+    #[Route('/afficherTousCours',name:'app_formation_afficher_Cours_Tout')]
+    public function afficherTout(SessionInterface $session,Request $request,ManagerRegistry $doctrine)
     {
 
         $this->token = $session->get('token');
@@ -340,12 +357,12 @@ class FormationController extends AbstractController
         $repo_prog = $doctrine->getRepository(Progres::class);
 
 
-        $cours_entre = $repo_prog->findByIdUtilisateur($id_user);
+        $cours_entre = $repo_prog->findByIdUtilisateur($this->CurrentUser->getId());
         $cour_entre_ = array();
         foreach($cours_entre as $i){
             array_push($cour_entre_,$repo->findOneById($i->getIdCours()));
         }
-        $cours_ = $repo->findByIdNoTuto($id_user);
+        $cours_ = $repo->findByIdNoTuto($this->CurrentUser->getId());
         $cours= array();
 
         
@@ -380,13 +397,13 @@ class FormationController extends AbstractController
             "isConnected" => $this->isConnected,
             "prog" => $prog,
             "DropBox" => $dropbox,
-            "iduser" => $id_user,
+            "iduser" => $this->CurrentUser->getId(),
         ]);
 
     }
 
-    #[Route('/afficherCoursCommance/{id_user}',name:'app_formation_afficher_Cours_Commance')]
-    public function afficherCommance($id_user,SessionInterface $session,ManagerRegistry $doctrine)
+    #[Route('/afficherCoursCommance',name:'app_formation_afficher_Cours_Commance')]
+    public function afficherCommance(SessionInterface $session,ManagerRegistry $doctrine)
     {
 
         $this->token = $session->get('token');
@@ -398,7 +415,7 @@ class FormationController extends AbstractController
         }
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
-        $user_array = $repo_prog->findByidUtilisateur($id_user);
+        $user_array = $repo_prog->findByidUtilisateur($this->CurrentUser->getId());
         //var_dump($user_array);
         $user_array2 = array();
         $prog = array();
@@ -406,7 +423,7 @@ class FormationController extends AbstractController
             array_push($user_array2,$i->getIdCours()->getId());
             array_push($prog,$i->getProgresUtilisateur());
         }
-        print_r($user_array2);
+        //print_r($user_array2);
         $cours = array();
         
         foreach($user_array2 as $i){
@@ -419,14 +436,14 @@ class FormationController extends AbstractController
             "isConnected" => $this->isConnected,
             "prog" => $prog,
             "DropBox" => $dropbox,
-            "iduser" => $id_user,
+            "iduser" => $this->CurrentUser->getId(),
         ]);
 
         
     }
 
-    #[Route('/afficherCoursTerminer/{id_user}',name:'app_formation_afficher_Cours_Terminer')]
-    public function afficherTerminer($id_user,SessionInterface $session,ManagerRegistry $doctrine)
+    #[Route('/afficherCoursTerminer',name:'app_formation_afficher_Cours_Terminer')]
+    public function afficherTerminer(SessionInterface $session,ManagerRegistry $doctrine)
     {
 
         $this->token = $session->get('token');
@@ -438,14 +455,13 @@ class FormationController extends AbstractController
         }
         $repo = $doctrine->getRepository(Cours::class);
         $repo_prog = $doctrine->getRepository(Progres::class);
-        $user_array = $repo_prog->findFinshedCoursByIdUtilisateur($id_user);
+        $user_array = $repo_prog->findFinshedCoursByIdUtilisateur($this->CurrentUser->getId());
         $user_array2 = array();
         $prog = array();
         foreach($user_array as $i){
             array_push($user_array2,$i->getIdCours()->getId());
             array_push($prog,$i->getProgresUtilisateur());
         }
-        print_r($user_array2);
         $cours = array();
         
         foreach($user_array2 as $i){
@@ -455,12 +471,12 @@ class FormationController extends AbstractController
         return $this->render('FrontOffice/Components/affichageTerminerCours.html.twig', [
             'list_cours' => $cours,
             "isConnected" => $this->isConnected,
-            "iduser" => $id_user,
+            "iduser" => $this->CurrentUser->getId(),
         ]);
     }
 
-    #[Route('/afficherMesCours/{id_user}',name:'app_formation_afficher_Mes_Cours')]
-    public function afficherMesCours($id_user,SessionInterface $session,ManagerRegistry $doctrine,Request $req)
+    #[Route('/afficherMesCours',name:'app_formation_afficher_Mes_Cours')]
+    public function afficherMesCours(SessionInterface $session,ManagerRegistry $doctrine,Request $req)
     {
         $this->token = $session->get('token');
 
@@ -472,7 +488,7 @@ class FormationController extends AbstractController
         $repo = $doctrine->getManager();
         $repo_Utilisateur = $doctrine->getRepository(Utilisateur::class);
         $repo_Cours = $doctrine->getRepository(Cours::class);
-        $cours = $repo_Cours->findByIdTuto($id_user);
+        $cours = $repo_Cours->findByIdTuto($this->CurrentUser->getId());
         $cour_a_ajouté = new Cours();
         $cour_a_ajouté->setDuree(0);
         $form= $this->createForm(CoursType::class,$cour_a_ajouté);
@@ -488,7 +504,7 @@ class FormationController extends AbstractController
                 $cour_a_ajouté->setDateDeLancement(new \DateTime('@'.strtotime('now')));
                 $cour_a_ajouté->setImgUrl("Teckwork/".$cour_a_ajouté->getId().'/'.$file);
                 
-                $utilisateur = $repo_Utilisateur->findOneById($id_user);
+                $utilisateur = $repo_Utilisateur->findOneById($this->CurrentUser->getId());
                 $cour_a_ajouté->setIdTuteur($utilisateur);
                 $dropbox->createFolder("Teckwork/".$cour_a_ajouté->getId());
                 $dropbox->upload("Teckwork/".$cour_a_ajouté->getId().'/'.$file,
@@ -506,7 +522,7 @@ class FormationController extends AbstractController
                     'Cours_form' => $form,
                     "isForm" => true,
                     "DropBox" => $dropbox,
-                    "iduser" => $id_user,
+                    "iduser" => $this->CurrentUser->getId(),
                 ]);
             }
         }
@@ -517,20 +533,20 @@ class FormationController extends AbstractController
             "isForm" => false,
             "monCour" => $cour_a_ajouté,
             "DropBox" => $dropbox,
-            "iduser" => $id_user,
+            "iduser" => $this->CurrentUser->getId(),
         ]);
 
     }
 
 
     
-    #[Route('/supprimerCours/{id}',name:'app_formation_supprimer_Cours')]
-    public function supprimer($id,ManagerRegistry $doctrine)
+    #[Route('/supprimerCours',name:'app_formation_supprimer_Cours')]
+    public function supprimer(ManagerRegistry $doctrine)
     {
         $repo_Cours = $doctrine->getRepository(Cours::class);
         $repo_Chapitre = $doctrine->getRepository(Chapitre::class);
         $repo_Contenu = $doctrine->getRepository(Contenu::class);
-        $courSupp = $repo_Cours->findOneById($id);
+        $courSupp = $repo_Cours->findOneById($this->CurrentUser->getId());
         $Chapitre = $repo_Chapitre->findByIdCours($courSupp->getId());
         
         foreach($Chapitre as $c){
@@ -544,8 +560,8 @@ class FormationController extends AbstractController
         return $this->redirectToRoute('app_formation_afficher_Mes_Cours');
     }
 
-    #[Route("CommancerCour/{id_cours}/{id_user}",name:"CommancerCour")]
-    public function commancer($id_cours,SessionInterface $session,$id_user,ManagerRegistry $doctrine,HttpClientInterface $httpClient){
+    #[Route("CommancerCour/{id_cours}",name:"CommancerCour")]
+    public function commancer($id_cours,SessionInterface $session,ManagerRegistry $doctrine,HttpClientInterface $httpClient){
 
         $this->token = $session->get('token');
 
@@ -561,7 +577,7 @@ class FormationController extends AbstractController
         $repo_chapitre = $doctrine->getRepository(Chapitre::class);
         $repo_contenu = $doctrine->getRepository(Contenu::class);
         $cours = $repo_Cours->findOneById($id_cours);
-        $user = $repo_Utilisateur->findOneById($id_user);
+        $user = $repo_Utilisateur->findOneById($this->CurrentUser->getId());
         $chapitres = $repo_chapitre->findByIdCours($id_cours);
         $pro = new Progres();
         $pro->setId($user);

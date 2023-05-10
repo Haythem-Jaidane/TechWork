@@ -76,7 +76,6 @@ class OffreType extends AbstractType
           //  ->add('domaine')
           ->add('domaine')
 
-            ->add('recruteur')
 
 
        //     ->add('candidatures')

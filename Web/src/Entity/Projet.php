@@ -26,6 +26,10 @@ class Projet
     #[ORM\Column]
     private ?string $domaine;
 
+    #[ORM\ManyToOne(inversedBy: "Utilisateur")]
+    #[ORM\JoinColumn(nullable:false)]
+    private ?Utilisateur $idUtilisateur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,5 +71,16 @@ class Projet
         return $this;
     }
 
+    public function getIdUtilisateur(): ?Utilisateur
+    {
+        return $this->$idUtilisateur;
+    }
+
+    public function setIdUtilisateur(Utilisateur $idUtilisateur): self
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
 
 }

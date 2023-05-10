@@ -3,8 +3,11 @@
 namespace App\Controller;
 use App\Form\SearchProjetType;
 use App\Entity\Projet;
+use App\Entity\Utilisateur;
 use App\Form\ProjetType;
 use App\Repository\ProjectRepository;
+use App\Repository\UtilisateurRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +21,7 @@ use Symfony\Component\Mime\Email;
 use App\Mailer\ProjectMailer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Twilio\Rest\Client;
+use Symfony\Component\Security\Core\Security;
 
 
 //use Nexmo\Client as NexmoClient;
@@ -40,6 +44,22 @@ $client = new Client($credentials);*/
 class ProjetController extends AbstractController
 {
 private $from = 'techwork414@gmail.com';
+private bool $connection;
+    private $security;
+    private Utilisateur $CurrentUser;
+
+    public function __construct(Security $security,UtilisateurRepository $UtilisateurManager)
+    {
+        $this->security = $security;
+        $user = $this->security->getUser();
+
+        if ($user) {
+            $this->connection = true;
+            $this->CurrentUser = $UtilisateurManager->findOneById($user->getId());
+        } else {
+            $this->connection = false;
+        }
+    }
     #[Route('/', name: 'app_projet_index', methods: ['GET'])]
     public function index(ProjectRepository $projectRepository,Request $request, PaginatorInterface $paginator): Response
     {
@@ -134,17 +154,18 @@ public function new(Request $request, ProjectRepository $projectRepository, Mail
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+        $projet->setidUtilisateur($this->CurrentUser);
         $projectRepository->save($projet, true);
         $nom = $projet->getNom();
         
         // send email
-        $email = (new Email())
+        /*$email = (new Email())
             ->from('techwork414@gmail.com')
             ->to('manarboukhris8@gmail.com')
             ->subject('New Project Created')
             ->html(sprintf('Voici les informations de la base de données : "%s".', $nom));
     
-        $mailer->send($email);
+        $mailer->send($email);*/
        /* 
         // send SMS
         $sid = 'AC5f382709f0dc165bba6e84ceb95dc455';
@@ -247,14 +268,18 @@ public function searchProjet(Request $request): JsonResponse
 
 
     #[Route("/stats", name:"app_stats")]
- 
 public function stats(): Response
 {
     // Récupérer le nombre de projets par domaine
+    
     $projectRepository = $this->getDoctrine()->getRepository(Projet::class);
+    
     $nbProjetInfo = $projectRepository->countByDomaine("Info");
+    
     $nbProjetAgriculture = $projectRepository->countByDomaine("Agriculture");
+    
     $nbProjetIOT = $projectRepository->countByDomaine("IOT");
+    
 
     // Créer un tableau avec les données
     $data = [

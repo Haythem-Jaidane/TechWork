@@ -291,7 +291,7 @@ section {
   transition: all 0.5s;
   z-index: 997;
   height: 90px;
-  background-color: var(--color-primary);
+  background-color: #BF8136;
 }
 
 .header.sticked {
@@ -1871,7 +1871,7 @@ section {
   width: 100%;
   position: relative;
   background: var(--color-primary);
-  padding: 60px 0 0 0;
+  padding: 60px 0 200px 0;
 }
 
 @media (min-width: 1365px) {

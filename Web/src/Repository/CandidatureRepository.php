@@ -66,11 +66,12 @@ class CandidatureRepository extends ServiceEntityRepository
      /**
       * @return Candidature[] Returns an array of Candidature objects
       */
-     public function findByStatus($value): array
+     public function findByStatus($value,$id): array
      {
          return $this->createQueryBuilder('c')
-             ->andWhere('c.status = :val')
+             ->andWhere('c.status = :val and c.candidat = :id')
              ->setParameter('val', $value)
+             ->setParameter('id', $id)
              ->orderBy('c.id', 'ASC')
              ->setMaxResults(10)
              ->getQuery()

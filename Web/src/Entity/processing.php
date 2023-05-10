@@ -1,6 +1,6 @@
 <?php
 // Start Server Session
-session_start();
+/*session_start();
 
 // Display All Errors (For Easier Development)
 ini_set('display_errors', 1);
@@ -49,4 +49,4 @@ $async_response = new stdClass();
 $async_response->response_received_data = 'Audio data was received';
 $async_response->response_received_transcript = $response->results[0]->alternatives[0]->transcript;
 $async_response = json_encode($async_response);
-echo $async_response;
+echo $async_response;*/

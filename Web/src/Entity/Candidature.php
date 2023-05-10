@@ -27,7 +27,7 @@ class Candidature
     private ?string $status;
 
     #[ORM\Column]
-    private ?string $details;
+    private ?string $details=" ";
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $datepostulation = null;

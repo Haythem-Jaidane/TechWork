@@ -23,11 +23,11 @@ class Publication
     private ?string $message;
 
     #[ORM\Column]
-    private ?string $idCours;
+    private ?string $idCours=" ";
 
     #[ORM\ManyToOne(inversedBy: "Profil")]
     #[ORM\JoinColumn(name:"id_Profil",referencedColumnName:"id_Profil",nullable:false)]
-    private ?Profil $id_Profil= null; 
+    private ?Profil $id_Profil; 
 
     public function getIdPub(): ?int
     {

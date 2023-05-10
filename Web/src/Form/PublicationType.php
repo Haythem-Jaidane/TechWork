@@ -30,13 +30,7 @@ class PublicationType extends AbstractType
                     ]),
                 ],
             ])
-            //->add('idCours') BECH RODHA NULL FIL BD
-            ->add('id_Profil',EntityType::class,[
-                'class'=>Profil::class,
-                "choice_label"=>'Prenom',
-                'expanded'=>false,
-                'multiple'=>false
-            ])
+
         ;
     }
 

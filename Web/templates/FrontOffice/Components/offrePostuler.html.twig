@@ -60,10 +60,7 @@
 			<br> <br>
 			<div class="form-group col-md-10 mx-auto">{{ form_widget(form.submit, {'label': 'Oui', 'attr': {'class': 'btn btn-primary'}}) }} &emsp;&emsp; <a href=/home/offre>Non</a>
 			</div>
-			<br> <br>
-			<div class="form-group col-md-10 mx-auto">
-				<p>Je suis, le {{ form_label(form.candidat) }} : {{ form_widget(form.candidat, {'attr': {'class': 'form-control'}}) }}</p>
-			</div>
+			<br>
 			{{ form_end(form) }}
 		</div>
 	</div> {% endblock %}

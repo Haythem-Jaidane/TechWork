@@ -12,14 +12,24 @@
           <div>
             <ul class="portfolio-flters">
               <li data-filter="*" class="filter-active">Tous</li>
+			  {% if user.getRole() == "Candidat"%}
               <li data-filter=".filter-offres">Offres d'emplois</li>
+			  {% else %}
+			  <li data-filter=".filter-offres">Mes Offres</li>
+			  {% endif %}
+			  {% if user.getRole() == "Candidat"%}
               <li data-filter=".filter-candidatures">Candidatures</li>
               <li data-filter=".filter-accepted">Candidatures Acceptées</li>
               <li data-filter=".filter-rejected">Candidatures Rejetées</li>
+			  {% else %}
+			  <li data-filter=".filter-candidatures">Candidatures recu</li>
+			  {% endif %}
 			                <li data-filter=".filter-contrats">Contrats</li>
 							     <li data-filter=".filter-domaines">Domaines</li>
             </ul><!-- End Portfolio Filters -->
           </div>
+
+		  {% if user.getRole() == "Candidat"%}
 
             <div class="row gy-4 portfolio-container">
           	  <div class="col-xl-15 col-md-20 portfolio-item filter-offres">
@@ -33,20 +43,20 @@
  
           							<th>Titre</th>
           							<th>Domaine</th>
-                                  							<th>Contrat</th>
+                                  	<th>Contrat</th>
           							<th>Salaire</th>
           							<th>Lieu</th>
-
-
           							<th>Description</th>
-                                  							<th>Recruteur</th>
+                                  	<th>Recruteur</th>
           							<th>Status</th>
           							<th class="text-center"> Actions </th>
           						</tr>
           					</thead>
-          					<tbody> {% for offre in offres %} <tr>
+          					<tbody> {% for offre in offres %} {% if offre.candidatures|length < 1%}<tr>
+							
  
-          							<td>{{ offre.titre }}</td>          							<td>{{ offre.domaine }}
+          							<td>{{ offre.titre }}</td>
+									<td>{{ offre.domaine }}
           							</td>
                                   							<td>{{ offre.contrat }}
           							</td>
@@ -64,7 +74,62 @@
           							<td class="text-center">
           								   
                           <a href="{{ path('app_offre_show_postuler', {'id': offre.id}) }}"><button class="btn text-primary">Postuler</button></a> 
+ 
+          							</td>
+									{% endif %}
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
 
+							
+          				</table>
+          			</div>
+          		</div>
+
+				
+          	</div><!-- End Portfolio Item -->
+			{% else %}
+			<div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-offres">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Mes Offres</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+ 
+          							<th>Titre</th>
+          							<th>Domaine</th>
+                                  	<th>Contrat</th>
+          							<th>Salaire</th>
+          							<th>Lieu</th>
+
+
+          							<th>Description</th>
+          							<th>Status</th>
+          							<th class="text-center"> Actions </th>
+          						</tr>
+          					</thead>
+          					<tbody> {% for offre in mesOffres %} <tr>
+ 
+          							<td>{{ offre.Titre }}</td>          							<td>{{ offre.domaine }}
+          							</td>
+                                  							<td>{{ offre.contrat }}
+          							</td>
+          							<td>{{ offre.salaire }}
+          							</td>
+          							<td>{{ offre.lieu }}</td>
+
+
+
+          							<td>{{ offre.description }}
+          							</td>
+          							<td>{{ offre.status }}</td>
+          							<td class="text-center"><a>Supprimer</a>
+          								   
+                          <!-- <a href="{{ path('app_offre_show_postuler', {'id': offre.id}) }}"><button class="btn text-primary">Postuler</button></a> 
+							-->
           							</td>
           						</tr> {% else %} <tr>
           							<td colspan="9">no records found</td>
@@ -72,9 +137,13 @@
           				</table>
           			</div>
           		</div>
+
+				
           	</div><!-- End Portfolio Item -->
+			{% endif %}
 
 
+			{% if user.getRole() == "Candidat"%}
             <div class="row gy-4 portfolio-container">
           	  <div class="col-xl-15 col-md-20 portfolio-item filter-candidatures">
           		<div class="portfolio-wrap">
@@ -207,6 +276,52 @@
           		</div>
               </div>
           	</div><!-- End Portfolio Item -->
+			{% else %}
+
+			<div class="row gy-4 portfolio-container">
+          	  <div class="col-xl-15 col-md-20 portfolio-item filter-candidatures">
+          		<div class="portfolio-wrap">
+          			<a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt=""></a>
+          			<div class="portfolio-info">
+          				<h4><a href="portfolio-details.html" title="More Details">Candidatures recu</a></h4>
+          				<table class="table tablesorter " id="">
+          					<thead class=" text-primary">
+          						<tr>
+                      <th>Titre</th>
+          		          							<th>Recruteur</th>
+          			<th>Candidat</th> 		
+          							<th>datepostulation</th> 
+  
+                        							 
+          							<th class="text-center"> status </th> 
+          						</tr>
+          					</thead>
+          					<tbody> {% for candidature in candidaturesPending %} <tr>
+                    						                    							<td>{{ candidature.offre.titre }}
+          							</td> 
+                                	<td>{{ candidature.offre.recruteur }}
+          							</td> 
+          							<td>{{ candidature.candidat }}</td>	
+          							</td>
+          							<td>{{ candidature.datepostulation|date('Y-m-d H:i')  }}</td>
+          		 
+
+ 
+          														<td class="text-center">{{ candidature.status }}</td>
+           							<td class="text-center">
+									<a href="{{ path('candidature_pdf', {'id': candidature.id}) }}"><button class="btn text-primary">Accepter</button></a> 
+                   					</td>
+          						</tr> {% else %} <tr>
+          							<td colspan="9">no records found</td>
+          						</tr> {% endfor %} </tbody>
+          				</table>
+          			</div>
+          		</div>
+              </div>
+          	</div>
+
+
+			{% endif %}
 
             <div class="row gy-4 portfolio-container">
           	  <div class="col-xl-15 col-md-20 portfolio-item filter-contrats">
@@ -273,11 +388,13 @@
               </div>
           	</div><!-- End Portfolio Item -->
 
-
+			
 
 
         </div>
-
+		{% if user.getRole() == "Recruteur"%}
+			<a href="{{ path('app_offre_new') }}">Ajouter Offre</a>
+		{% endif %}
       </div>
     </section>
 {% endblock %}

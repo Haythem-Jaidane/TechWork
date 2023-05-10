@@ -29,6 +29,7 @@ class ContratController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $contrat->setDuree(0);
             $contratRepository->save($contrat, true);
 
             return $this->redirectToRoute('app_contrat_index', [], Response::HTTP_SEE_OTHER);

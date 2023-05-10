@@ -1,0 +1,73 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    {% include 'FrontOffice/Components/Assets/icon.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/css.html.twig' %}
+    {% include 'FrontOffice/Components/navbar.html.twig' %}
+
+    <div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Offres</h5>
+                </div>
+                <div class="card-body">
+               
+               
+                    <h1>Ajouter une nouvelle offre d'emploi <td class="text-center">
+  	                    <a href="{{ path('app_offre_index') }}"><button class="btn btn-primary btn-fab btn-icon btn-round"><i class="tim-icons icon-bullet-list-67"></i></button></a>
+                    </h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                {{ form_label(form.titre) }}
+                {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.titre) }}
+            </div>
+
+                        <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.salaire) }}
+                {{ form_widget(form.salaire, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.salaire) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.contrat) }}
+                {{ form_widget(form.contrat, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.domaine) }}
+                {{ form_widget(form.domaine, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+                        <div class="form-group">
+                {{ form_label(form.lieu) }}
+                {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+
+            <div class="form-group">
+                {{ form_label(form.status) }}
+                {{ form_widget(form.status, {'attr': {'class': 'form-control','disabled': 'disabled','value': 'Dispo'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+    
+    {% include 'FrontOffice/Components/footerbar.html.twig' %}
+    {% include 'FrontOffice/Components/Assets/js.html.twig' %}
+{% endblock %}

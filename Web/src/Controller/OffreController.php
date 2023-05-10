@@ -13,11 +13,33 @@ use App\Entity\Candidature;
 use App\Form\CandidatureType;
 use App\Repository\CandidatureRepository;
 use App\Form\PostulerType;
+use App\Entity\Utilisateur;
+use Symfony\Component\Security\Core\Security;
+
+use App\Repository\UtilisateurRepository;
 
 use App\Entity\CurlServer;
 
 class OffreController extends AbstractController
 {
+
+    private bool $isConnected;
+    private Utilisateur $CurrentUser;
+    private $security;
+
+    public function __construct(Security $security,UtilisateurRepository $UtilisateurManager)
+    {
+        $this->security = $security;
+        $user = $this->security->getUser();
+
+        if ($user) {
+            $this->isConnected = true;
+            $this->CurrentUser = $UtilisateurManager->findOneById($user->getId());
+        } else {
+            $this->isConnected = false;
+        }
+    }
+
     public function count()
     {   
         $em = $this->getDoctrine()->getManager();
@@ -79,15 +101,22 @@ class OffreController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $offre->setRecruteur($this->CurrentUser);
             $offre->setStatus('Disponible');
             $offreRepository->save($offre, true);
 
-            return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home_other', ["section" => "offre"], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('offre/new.html.twig', [
+        /*return $this->renderForm('offre/new.html.twig', [
             'offre' => $offre,
             'form' => $form,
+        ]);*/
+
+        return $this->renderForm('offre/newOffre.html.twig', [
+            'offre' => $offre,
+            'form' => $form,
+            "isConnected" => $this->isConnected,
         ]);
     }
 
@@ -114,6 +143,7 @@ public function show_postuler(Offre $offre,Request $request, CandidatureReposito
     $form = $this->createForm(PostulerType::class, $candidature);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
+        $candidature->setCandidat($this->CurrentUser);
         $candidature->setDatepostulation(new \DateTime());
         $candidature->setStatus('Pending');
         $candidature->setOffre($offre);
@@ -163,7 +193,7 @@ public function show_postuler(Offre $offre,Request $request, CandidatureReposito
 
 
     /**
-     * @Route("/stats", name="stats")
+     * @Route("/stats/offre", name="stats")
      */
     public function statistiques(OffreRepository $categRepo, AnnoncesRepository $annRepo){
         // On va chercher toutes les catégories

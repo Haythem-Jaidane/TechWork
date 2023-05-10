@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Entity\Profil;
 use App\Form\UtilisateurType;
 use App\Repository\UtilisateurRepository;
+use App\Repository\ProfilRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 #[Route('/utilisateur')]
 class UtilisateurController extends AbstractController
@@ -23,13 +26,18 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/new', name: 'app_utilisateur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UtilisateurRepository $utilisateurRepository): Response
+    public function new(Request $request, UtilisateurRepository $utilisateurRepository,ProfilRepository $profilRepository): Response
     {
         $utilisateur = new Utilisateur();
+        $profil = new Profil();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $profil->setIdProfil($utilisateur->getId());
+
+            $profilRepository->save($profil,true);
             $utilisateurRepository->save($utilisateur, true);
 
             return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);

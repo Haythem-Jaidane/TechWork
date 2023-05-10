@@ -8,15 +8,14 @@
         <img src="assets/img/logo.png" alt="">
       </a>
       <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href={{path('app_home')}}>Home</a></li>
-          <li><a href={{path('app_home_other',{'section': 'about' })}}>About</a></li>
+        <ul> 
+          {% if isConnected %}
           <li><a href={{path('app_home_other',{'section': 'offre' })}}>Offre</a></li>
           <li><a href={{path('app_home_other',{'section': 'portfolio' })}}>protfolio</a></li>
           <li><a href={{path('app_formation_afficher_Cours',{"id_user":8})}}>formation</a></li>
+          <li class="nav-link"><a href={{path('app_publication_index',{"id_Profil":3})}}>Publication</a></li>
           
-          
-          {% if isConnected %}
+
           <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
@@ -28,12 +27,10 @@
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link"><a href={{path('app_profil_index')}}>Ajouter Profil</a></li>
-                   <li class="nav-link"><a href={{path('app_publication_index',{"id_Profil":3})}}>Publication</a></li>
-                  <!--<li class="nav-link"><a href={{path('app_home_other',{'section': 'profile' })}}>Profil</a></li>-->
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                  <li class="nav-link"><a href={{path('app_profil_show')}}>Mon Profil</a></li>
+                   
                   <li class="dropdown-divider"></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                  <li class="nav-link"><a href="{{ path('app_logout') }}" class="nav-item dropdown-item">Log out</a></li>
                 </ul>
               </li>
           {% endif %}

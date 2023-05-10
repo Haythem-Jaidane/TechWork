@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Profil;
+use App\Entity\Utilisateur;
 use App\Form\ProfilType;
 use App\Repository\ProfilRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,12 +14,29 @@ use Twig\Extension\StringLoaderExtension ;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Doctrine\ORM\EntityManagerInterface;
-
+use Symfony\Component\Security\Core\Security;
 
 
 #[Route('/profil')]
 class ProfilController extends AbstractController
 {
+    private bool $isConnected;
+    private Profil $CurrentUser;
+    private $security;
+
+    public function __construct(Security $security,ProfilRepository $ProfilManager)
+    {
+        $this->security = $security;
+        $user = $this->security->getUser();
+
+        if ($user) {
+            $this->isConnected = true;
+            $this->CurrentUser = $ProfilManager->findOneById($user->getId());
+        } else {
+            $this->isConnected = false;
+        }
+    }
+
     #[Route('/', name: 'app_profil_index', methods: ['GET'])]
     public function index(ProfilRepository $profilRepository): Response
     {
@@ -26,11 +44,11 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/index.html.twig', [
             'profils' => $profilRepository->findAll(),
-            'isConnected' => True,
+            'isConnected' => $this->isConnected,
         ]);
     }
-    #[Route('/pdf/{id}', name: 'PDF_profil', methods: ['GET'])]
-    public function pdf(EntityManagerInterface $entityManager,$id)
+    #[Route('/pdf', name: 'PDF_profil', methods: ['GET'])]
+    public function pdf(EntityManagerInterface $entityManager)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -40,7 +58,7 @@ class ProfilController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $profil = $entityManager->getRepository(Profil::class)->find($id);
+        $profil = $entityManager->getRepository(Profil::class)->find($this->CurrentUser);
         $html = $this->renderView('profil/pdf.html.twig', [
             'profil' => $profil,
         ]);
@@ -73,7 +91,7 @@ class ProfilController extends AbstractController
        
         return $this->render('profil/profileViewBack.html.twig', [
             'profils' => $profilRepository->findAll(),
-            'isConnected' => True,
+            'isConnected' => $this->isConnected,
         ]);
     }
 
@@ -95,19 +113,19 @@ class ProfilController extends AbstractController
         return $this->renderForm('profil/new.html.twig', [
             'profil' => $profil,
             'form' => $form,
-            'isConnected' => True,
+            'isConnected' => $this->isConnected,
         ]);
     }
 
 
  
 
-    #[Route('/{profil}', name: 'app_profil_show', methods: ['GET'])]
-    public function show(Profil $profil): Response
+    #[Route('/show', name: 'app_profil_show', methods: ['GET'])]
+    public function show(): Response
     {
         return $this->render('profil/show.html.twig', [
-            'profil' => $profil,
-             'isConnected' => True,
+            'profil' => $this->CurrentUser,
+             'isConnected' => $this->isConnected,
         ]);
     }
 
@@ -133,20 +151,20 @@ public function qrCode(): Response
 }
 
 
-    #[Route('/{idProfil}/edit', name: 'app_profil_edit', methods: ['GET', 'POST'])]
-    public function edit(Profil $idProfil,Request $request, ProfilRepository $profilRepository): Response
+    #[Route('/edit', name: 'app_profil_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, ProfilRepository $profilRepository): Response
     {
-        $form = $this->createForm(ProfilType::class, $idProfil);
+        $form = $this->createForm(ProfilType::class, $this->CurrentUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $profilRepository->save($idProfil, true);
+            $profilRepository->save($this->CurrentUser, true);
 
-            return $this->redirectToRoute('app_profil_show',['profil' => $idProfil->getIdProfil()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_profil_show',['profil' => $this->CurrentUser->getIdProfil()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('profil/edit.html.twig', [
-            'profil' => $idProfil,
+            'profil' => $this->CurrentUser,
             'form' => $form,
             'isConnected' => True,
  

@@ -6,9 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Profil;
+use App\Entity\Utilisateur;
 use App\Form\ProfilType;
 use App\Repository\ProfilRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Offre;
 use App\Form\OffreType; 
@@ -16,19 +18,39 @@ use App\Repository\OffreRepository;
 use App\Repository\CandidatureRepository;
 use App\Repository\ContratRepository;
 use App\Repository\DomaineRepository;
+use Symfony\Component\Security\Core\Security;
+
 
 class FrontController extends AbstractController
 {
 
+    private bool $connection;
+    private $security;
+    private Utilisateur $CurrentUser;
+
+    public function __construct(Security $security,UtilisateurRepository $UtilisateurManager)
+    {
+        $this->security = $security;
+        $user = $this->security->getUser();
+
+        if ($user) {
+            $this->connection = true;
+            $this->CurrentUser = $UtilisateurManager->findOneById($user->getId());
+        } else {
+            $this->connection = false;
+        }
+    }
+
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
+       
 
         $section = '';
 
         return $this->render('FrontOffice/home.html.twig',[
             "section" => $section,
-            "isConnected" => true, 
+            "isConnected" => $this->connection, 
         ]);
     }
 
@@ -53,7 +75,7 @@ class FrontController extends AbstractController
     {
         return $this->render('FrontOffice/Components/homeNewSession.html.twig', [
             "section" => $section,
-            "isConnected" => true,
+            "isConnected" => $this->connection,
         ]);
     }
  
@@ -96,24 +118,26 @@ class FrontController extends AbstractController
         $candidatures= $c->findAll();
         $contrats= $con->findAll();
         $domaines= $dom->findAll();
-        $candidaturesPending=$cp->findByStatus('Pending'); 
-        $candidaturesAccepted=$ca->findByStatus('Acceptée'); 
-        $candidaturesRejected=$cr->findByStatus('Rejetée'); 
+        $candidaturesPending=$cp->findByStatus('Pending',$this->CurrentUser); 
+        $candidaturesAccepted=$ca->findByStatus('Acceptée',$this->CurrentUser); 
+        $candidaturesRejected=$cr->findByStatus('Rejetée',$this->CurrentUser);
+        //var_dump($o->getOfferToPostule()[0]->getTitre());
         return $this->render('FrontOffice/home.html.twig',[
             "section" => $section,
             "isConnected" => true,                              
             'offres' => $o->findAll(),
+            'mesOffres' => $o->findByrecruteur($this->CurrentUser),
             'contrats' => $con->findAll(),
             'domaines' => $dom->findAll(),
             'candidatures' => $c->findAll(),
-            'candidaturesPending' =>$cp->findByStatus('Pending'),
-            'candidaturesAccepted' =>$ca->findByStatus('Acceptée'),
-            'candidaturesRejected' =>$cr->findByStatus('Rejetée'),
-      
- 
-                "section" => $section,'projets' => $projectRepository->findAll(),
-                "isConnected" => true, 
-            ]);
+            //'candidaturesAPostuler' => $c->findBy(),
+            'candidaturesPending' =>$cp->findByStatus('Pending',$this->CurrentUser),
+            'candidaturesAccepted' =>$ca->findByStatus('Acceptée',$this->CurrentUser),
+            'candidaturesRejected' =>$cr->findByStatus('Rejetée',$this->CurrentUser),
+            "section" => $section,'projets' => $projectRepository->findAll(),
+            "isConnected" => $this->connection,
+            "user" => $this->CurrentUser,
+        ]);
     }
 
 

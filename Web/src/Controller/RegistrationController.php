@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Entity\Profil;
+use App\Repository\ProfilRepository;
 use App\Form\RegistrationFormType;
 use App\Security\AppCustomAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,9 +19,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher,ProfilRepository $profilRepository, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new Utilisateur();
+        $profil = new Profil();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -32,7 +36,15 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $profil->setIdProfil($user);
+            $profil->setNom($user->getNom());
+            $profil->setPrenom($user->getPrenom());
+            $profil->setEMail($user->getEmail());
+            
+            
             $entityManager->persist($user);
+            $entityManager->persist($profil);
+
             $entityManager->flush();
             // do anything else you need here, like send an email
 

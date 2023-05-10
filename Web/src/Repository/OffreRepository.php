@@ -63,6 +63,21 @@ class OffreRepository extends ServiceEntityRepository
     return $query->getQuery()->getResult(); 
 }
 
+    public function getOfferToPostule(){
+
+
+    $entityManager = $this->getEntityManager();
+
+    $query = $entityManager->createQuery(
+        'SELECT o,c
+        FROM App\Entity\Offre o
+        LEFT JOIN App\Entity\Candidature c WITH c.offre = o.id
+        WHERE o.id != c.offre'
+    );
+
+    return $query->getResult();
+    } 
+
 //    /**
 //     * @return Offre[] Returns an array of Offre objects
 //     */
