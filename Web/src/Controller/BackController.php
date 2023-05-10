@@ -9,6 +9,7 @@ use App\Repository\ProjectRepository;
 use App\Repository\ProfilRepository;
 use App\Repository\OffreRepository;
 use App\Repository\CandidatureRepository;
+use App\Repository\UtilisateurRepository;
 use App\Entity\Offre;
 use App\Entity\Candidature;
 use App\Entity\Domaine;
@@ -34,10 +35,10 @@ class BackController extends AbstractController
     }
 
     #[Route('/dashboard/utilisateur', name: 'app_back_office_utilisateur', methods: ['GET'])]
-    public function backOfficeUser(ProfilRepository $profilRepository,ProjectRepository $projectRepository): Response
+    public function backOfficeUser(ProfilRepository $profilRepository,UtilisateurRepository $userRepo): Response
     {
         return $this->render('BackOffice/back.html.twig',[
-            "getsion" => "utilisateur",'profils' => $profilRepository->findAll(),'projets ' => $projectRepository->findAll(),
+            "getsion" => "utilisateur",'utilisateurs' => $userRepo->findAll(),
             
         ]);
     }
